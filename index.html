@@ -547,7 +547,15 @@
     started = true;
     if (status) status.textContent = 'Building the campus model…';
     import('js/campus.js').catch(() => {
-      if (status) status.textContent = 'The 3D model could not load. The plan is described below.';
+      /* No WebGL, an old GPU or a blocked CDN. Collapse the canvas rather
+         than leaving a tall empty box mid-proposal, and say what happened in
+         plain language. The building is still described in the copy. */
+      const wrap = scene.closest('.campus-scene');
+      if (wrap) wrap.classList.add('failed');
+      if (status) {
+        status.textContent = 'The interactive model needs WebGL, which this browser has turned off. ' +
+          'The campus is described in the text below.';
+      }
     });
   }
 
