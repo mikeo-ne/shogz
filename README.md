@@ -1,58 +1,81 @@
-# SHOGZZ — Editorial Photography Portfolio
+# Uganda Creative Innovation Centre (UCIC) — Interactive 3D Ministerial Proposal
 
-A clean, responsive, high-end editorial photography portfolio website built with
-semantic HTML, modern CSS, and vanilla JavaScript. No framework, no build step —
-just open `index.html` or serve the folder.
+A modern, shareable, interactive 3D proposal website for the **Uganda Creative Innovation Centre** — a national creative development institution in Kampala, Uganda.
 
-Built for **SHOGZZ** (ShoghiMbaya) — entrepreneur & creator. Visual diary spanning
-architecture, food & drinks, and travel & lifestyle.
+> *Where Uganda's creative future takes shape.*
 
-## Design system
+Prepared for consideration by **Hon. Lt. Gen. (Rtd) Henry Tumukunde**, Minister of Gender, Labour and Social Development.
 
-| Role                  | Value     |
-| --------------------- | --------- |
-| Background / linen    | `#FDFBF7` |
-| Body / headings       | `#2A221E` |
-| Metadata / sand-taupe | `#8C7C6D` |
+## What this is
 
-- **Headings:** Playfair Display (primary serif) + Cormorant Garamond (italic serif)
-- **UI / labels:** Space Grotesk (fallback Inter)
+A single-page interactive proposal that replaces a static document with a living experience:
 
-## Features
+- **Animated 3D hero** — particle field + wireframe campus massing (Three.js)
+- **Interactive 3D campus** — orbit, zoom, click buildings, cutaway interiors, "enter the music studio", auto-orbit
+- **Animated investment framework** — interactive SVG donut chart + clickable UGX 3.0bn budget lines with downloadable summary
+- **Five institutional pillars** — interactive explorer
+- **Delivery roadmap, governance, East Sound Technologies** showcase
+- **Ministerial request** section with share + print/PDF actions
+- Scroll animations (GSAP ScrollTrigger), counters, tilt cards, marquee, preloader, progress bar
 
-- **Sticky header** — "SHOGZZ" brand + navigation (Architecture, Food & Drinks,
-  Travel, Contact). Inverts from light (over the hero) to dark on scroll.
-  Full-screen slide-down menu on mobile.
-- **Hero** — large editorial "REDEFINE CREATIVITY" typography with an italic tagline
-  over a slow-zooming architectural backdrop.
-- **Three portfolio sections** — Architectural Photography, Food & Drinks,
-  Travel & Lifestyle — each a 3-column (→ 2 → 1 on smaller screens) responsive grid.
-- **Cards** — image + project title + metadata tag (e.g. `2026 • KAMPALA`), subtle
-  hover zoom, and an index numeral.
-- **Lightbox** — click a card to open a full-screen modal with a close button,
-  prev/next navigation, keyboard support (`Esc`, `←`, `→`), and backdrop-click to close.
-- **Footer** — centered "Let's Collaborate" call-to-action, a connect button linking to
-  [SHOGZZ's Linktree](https://linktr.ee/ShoghiMbaya), social links (YouTube, X/Twitter,
-  Snapchat), and copyright.
+## Content sections
 
-## Structure
+| # | Section | Highlights |
+|---|---------|------------|
+| 01 | The national case | Talent · Access · Enterprise, vision & mission |
+| 02 | Campus 3D | 6-wing concept campus, ~1,000–1,200 m² |
+| 03 | Pillars | Music, film, photography, creative tech, learning & enterprise |
+| 04 | Investment | UGX 3.0bn preliminary establishment plan (14 lines) |
+| 05 | East Sound | Homegrown music-intelligence initiative |
+| 06 | Roadmap | Validate → Establish → Launch → Expand (24 months) |
+| 07 | Governance | Safeguards & impact metrics |
+| 08 | Ministerial request | 90-day development phase ask |
 
-```
-index.html          # Page markup
-css/style.css       # Design system + layout + responsive rules
-js/main.js          # Grid render, lightbox, smooth scroll, header state, reveals
-images/             # Photographic assets + favicon
-```
+## Tech
+
+- **No build step** — plain HTML/CSS/JS, deploy anywhere static
+- Three.js (r161 via CDN import map) for both 3D scenes
+- GSAP 3 + ScrollTrigger via CDN for scroll animation
+- Google Fonts: Fraunces (serif display) + Inter + Space Grotesk
 
 ## Run locally
 
 ```bash
-# any static server works, e.g.
 python3 -m http.server 8080
-# then open http://localhost:8080
+# open http://localhost:8080
 ```
 
-## Deploy
+> Note: ES modules + import maps require serving over HTTP (not `file://`).
 
-The included GitHub Actions workflow (`static.yml`) publishes the repository
-contents to GitHub Pages on pushes to `main`.
+## Deploy / share
+
+- **Vercel** — the `shogz` project is already linked to `mikeo-ne/shogz`. Merge to `main`
+  and Vercel rebuilds automatically; no build command or framework preset is needed.
+  Live: <https://shogz.vercel.app>
+- **GitHub Pages** — `.github/workflows/static.yml` also publishes on push to `main`.
+- **Netlify** — import the repo, leave the build command empty, publish directory `/`.
+- **Share** — use the in-page *Share proposal* button (Web Share API → clipboard fallback),
+  or copy the live URL. `images/og-cover.png` (1200×630) provides rich link previews on
+  WhatsApp, X, LinkedIn and Slack.
+
+## Notes
+
+- `.nojekyll` is included so GitHub Pages serves the `js/` folder byte-for-byte.
+- The preloader has a 5-second failsafe and inline `<noscript>` styles, so content is never
+  trapped behind an animation if a CDN is blocked.
+- `prefers-reduced-motion` disables auto-orbit, marquee motion and reveal animations.
+
+## Structure
+
+```
+index.html          # Page markup (all proposal content)
+css/style.css       # Design system + layout + responsive + print
+js/main.js          # Preloader, nav, reveals, pillars, budget, share
+js/campus.js        # Three.js interactive campus model
+js/hero3d.js        # Three.js hero particle/massing background
+images/             # Favicon, OG cover (svg + png)
+```
+
+## Disclaimer
+
+All visuals are conceptual. Budget and facility specifications are preliminary and subject to feasibility, design, procurement and approvals. © 2026 · Draft for discussion.

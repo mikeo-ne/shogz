@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050B14"/>
+      <stop offset="0.6" stop-color="#0B2238"/>
+      <stop offset="1" stop-color="#122E44"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.76" cy="0.24" r="0.55">
+      <stop offset="0" stop-color="#2A5C7C" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#0B2238" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F0D79E"/>
+      <stop offset="1" stop-color="#C79B52"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#D8B36A" stroke-opacity="0.10" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- wireframe campus massing (flat-roof pavilions) -->
+  <g transform="translate(26,10)" opacity="0.6" fill="none" stroke="url(#gold)" stroke-width="1.5">
+    <!-- pavilion 1 -->
+    <path d="M700 400 L700 306 L806 306 L806 400 Z"/>
+    <path d="M700 330 L806 330 M700 356 L806 356 M700 382 L806 382"/>
+    <path d="M730 306 L730 400 M776 306 L776 400"/>
+    <path d="M700 306 L716 284 L822 284 L806 306"/>
+    <path d="M716 284 L716 378 M822 284 L822 378"/>
+    <!-- pavilion 2 -->
+    <path d="M846 400 L846 336 L936 336 L936 400 Z"/>
+    <path d="M846 360 L936 360 M846 382 L936 382"/>
+    <path d="M846 336 L860 318 L950 318 L936 336"/>
+    <path d="M860 318 L860 364 M950 318 L950 364"/>
+    <!-- pergola / link -->
+    <g opacity="0.55">
+    <path d="M560 420 L560 372 L640 372 L640 420 Z"/>
+    <path d="M560 388 L640 388 M580 372 L580 420 M600 372 L600 420 M620 372 L620 420"/>
+    </g>
+  </g>
+
+  <!-- orbit ring -->
+  <ellipse cx="840" cy="300" rx="330" ry="120" fill="none" stroke="#D8B36A" stroke-opacity="0.22" stroke-width="1"/>
+
+  <!-- particles -->
+  <g fill="#F0D79E" opacity="0.7">
+    <circle cx="640" cy="180" r="2.5"/><circle cx="742" cy="140" r="1.8"/><circle cx="1082" cy="220" r="2.2"/>
+    <circle cx="980" cy="480" r="1.6"/><circle cx="600" cy="500" r="2"/><circle cx="1140" cy="410" r="1.8"/>
+    <circle cx="700" cy="120" r="1.4"/><circle cx="900" cy="170" r="2.6"/>
+  </g>
+
+  <!-- seal -->
+  <g transform="translate(96,86)">
+    <circle cx="34" cy="34" r="33" fill="none" stroke="url(#gold)" stroke-width="1.6"/>
+    <text x="34" y="47" text-anchor="middle" font-family="Georgia,serif" font-size="34" fill="url(#gold)">U</text>
+  </g>
+
+  <text x="96" y="196" fill="#CFE0EC" font-family="Helvetica,Arial,sans-serif" font-size="15" letter-spacing="5">MINISTERIAL INVESTMENT PROPOSAL · KAMPALA, UGANDA</text>
+
+  <text x="96" y="292" fill="#FFFFFF" font-family="Georgia,serif" font-size="62">Where Uganda’s</text>
+  <text x="96" y="366" fill="url(#gold)" font-family="Georgia,serif" font-size="62" font-style="italic">creative future</text>
+  <text x="96" y="440" fill="#FFFFFF" font-family="Georgia,serif" font-size="62">takes shape.</text>
+
+  <line x1="96" y1="492" x2="470" y2="492" stroke="#D8B36A" stroke-opacity="0.6"/>
+
+  <g font-family="Helvetica,Arial,sans-serif">
+    <text x="96" y="540" fill="#FFFFFF" font-size="26" font-weight="bold">UGX 3.0bn</text>
+    <text x="96" y="566" fill="#9FB2C3" font-size="13" letter-spacing="2">PLANNING FRAMEWORK</text>
+
+    <text x="340" y="540" fill="#FFFFFF" font-size="26" font-weight="bold">1,200 m²</text>
+    <text x="340" y="566" fill="#9FB2C3" font-size="13" letter-spacing="2">CONCEPT CAMPUS</text>
+
+    <text x="600" y="540" fill="#FFFFFF" font-size="26" font-weight="bold">6 wings</text>
+    <text x="600" y="566" fill="#9FB2C3" font-size="13" letter-spacing="2">MUSIC · FILM · PHOTO · LEARN</text>
+  </g>
+
+  <rect x="0" y="609" width="1200" height="21" fill="#D8B36A"/>
+  <text x="96" y="625" fill="#060D1A" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold" letter-spacing="3">INTERACTIVE 3D PROPOSAL · DRAG · ORBIT · EXPLORE</text>
+</svg>

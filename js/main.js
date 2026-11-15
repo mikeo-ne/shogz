@@ -1,222 +1,305 @@
-/* ==========================================================================
-   SHOGZZ — Interactive portfolio behaviour
-   ========================================================================== */
-(() => {
-  "use strict";
+/* UCIC — Main interactions: preloader, nav, reveals, pillars, budget, share */
+(function () {
+  'use strict';
 
-  /* ------------------------------------------------------------------
-     Portfolio data
-     Each image lives in /images. Grids are rendered from this single
-     source of truth so the caption + lightbox stay in sync.
-  ------------------------------------------------------------------ */
-  const PORTFOLIO = {
-    architecture: [
-      { title: "Meridian House",   meta: "2026 • KAMPALA",       src: "images/architecture-01.jpg" },
-      { title: "The Spiral Stair", meta: "2025 • ADDIS ABABA",   src: "images/architecture-02.jpg" },
-      { title: "Concrete Verse",   meta: "2024 • DAR ES SALAAM", src: "images/architecture-03.jpg" }
-    ],
-    food: [
-      { title: "Morning Ritual",   meta: "2026 • KIGALI",        src: "images/food-01.jpg" },
-      { title: "Plated in Season", meta: "2025 • NAIROBI",       src: "images/food-02.jpg" },
-      { title: "Slow Afternoon",   meta: "2024 • ZANZIBAR",      src: "images/food-03.jpg" }
-    ],
-    travel: [
-      { title: "Savanna Light",    meta: "2026 • SERENGETI",     src: "images/travel-01.jpg" },
-      { title: "City Reverie",     meta: "2025 • LAGOS",         src: "images/travel-02.jpg" },
-      { title: "The Quiet Coast",  meta: "2024 • MOMBASA",       src: "images/travel-03.jpg" }
-    ]
-  };
+  /* ---------- Preloader ---------- */
+  const pre = document.getElementById('preloader');
+  const preFill = document.getElementById('preBarFill');
+  const prePct = document.getElementById('prePct');
+  let p = 0;
+  const preTimer = setInterval(() => {
+    p = Math.min(100, p + Math.random() * 16 + 6);
+    if (preFill) preFill.style.width = p + '%';
+    if (prePct) prePct.textContent = Math.round(p) + '%';
+    if (p >= 100) {
+      clearInterval(preTimer);
+      setTimeout(() => {
+        pre.classList.add('done');
+        heroIntro();
+      }, 250);
+    }
+  }, 110);
 
-  const gridMap = {
-    architecture: document.getElementById("grid-architecture"),
-    food: document.getElementById("grid-food"),
-    travel: document.getElementById("grid-travel")
-  };
-
-  /* Ordered list of every image, used for lightbox prev/next navigation */
-  const allItems = [];
-  let currentLightboxIndex = -1;
-
-  /* ------------------------------------------------------------------
-     Render cards
-  ------------------------------------------------------------------ */
-  function renderGrid(sectionKey, gridEl) {
-    if (!gridEl) return;
-    const items = PORTFOLIO[sectionKey];
-
-    const html = items
-      .map((item, i) => {
-        const globalIndex = allItems.length + i;
-        return `
-          <button class="card reveal" type="button"
-                  data-index="${globalIndex}"
-                  aria-label="View ${item.title}, ${item.meta}"
-                  aria-haspopup="dialog">
-            <span class="card-media">
-              <img src="${item.src}" alt="${item.title}" loading="lazy" />
-              <span class="card-index">${String(i + 1).padStart(2, "0")}</span>
-            </span>
-            <span class="card-caption">
-              <span class="card-title">${item.title}</span>
-              <span class="card-meta">${item.meta}</span>
-            </span>
-          </button>`;
-      })
-      .join("");
-
-    gridEl.innerHTML = html;
-    items.forEach((item) => allItems.push(item));
+  /* ---------- Hero intro (GSAP if available) ---------- */
+  function heroIntro() {
+    if (window.gsap) {
+      gsap.to('.hero-title .line-inner', { y: 0, duration: 1.1, stagger: 0.12, ease: 'power4.out' });
+      gsap.to('.reveal-hero', { opacity: 1, y: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out', delay: 0.3 });
+    } else {
+      document.querySelectorAll('.hero-title .line-inner').forEach(el => el.style.transform = 'none');
+      document.querySelectorAll('.reveal-hero').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+    }
+    startCounters();
   }
 
-  ["architecture", "food", "travel"].forEach((key) => renderGrid(key, gridMap[key]));
+  /* ---------- Nav ---------- */
+  const topbar = document.getElementById('topbar');
+  const progress = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    topbar.classList.toggle('scrolled', window.scrollY > 40);
+    const h = document.documentElement.scrollHeight - innerHeight;
+    progress.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+  }, { passive: true });
 
-  /* ------------------------------------------------------------------
-     Smooth scroll for in-page links
-  ------------------------------------------------------------------ */
-  document.querySelectorAll("[data-scroll]").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      const target = document.querySelector(link.getAttribute("href"));
-      if (!target) return;
-      e.preventDefault();
-      const offset = 70;
-      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      window.scrollTo({ top, behavior: "smooth" });
-      closeMobileNav();
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  navToggle.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+  /* ---------- Reveal on scroll ---------- */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ---------- Counters ---------- */
+  let countersStarted = false;
+  function startCounters() {
+    if (countersStarted) return;
+    countersStarted = true;
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const dur = 1600; const t0 = performance.now();
+      function tick(now) {
+        const t = Math.min(1, (now - t0) / dur);
+        const eased = 1 - Math.pow(1 - t, 3);
+        const val = t >= 1 ? target : target * eased;
+        el.textContent = prefix + val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+    // Budget total counter
+    const bt = document.getElementById('budgetTotal');
+    if (bt) {
+      const t0 = performance.now();
+      (function tick(now) {
+        const t = Math.min(1, (now - t0) / 1600);
+        const eased = 1 - Math.pow(1 - t, 3);
+        bt.textContent = 'UGX ' + (t >= 1 ? '3.0' : (3.0 * eased).toFixed(1)) + 'bn';
+        if (t < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+  }
+
+  /* ---------- Marquee duplicate for seamless loop ---------- */
+  const track = document.getElementById('marqueeTrack');
+  if (track) track.innerHTML += track.innerHTML;
+
+  /* ---------- Stagger children inside revealed groups ---------- */
+  document.querySelectorAll('.grid, .pillars, .timeline').forEach(group => {
+    [...group.children].forEach((child, i) => {
+      child.style.transitionDelay = (i * 0.07) + 's';
     });
   });
 
-  /* ------------------------------------------------------------------
-     Sticky header state
-  ------------------------------------------------------------------ */
-  const header = document.getElementById("siteHeader");
-  let ticking = false;
-
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      header.classList.toggle("is-scrolled", window.scrollY > 24);
-      ticking = false;
+  /* ---------- Tilt cards ---------- */
+  document.querySelectorAll('.tilt').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
     });
-  }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  /* ------------------------------------------------------------------
-     Mobile nav
-  ------------------------------------------------------------------ */
-  const navToggle = document.getElementById("navToggle");
-  const mainNav = document.getElementById("mainNav");
-
-  function closeMobileNav() {
-    mainNav.classList.remove("is-open");
-    header.classList.remove("nav-open");
-    navToggle.setAttribute("aria-expanded", "false");
-  }
-
-  navToggle.addEventListener("click", () => {
-    const open = mainNav.classList.toggle("is-open");
-    header.classList.toggle("nav-open", open);
-    navToggle.setAttribute("aria-expanded", String(open));
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
   });
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMobileNav();
+  /* ---------- Pillars ---------- */
+  const pillars = [
+    ['Music & sound production', 'The first operational priority: accessible professional recording and production rooms, equipment orientation, producer development, artist coaching, collaborative sessions and practical pathways into paid work.', ['Recording', 'Production', 'Mixing & mastering', 'Artist development']],
+    ['Film & digital media', 'A phased set of facilities and training for video production, editing, sound for picture, digital storytelling and commercial content creation.', ['Video production', 'Editing', 'Sound for picture', 'Storytelling']],
+    ['Photography & visual arts', 'Shared photography facilities, lighting, visual communication, design practice, portfolio development and exhibition opportunities.', ['Photography', 'Lighting', 'Design', 'Exhibition']],
+    ['Creative technology & innovation', 'A collaborative environment for creative software, music intelligence, intellectual property awareness, data tools, product testing and Ugandan technology innovators.', ['Music intelligence', 'IP awareness', 'Data tools', 'Incubation']],
+    ['Learning, performance & enterprise', 'Practical training, mentorship, performance opportunities, business skills, market readiness, partnerships and pathways to sustainable creative enterprise.', ['Training', 'Mentorship', 'Performance', 'Enterprise']]
+  ];
+  const pillarEls = document.querySelectorAll('.pillar');
+  function setPillar(i) {
+    pillarEls.forEach(x => x.classList.toggle('active', +x.dataset.pillar === i));
+    const [title, desc, tags] = pillars[i];
+    const tEl = document.getElementById('pillar-title');
+    const dEl = document.getElementById('pillar-desc');
+    const nEl = document.getElementById('pillar-num');
+    const tagsEl = document.getElementById('pillar-tags');
+    if (window.gsap) {
+      gsap.fromTo([tEl, dEl], { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.06, ease: 'power2.out' });
+    }
+    tEl.textContent = title; dEl.textContent = desc;
+    nEl.textContent = String(i + 1).padStart(2, '0');
+    tagsEl.innerHTML = tags.map(t => `<span>${t}</span>`).join('');
+  }
+  pillarEls.forEach(el => {
+    el.addEventListener('click', () => setPillar(+el.dataset.pillar));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setPillar(+el.dataset.pillar); } });
+  });
+  setPillar(0);
+
+  /* ---------- Budget ---------- */
+  const budget = [
+    ['Feasibility, legal, architectural & engineering', 150, 'Studies, legal structuring, concept design and technical assessments.', '#D8B36A'],
+    ['Property deposit, lease preparation & initial occupancy', 120, 'Initial occupancy costs for an existing premises; final amount depends on the selected property route.', '#BB9150'],
+    ['Building renovation & infrastructure', 500, 'Building adaptation, internal works, circulation, finishes and essential infrastructure.', '#466B86'],
+    ['Acoustic engineering & treatment', 300, 'Sound isolation, room acoustics and treatment for professional music spaces.', '#9A7B56'],
+    ['Music production equipment', 350, 'Priority recording, production, mixing and mastering equipment.', '#547E8D'],
+    ['Film, photography & digital media equipment', 300, 'Cameras, lighting, editing and related production equipment for phased services.', '#7B9D9D'],
+    ['Computers, software, networking & storage', 180, 'Workstations, licensed tools, network infrastructure and secure storage.', '#344D68'],
+    ['Electrical systems & backup power', 220, 'Electrical upgrades, distribution, protection and backup power.', '#B7A58A'],
+    ['Furniture & shared facilities', 150, 'Learning, collaboration, reception, office and shared-use furniture.', '#7F8B91'],
+    ['Safety, security & accessibility', 80, 'Fire and life safety, access control, security and accessibility improvements.', '#52667A'],
+    ['Recruitment & staff training', 70, 'Core team mobilisation, onboarding and operational training.', '#A78D61'],
+    ['Launch & outreach', 30, 'Public information, launch activities and beneficiary outreach.', '#647F73'],
+    ['Initial operating reserve', 350, 'Initial working-capital buffer; not a full multi-year operating commitment.', '#9A7447'],
+    ['Contingency', 200, 'Preliminary provision for unforeseen establishment costs.', '#C9BDA9']
+  ];
+  const fmt = n => 'UGX ' + n.toLocaleString('en-US') + 'm';
+  const total = budget.reduce((s, b) => s + b[1], 0); // 3000
+
+  // Donut (SVG arcs)
+  const donutG = document.getElementById('donutSegments');
+  const R = 82, CX = 100, CY = 100;
+  let angle = -Math.PI / 2;
+  function polar(a, r) { return [CX + r * Math.cos(a), CY + r * Math.sin(a)]; }
+  function arcPath(a0, a1) {
+    const [x0, y0] = polar(a0, R), [x1, y1] = polar(a1, R);
+    const large = (a1 - a0) > Math.PI ? 1 : 0;
+    return `M ${x0} ${y0} A ${R} ${R} 0 ${large} 1 ${x1} ${y1}`;
+  }
+  budget.forEach((b, i) => {
+    const frac = b[1] / total;
+    const a0 = angle, a1 = angle + frac * Math.PI * 2 - 0.012;
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', arcPath(a0, a1));
+    path.setAttribute('stroke', b[3]);
+    path.setAttribute('stroke-width', '26');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke-linecap', 'butt');
+    path.dataset.idx = i;
+    donutG.appendChild(path);
+    angle = a1 + 0.012;
   });
 
-  /* ------------------------------------------------------------------
-     Reveal-on-scroll (IntersectionObserver)
-  ------------------------------------------------------------------ */
-  const revealEls = document.querySelectorAll(".reveal");
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
-        }
+  const list = document.getElementById('budget-list');
+  const detail = document.getElementById('budget-detail');
+  const donutCenter = document.getElementById('donutCenter');
+  const donutSub = document.getElementById('donutSub');
+  const maxVal = Math.max(...budget.map(b => b[1]));
+
+  function selectBudget(i) {
+    const b = budget[i];
+    document.querySelectorAll('.budget-row').forEach((r, j) => r.classList.toggle('active', j === i));
+    document.querySelectorAll('#donutSegments path').forEach((p, j) => {
+      p.style.opacity = j === i ? '1' : '0.35';
+      p.style.transform = j === i ? 'scale(1.04)' : 'scale(1)';
+    });
+    detail.textContent = b[2] + ' Allocation: ' + fmt(b[1]) + ' (' + (b[1] / total * 100).toFixed(1) + '% of total).';
+    donutCenter.textContent = fmt(b[1]).replace('UGX ', '');
+    donutSub.textContent = b[0].split(',')[0];
+    if (window.gsap) gsap.fromTo(detail, { opacity: 0.4 }, { opacity: 1, duration: 0.4 });
+  }
+
+  budget.forEach((b, i) => {
+    const row = document.createElement('div');
+    row.className = 'budget-row';
+    row.setAttribute('role', 'button');
+    row.setAttribute('tabindex', '0');
+    row.innerHTML = `<div><div class="bname"><span class="swatch" style="background:${b[3]}"></span>${b[0]}<span class="pct">${(b[1] / total * 100).toFixed(1)}%</span></div><div class="bar"><i data-w="${b[1] / maxVal * 100}"></i></div></div><strong>${fmt(b[1])}</strong>`;
+    row.addEventListener('click', () => selectBudget(i));
+    row.addEventListener('keydown', e => { if (e.key === 'Enter') selectBudget(i); });
+    list.appendChild(row);
+  });
+  donutG.querySelectorAll('path').forEach(p => p.addEventListener('click', () => selectBudget(+p.dataset.idx)));
+
+  // Animate bars when visible
+  const barIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar i').forEach(bar => bar.style.width = bar.dataset.w + '%');
+        barIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  barIO.observe(list);
+
+  /* ---------- Toast ---------- */
+  const toast = document.getElementById('toast');
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+  }
+
+  /* ---------- Share ---------- */
+  async function shareProposal() {
+    const data = {
+      title: 'Uganda Creative Innovation Centre — Ministerial Proposal',
+      text: 'Where Uganda’s creative future takes shape. Explore the interactive 3D UCIC proposal: campus, UGX 3.0bn investment & roadmap.',
+      url: location.href
+    };
+    if (navigator.share) {
+      try { await navigator.share(data); } catch (e) { /* user cancelled */ }
+    } else {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        showToast('Proposal link copied to clipboard ✓');
+      } catch (e) {
+        showToast('Copy this link to share: ' + location.href);
+      }
+    }
+  }
+  ['shareBtn', 'shareBtn2'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', shareProposal);
+  });
+
+  /* ---------- Print ---------- */
+  ['printBtn', 'printBtn2'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', () => window.print());
+  });
+
+  /* ---------- Download budget summary ---------- */
+  const dl = document.getElementById('downloadBudget');
+  if (dl) dl.addEventListener('click', () => {
+    const lines = [
+      'UGANDA CREATIVE INNOVATION CENTRE — BUDGET SUMMARY',
+      'Total indicative establishment investment: UGX 3.0bn (preliminary planning estimate)',
+      'Note: Assumes existing suitable building. Excludes land purchase, new construction & multi-year operating budget.',
+      '',
+      ...budget.map(b => `• ${b[0]} — ${fmt(b[1])} (${(b[1] / total * 100).toFixed(1)}%)`),
+      '',
+      'All values indicative — subject to feasibility, bill of quantities & supplier quotations.'
+    ].join('\n');
+    const blob = new Blob([lines], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'UCIC-budget-summary.txt';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast('Budget summary downloaded ✓');
+  });
+
+  /* ---------- GSAP ScrollTrigger reveals (enhance) ---------- */
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.reveal').forEach(el => {
+      gsap.fromTo(el, { opacity: 0, y: 28 }, {
+        opacity: 1, y: 0, duration: 0.85, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
       });
-    },
-    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
-  );
-  revealEls.forEach((el) => io.observe(el));
-
-  /* ------------------------------------------------------------------
-     Lightbox
-  ------------------------------------------------------------------ */
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImage = document.getElementById("lightboxImage");
-  const lightboxTitle = document.getElementById("lightboxTitle");
-  const lightboxMeta = document.getElementById("lightboxMeta");
-  const lightboxClose = document.getElementById("lightboxClose");
-  const lightboxPrev = document.getElementById("lightboxPrev");
-  const lightboxNext = document.getElementById("lightboxNext");
-
-  function openLightbox(index) {
-    if (index < 0 || index >= allItems.length) return;
-    const item = allItems[index];
-    currentLightboxIndex = index;
-    lightboxImage.src = item.src;
-    lightboxImage.alt = item.title;
-    lightboxTitle.textContent = item.title;
-    lightboxMeta.textContent = item.meta;
-
-    lightboxPrev.hidden = index === 0;
-    lightboxNext.hidden = index === allItems.length - 1;
-
-    lightbox.classList.add("is-open");
-    lightbox.setAttribute("aria-hidden", "false");
-    document.body.classList.add("lightbox-open");
-    lightboxClose.focus();
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove("is-open");
-    lightbox.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("lightbox-open");
-    currentLightboxIndex = -1;
-  }
-
-  function stepLightbox(dir) {
-    if (currentLightboxIndex < 0) return;
-    openLightbox(currentLightboxIndex + dir);
-  }
-
-  ["architecture", "food", "travel"].forEach((key) => {
-    const grid = gridMap[key];
-    if (!grid) return;
-    grid.addEventListener("click", (e) => {
-      const card = e.target.closest(".card");
-      if (card) openLightbox(Number(card.dataset.index));
     });
-    grid.addEventListener("keydown", (e) => {
-      if (e.key !== "Enter" && e.key !== " ") return;
-      const card = e.target.closest(".card");
-      if (!card) return;
-      e.preventDefault();
-      openLightbox(Number(card.dataset.index));
+    // Parallax on hero canvas
+    gsap.to('#hero3d', {
+      yPercent: 12, ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
     });
-  });
-
-  lightboxClose.addEventListener("click", closeLightbox);
-  lightboxPrev.addEventListener("click", () => stepLightbox(-1));
-  lightboxNext.addEventListener("click", () => stepLightbox(1));
-
-  /* Click on the backdrop closes the lightbox */
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (!lightbox.classList.contains("is-open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft") stepLightbox(-1);
-    if (e.key === "ArrowRight") stepLightbox(1);
-  });
-
-  /* ------------------------------------------------------------------
-     Footer year
-  ------------------------------------------------------------------ */
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  }
 })();

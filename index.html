@@ -1,161 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SHOGZZ — Redefine Creativity</title>
-  <meta name="description" content="SHOGZZ is an editorial photography portfolio spanning architecture, food & drinks, and travel & lifestyle — the visual diary of an entrepreneur." />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Uganda Creative Innovation Centre — Ministerial Investment Proposal</title>
+<meta name="description" content="Interactive 3D ministerial proposal for the Uganda Creative Innovation Centre (UCIC) — a national creative development institution in Kampala. Explore the campus in 3D, the UGX 3.0bn investment framework, and the delivery roadmap." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Uganda Creative Innovation Centre — Ministerial Proposal" />
+<meta property="og:description" content="Where Uganda's creative future takes shape. An interactive 3D proposal: campus, investment & roadmap." />
+<meta property="og:image" content="images/og-cover.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Uganda Creative Innovation Centre — interactive 3D ministerial proposal" />
+<meta property="og:site_name" content="Uganda Creative Innovation Centre" />
+<meta name="twitter:image" content="images/og-cover.png" />
+<meta name="twitter:title" content="Uganda Creative Innovation Centre — Ministerial Proposal" />
+<meta name="twitter:description" content="An interactive 3D proposal: concept campus, UGX 3.0bn investment framework and 24-month roadmap." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#060D1A" />
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+<script>
+  /* Preloader failsafe: reveal the page even if a script fails to load. */
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var pre = document.getElementById('preloader');
+      if (pre && !pre.classList.contains('done')) {
+        pre.classList.add('done');
+        document.querySelectorAll('.hero-title .line-inner').forEach(function (el) { el.style.transform = 'none'; });
+        document.querySelectorAll('.reveal-hero').forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
+      }
+    }, 5000);
+  });
+</script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/" } }
+</script>
+<noscript><style>#preloader{display:none}.reveal,.reveal-hero{opacity:1!important;transform:none!important}.hero-title .line-inner{transform:none!important}</style></noscript>
 </head>
 <body>
-  <!-- ============ HEADER ============ -->
-  <header class="site-header" id="siteHeader">
-    <div class="header-inner">
-      <a href="#home" class="brand" aria-label="SHOGZZ home">
-        <span class="brand-mark">SHOGZZ</span>
-        <span class="brand-sub">OFFICIAL</span>
-      </a>
 
-      <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
-        <ul>
-          <li><a href="#architecture" class="nav-link" data-scroll>Architecture</a></li>
-          <li><a href="#food" class="nav-link" data-scroll>Food &amp; Drinks</a></li>
-          <li><a href="#travel" class="nav-link" data-scroll>Travel</a></li>
-          <li><a href="#contact" class="nav-link" data-scroll>Contact</a></li>
-        </ul>
-      </nav>
+<!-- Preloader -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-inner">
+    <div class="pre-seal">U</div>
+    <div class="pre-word">UGANDA CREATIVE<br/>INNOVATION CENTRE</div>
+    <div class="pre-bar"><span id="preBarFill"></span></div>
+    <div class="pre-pct" id="prePct">0%</div>
+  </div>
+</div>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNav">
-        <span></span><span></span><span></span>
-      </button>
+<!-- Progress -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Nav -->
+<header class="topbar" id="topbar">
+  <a class="brand" href="#top">
+    <span class="seal">U</span>
+    <span class="brand-text">UGANDA CREATIVE<br/>INNOVATION CENTRE</span>
+  </a>
+  <nav class="nav" id="mainNav" aria-label="Primary">
+    <a href="#case">The case</a>
+    <a href="#campus">Campus 3D</a>
+    <a href="#pillars">Pillars</a>
+    <a href="#investment">Investment</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#east">East Sound</a>
+    <a class="cta" href="#ask">Ministerial request</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#case">The case</a><a href="#campus">Campus 3D</a><a href="#pillars">Pillars</a><a href="#investment">Investment</a><a href="#roadmap">Roadmap</a><a href="#east">East Sound</a><a href="#ask">Ministerial request</a>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <canvas id="hero3d" aria-hidden="true"></canvas>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-vignette" aria-hidden="true"></div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow reveal-hero"><span class="dot"></span> MINISTERIAL INVESTMENT PROPOSAL · KAMPALA, UGANDA</div>
+    <h1 class="hero-title">
+      <span class="line"><span class="line-inner">Where Uganda’s</span></span>
+      <span class="line"><span class="line-inner"><em>creative future</em></span></span>
+      <span class="line"><span class="line-inner">takes shape.</span></span>
+    </h1>
+    <p class="hero-sub reveal-hero">A national creative development institution bringing professional facilities, practical skills, technology and enterprise support within reach of Ugandan creatives — beginning with music, and growing into a wider creative economy platform.</p>
+
+    <div class="hero-actions reveal-hero">
+      <a class="btn btn-gold" href="#campus">Explore the 3D campus <span>↗</span></a>
+      <a class="btn btn-ghost" href="#investment">View investment plan</a>
+      <button class="btn btn-ghost" id="printBtn" type="button">Print / PDF</button>
     </div>
-  </header>
 
-  <main id="main">
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="home">
-      <div class="hero-bg" aria-hidden="true">
-        <img src="images/hero.jpg" alt="" loading="eager" />
-      </div>
-      <div class="hero-overlay" aria-hidden="true"></div>
-
-      <div class="hero-content">
-        <p class="hero-kicker reveal">SHOGZZ — ENTREPRENEUR &amp; CREATOR</p>
-        <h1 class="hero-title reveal">
-          <span class="line">REDEFINE</span>
-          <span class="line">CREATIVITY</span>
-        </h1>
-        <p class="hero-tagline reveal">
-          <em>Vision, hustle &amp; feeling —</em>
-          an editorial archive of architecture, food &amp; travel, seen through the lens of an entrepreneur.
-        </p>
-        <a href="#architecture" class="btn-hero reveal" data-scroll>
-          <span>Explore the Work</span>
-          <span class="btn-arrow" aria-hidden="true">&darr;</span>
-        </a>
-      </div>
-
-      <div class="hero-foot" aria-hidden="true">
-        <span>SCROLL</span>
-        <span class="hero-foot-line"></span>
-      </div>
-    </section>
-
-    <!-- ============ INTRO STRIP ============ -->
-    <section class="intro reveal">
-      <div class="intro-inner">
-        <p class="eyebrow">The Brand</p>
-        <h2 class="intro-title">
-          A quiet celebration of the seen &amp; the sensed —<br />
-          <em>captured in warm light.</em>
-        </h2>
-        <p class="intro-body">
-          SHOGZZ is the visual diary of an entrepreneur — a lens trained on structure,
-          craft and the places worth remembering. Every frame is dressed in honest,
-          natural light and told with editorial intention.
-        </p>
-      </div>
-    </section>
-
-    <!-- ============ ARCHITECTURE ============ -->
-    <section class="category" id="architecture">
-      <div class="category-head reveal">
-        <p class="eyebrow">01 — Portfolio</p>
-        <h2 class="category-title">Architectural Photography</h2>
-        <p class="category-desc">Structure, shadow and the poetry of built space.</p>
-      </div>
-      <div class="grid grid-3" id="grid-architecture"></div>
-    </section>
-
-    <!-- ============ FOOD & DRINKS ============ -->
-    <section class="category category-alt" id="food">
-      <div class="category-head reveal">
-        <p class="eyebrow">02 — Portfolio</p>
-        <h2 class="category-title">Food &amp; Drinks</h2>
-        <p class="category-desc">Craft, colour and the texture of taste.</p>
-      </div>
-      <div class="grid grid-3" id="grid-food"></div>
-    </section>
-
-    <!-- ============ TRAVEL & LIFESTYLE ============ -->
-    <section class="category" id="travel">
-      <div class="category-head reveal">
-        <p class="eyebrow">03 — Portfolio</p>
-        <h2 class="category-title">Travel &amp; Lifestyle</h2>
-        <p class="category-desc">Journeys, places and the moments between.</p>
-      </div>
-      <div class="grid grid-3" id="grid-travel"></div>
-    </section>
-
-    <!-- ============ FOOTER / CONTACT ============ -->
-    <footer class="footer" id="contact">
-      <div class="footer-inner">
-        <p class="eyebrow eyebrow-light">Get in touch</p>
-        <h2 class="footer-title">Let's Collaborate</h2>
-        <p class="footer-desc">
-          Have a project, a place, or a plate worth capturing? Reach out — the inbox is always open.
-        </p>
-        <a href="https://linktr.ee/ShoghiMbaya" target="_blank" rel="noopener" class="btn-contact">
-          <span>Connect with SHOGZZ</span>
-          <span class="btn-arrow" aria-hidden="true">&nearr;</span>
-        </a>
-
-        <div class="footer-links">
-          <span class="footer-label">Follow</span>
-          <a href="https://www.youtube.com/@shoghi10" target="_blank" rel="noopener" aria-label="SHOGZZ on YouTube">YouTube</a>
-          <a href="https://twitter.com/its_him91" target="_blank" rel="noopener" aria-label="SHOGZZ on X (Twitter)">X / Twitter</a>
-          <a href="https://www.snapchat.com/add/notreal_lyfe" target="_blank" rel="noopener" aria-label="SHOGZZ on Snapchat">Snapchat</a>
-        </div>
-
-        <p class="copyright">
-          &copy; <span id="year"></span> SHOGZZ. All rights reserved.
-          &nbsp;&mdash;&nbsp; Crafted in warm light.
-        </p>
-      </div>
-    </footer>
-  </main>
-
-  <!-- ============ LIGHTBOX ============ -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Image viewer">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close image viewer">&times;</button>
-    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image" aria-hidden="true">&#8249;</button>
-    <button class="lightbox-next" id="lightboxNext" aria-label="Next image" aria-hidden="true">&#8250;</button>
-    <figure class="lightbox-figure">
-      <img id="lightboxImage" src="" alt="" />
-      <figcaption class="lightbox-caption">
-        <span id="lightboxTitle" class="lightbox-title"></span>
-        <span id="lightboxMeta" class="lightbox-meta"></span>
-      </figcaption>
-    </figure>
+    <div class="hero-stats reveal-hero">
+      <div class="hstat"><strong data-count="3.0" data-decimals="1" data-prefix="UGX " data-suffix="bn">UGX 0bn</strong><span>Planning framework</span></div>
+      <div class="hstat"><strong data-count="1200" data-suffix=" m²">0 m²</strong><span>Usable campus space</span></div>
+      <div class="hstat"><strong data-count="6">0</strong><span>Connected wings</span></div>
+      <div class="hstat"><strong data-count="24" data-suffix=" mo">0 mo</strong><span>Delivery roadmap</span></div>
+    </div>
   </div>
 
-  <script src="js/main.js"></script>
+  <div class="hero-scroll" aria-hidden="true"><span>SCROLL</span><i></i></div>
+  <div class="hero-badge" aria-hidden="true">INTERACTIVE 3D PROPOSAL<br/><b>DRAG · ORBIT · EXPLORE</b></div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack">
+    <span>MUSIC &amp; SOUND</span><i>✦</i><span>FILM &amp; DIGITAL MEDIA</span><i>✦</i><span>PHOTOGRAPHY &amp; VISUAL ARTS</span><i>✦</i><span>CREATIVE TECHNOLOGY</span><i>✦</i><span>LEARNING &amp; ENTERPRISE</span><i>✦</i><span>EAST SOUND TECHNOLOGIES</span><i>✦</i>
+  </div>
+</div>
+
+<!-- ============ 01 CASE ============ -->
+<section id="case" class="wrap section">
+  <div class="section-head reveal">
+    <div>
+      <div class="kicker">01 · The national case</div>
+      <h2>Creative talent is abundant.<br/><em>Access is the missing link.</em></h2>
+    </div>
+    <p>Uganda’s creative people need more than inspiration. They need dependable places to learn, make, record, produce, collaborate, protect their work and build sustainable businesses.</p>
+  </div>
+
+  <div class="grid">
+    <article class="panel span4 tilt reveal">
+      <div class="card-num">01</div>
+      <div class="kicker">The opportunity</div>
+      <div class="stat">Talent</div>
+      <p>Build a practical bridge between raw creative ability, professional standards, market access and income-generating enterprise.</p>
+      <div class="card-foot">Skills → Standards → Market</div>
+    </article>
+    <article class="panel span4 tilt reveal">
+      <div class="card-num">02</div>
+      <div class="kicker">The institutional response</div>
+      <div class="stat">Access</div>
+      <p>Shared, professionally managed facilities and programmes, available to beneficiaries through transparent booking and selection.</p>
+      <div class="card-foot">Shared · Managed · Fair</div>
+    </article>
+    <article class="panel span4 tilt reveal">
+      <div class="card-num">03</div>
+      <div class="kicker">The national outcome</div>
+      <div class="stat">Enterprise</div>
+      <p>Stronger skills, new creative businesses, jobs, local intellectual property and a more connected creative industry.</p>
+      <div class="card-foot">Jobs · IP · Industry</div>
+    </article>
+
+    <article class="panel span7 reveal">
+      <div class="kicker">Vision</div>
+      <h3>A national home for creative development</h3>
+      <p>To become a leading Ugandan institution for creative skills, innovation, production and enterprise — accessible to emerging and established talent from across the country.</p>
+      <div class="divider"></div>
+      <div class="kicker">Mission</div>
+      <p>To provide shared infrastructure, training, mentorship, technology and industry partnerships that enable Ugandans to turn creative ability into professional work and sustainable livelihoods.</p>
+    </article>
+    <article class="panel span5 dark reveal">
+      <div class="kicker kicker-gold">Guiding principle</div>
+      <h3>Public benefit first.</h3>
+      <p>UCIC is not a private studio or a closed membership club. It is a national platform with fair access, clear eligibility, transparent governance and measurable public outcomes.</p>
+      <ul class="check-list">
+        <li>Free-access public benefit</li><li>Transparent booking &amp; selection</li><li>Measurable outcomes</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 02 CAMPUS 3D ============ -->
+<section id="campus" class="campus-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker kicker-gold">02 · Concept campus visualisation</div>
+        <h2 class="light">One connected<br/><em>creative campus.</em></h2>
+      </div>
+      <p class="light-muted">Illustrative spatial concept for a large Kampala facility of approximately 1,000–1,200 m² usable space, subject to premises assessment, design and approvals.</p>
+    </div>
+
+    <div class="campus-shell reveal">
+      <div class="campus-scene" aria-label="Interactive 3D campus visualisation">
+        <canvas id="campus3d" aria-label="Interactive three-dimensional conceptual campus model"></canvas>
+        <div class="campus-loading" id="campus-loading">Loading interactive 3D campus…</div>
+        <div class="campus-hint">Drag to orbit · Scroll to zoom · Click a building</div>
+        <div class="campus-caption">Conceptual 3D massing study · Not an actual site or approved design</div>
+        <div class="campus-mode-badge" id="campus-mode">Exterior overview</div>
+      </div>
+
+      <div class="campus-ui">
+        <div class="pill-tabs" role="tablist" aria-label="Campus wings">
+          <button class="active" data-room="hub" role="tab">Central hub</button>
+          <button data-room="music" role="tab">Music &amp; sound</button>
+          <button data-room="media" role="tab">Film &amp; media</button>
+          <button data-room="photo" role="tab">Photography</button>
+          <button data-room="learn" role="tab">Learning</button>
+          <button data-room="enterprise" role="tab">Enterprise</button>
+        </div>
+
+        <div class="campus-controls">
+          <button id="roof-toggle" type="button">Show interior layout</button>
+          <button id="inside-toggle" type="button">Enter music studio</button>
+          <button id="auto-toggle" type="button" aria-pressed="false">Auto-orbit: Off</button>
+          <button id="reset-campus" type="button">Reset view</button>
+        </div>
+
+        <div class="campus-info" aria-live="polite">
+          <div>
+            <strong id="room-title">Central innovation hub</strong>
+            <p id="room-desc">Shared reception, learning rooms, collaboration space, enterprise support and administration.</p>
+          </div>
+          <div class="campus-legend">
+            <span><i class="lg lg-gold"></i>Music</span>
+            <span><i class="lg lg-teal"></i>Media</span>
+            <span><i class="lg lg-cream"></i>Hub</span>
+          </div>
+        </div>
+
+        <div class="campus-cta">
+          <button class="tour-btn" id="tourBtn" type="button">▶ Start the guided 3D tour</button>
+          <span>Illustrative massing — click any wing or use the tabs above.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 PILLARS ============ -->
+<section id="pillars" class="wrap section">
+  <div class="section-head reveal">
+    <div>
+      <div class="kicker">03 · Institutional pillars</div>
+      <h2>Five connected <em>pathways.</em></h2>
+    </div>
+    <p>Music leads the first implementation phase. The wider institution expands in a planned sequence as partnerships, demand and operating capacity grow.</p>
+  </div>
+
+  <div class="pillars reveal" id="pillarsGrid">
+    <article class="pillar active" data-pillar="0" tabindex="0"><div class="num">01</div><h3>Music &amp; sound</h3><p>Recording, production, mixing, mastering and artist development.</p><span class="pillar-arrow">→</span></article>
+    <article class="pillar" data-pillar="1" tabindex="0"><div class="num">02</div><h3>Film &amp; digital media</h3><p>Video, editing, sound for picture and digital storytelling.</p><span class="pillar-arrow">→</span></article>
+    <article class="pillar" data-pillar="2" tabindex="0"><div class="num">03</div><h3>Photography &amp; visual arts</h3><p>Photography, visual communication and creative design.</p><span class="pillar-arrow">→</span></article>
+    <article class="pillar" data-pillar="3" tabindex="0"><div class="num">04</div><h3>Creative technology</h3><p>Music intelligence, digital tools, IP awareness and innovation.</p><span class="pillar-arrow">→</span></article>
+    <article class="pillar" data-pillar="4" tabindex="0"><div class="num">05</div><h3>Learning &amp; enterprise</h3><p>Training, mentorship, performance and business development.</p><span class="pillar-arrow">→</span></article>
+  </div>
+
+  <div class="pillar-detail reveal">
+    <div class="pillar-detail-num" id="pillar-num">01</div>
+    <div>
+      <h3 id="pillar-title">Music &amp; sound production</h3>
+      <p id="pillar-desc">The first operational priority: accessible professional recording and production rooms, equipment orientation, producer development, artist coaching, collaborative sessions and practical pathways into paid work.</p>
+      <div class="pillar-tags" id="pillar-tags"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 INVESTMENT ============ -->
+<section id="investment" class="wrap section">
+  <div class="section-head reveal">
+    <div>
+      <div class="kicker">04 · Investment framework</div>
+      <h2>A UGX 3 billion<br/><em>establishment plan.</em></h2>
+    </div>
+    <p>A preliminary planning envelope for fitting out and launching a large centre in an existing building secured through lease or institutional arrangement — not a land purchase or new-build estimate.</p>
+  </div>
+
+  <div class="panel investment-panel reveal">
+    <div class="budget-layout">
+      <div>
+        <div class="kicker">Total indicative establishment investment</div>
+        <div class="budget-total"><span id="budgetTotal">UGX 0</span><small> · preliminary planning estimate</small></div>
+        <p>Explore the allocations by selecting a budget line. Values are indicative and require technical validation, a bill of quantities and supplier quotations.</p>
+        <div class="note">The estimate assumes an existing suitable building. Land purchase, new construction and a fully funded multi-year operating budget are excluded.</div>
+        <div class="budget-actions">
+          <button class="btn btn-dark" id="downloadBudget" type="button">Download budget summary</button>
+          <button class="btn btn-outline" id="shareBtn" type="button">Share proposal</button>
+        </div>
+      </div>
+      <div class="donut-wrap">
+        <svg class="donut-svg" viewBox="0 0 200 200" role="img" aria-label="Budget allocation donut chart">
+          <g id="donutSegments"></g>
+          <circle cx="100" cy="100" r="62" fill="#fff"/>
+        </svg>
+        <div class="donut-label"><strong id="donutCenter">3.0bn</strong><span>UGX total</span><small id="donutSub">Tap a line below</small></div>
+      </div>
+    </div>
+    <div class="budget-list" id="budget-list"></div>
+    <div class="note" id="budget-detail">Select any budget line to see what it covers.</div>
+  </div>
+
+  <div class="grid" style="margin-top:18px">
+    <article class="panel span4 reveal"><div class="kicker">Premises strategy</div><h3>Assess before committing.</h3><p>Compare government or institutional premises, a long-term lease of an existing building, and a public-private property partnership. No property route is assumed at this stage.</p></article>
+    <article class="panel span4 reveal"><div class="kicker">Funding approach</div><h3>Mobilise in stages.</h3><p>Blend public support, private-sector contributions, development partners, equipment sponsorships and programme partnerships. The minister is asked to champion and facilitate, not personally finance the project.</p></article>
+    <article class="panel span4 reveal"><div class="kicker">Operating discipline</div><h3>Protect free access.</h3><p>Use transparent eligibility, scheduled access, trained staff, maintenance plans and a separate operating model combining grants, partnerships and earned institutional income.</p></article>
+  </div>
+</section>
+
+<!-- ============ 05 EAST SOUND ============ -->
+<section id="east" class="east-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">05 · Homegrown creative technology</div>
+        <h2>Innovation built <em>in Uganda.</em></h2>
+      </div>
+      <p>UCIC can be a platform where local creative technology is demonstrated, tested, improved and connected to the wider industry.</p>
+    </div>
+    <div class="grid">
+      <article class="panel span5 reveal east-card">
+        <div class="east-mark">east<span>sound</span></div>
+        <div class="kicker">East Sound Technologies · existing initiative</div>
+        <h3>Music intelligence and rights awareness.</h3>
+        <p>East Sound Technologies, associated with 7H Music Group Ltd, is presented as a homegrown technology initiative and potential industry partner — not as a UCIC-owned or government-developed product.</p>
+        <a class="btn btn-dark" href="https://eastsound.vercel.app" target="_blank" rel="noopener">Visit East Sound Technologies ↗</a>
+      </article>
+      <article class="panel span7 reveal">
+        <div class="kicker">Potential areas for collaboration</div>
+        <h3>Connecting creators to data, evidence and knowledge.</h3>
+        <ul class="feature-list">
+          <li>Radio airplay monitoring and music fingerprinting workflows.</li>
+          <li>Music charts, analytics and reporting tools.</li>
+          <li>Copyright, intellectual property and royalty education.</li>
+          <li>Technology incubation for Ugandan creative-sector innovators.</li>
+          <li>Industry dashboards and evidence-led decision support.</li>
+        </ul>
+        <div class="note">Any use of East Sound systems, data, services or intellectual property would be subject to due diligence, transparent procurement or partnership procedures, and a written agreement. Other Ugandan innovators should have fair opportunity to participate.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 ROADMAP ============ -->
+<section id="roadmap" class="wrap section">
+  <div class="section-head reveal">
+    <div>
+      <div class="kicker">06 · Delivery roadmap</div>
+      <h2>Build carefully. <em>Prove value. Scale.</em></h2>
+    </div>
+    <p>A phased implementation reduces risk, validates demand and allows the centre to open with a credible first set of services before expanding.</p>
+  </div>
+  <div class="timeline reveal" id="timeline">
+    <article class="phase"><b>PHASE 01 · 0–3 MONTHS</b><h3>Validate</h3><p>Stakeholder consultations, feasibility, premises assessment, governance design, technical brief and cost verification.</p><span class="phase-dot"></span></article>
+    <article class="phase"><b>PHASE 02 · 4–8 MONTHS</b><h3>Establish</h3><p>Secure premises, complete design and fit-out, procure priority music equipment, recruit and train core team.</p><span class="phase-dot"></span></article>
+    <article class="phase"><b>PHASE 03 · 9–12 MONTHS</b><h3>Launch music-first</h3><p>Open priority studios and learning programmes, introduce fair booking, publish service standards and baseline metrics.</p><span class="phase-dot"></span></article>
+    <article class="phase"><b>PHASE 04 · 12–24 MONTHS</b><h3>Expand</h3><p>Grow film, photography, creative technology and enterprise programmes as resources and performance justify.</p><span class="phase-dot"></span></article>
+  </div>
+</section>
+
+<!-- ============ 07 GOVERNANCE ============ -->
+<section class="wrap section">
+  <div class="section-head reveal">
+    <div>
+      <div class="kicker">07 · Governance &amp; public value</div>
+      <h2>Trust is part of <em>the infrastructure.</em></h2>
+    </div>
+    <p>UCIC should operate with professional management, independent oversight and a clear public-benefit mandate.</p>
+  </div>
+  <div class="grid">
+    <article class="panel span6 reveal">
+      <h3>Proposed governance safeguards</h3>
+      <ul class="feature-list">
+        <li>Public-private ownership and partnership structure, subject to legal and procurement assessment.</li>
+        <li>Independent board or oversight mechanism with clear conflict-of-interest rules.</li>
+        <li>Professional centre management and published service standards.</li>
+        <li>Annual financial reporting, procurement controls and performance reviews.</li>
+        <li>Transparent beneficiary selection, booking and complaints processes.</li>
+      </ul>
+    </article>
+    <article class="panel span6 dark reveal">
+      <h3>Impact to measure</h3>
+      <ul class="feature-list light-list">
+        <li>Creatives trained and supported, disaggregated by age, gender and region.</li>
+        <li>Hours of free or subsidised facility access delivered.</li>
+        <li>Creative works produced and projects completed.</li>
+        <li>Jobs, internships, enterprises and paid opportunities supported.</li>
+        <li>Partnerships, intellectual property awareness and technology adoption.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 08 ASK ============ -->
+<section id="ask" class="ask-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker kicker-gold">08 · Request for ministerial consideration</div>
+        <h2 class="light">A champion to help<br/><em>convene the national effort.</em></h2>
+      </div>
+      <p class="light-muted">The proposal seeks strategic guidance and facilitation to move from concept to a properly assessed, partner-backed implementation plan.</p>
+    </div>
+    <div class="grid">
+      <div class="span7 reveal">
+        <h3 class="light ask-title">We respectfully request support to:</h3>
+        <ol class="ask-list">
+          <li>Consider and provide strategic guidance on the UCIC concept.</li>
+          <li>Facilitate introductions and coordination with relevant ministries, agencies, public institutions and training partners.</li>
+          <li>Support exploration of suitable government or institutional premises in Kampala.</li>
+          <li>Help mobilise resources for a feasibility and technical assessment.</li>
+          <li>Convene private-sector, development, technology and creative-industry partners.</li>
+          <li>Consider serving as a strategic champion or patron, subject to your acceptance.</li>
+        </ol>
+        <div class="ask-actions">
+          <button class="btn btn-gold" id="shareBtn2" type="button">Share this proposal ↗</button>
+          <button class="btn btn-ghost" id="printBtn2" type="button">Print / save as PDF</button>
+        </div>
+      </div>
+      <div class="panel span5 reveal ask-card">
+        <div class="sig-badge">For ministerial consideration</div>
+        <div class="kicker">The immediate next step</div>
+        <h3>Authorise a 90-day development phase.</h3>
+        <p>Constitute a small multi-stakeholder working group to validate the concept, confirm premises options, commission technical costing, refine governance and prepare an investment-ready implementation case.</p>
+        <div class="divider"></div>
+        <div class="small">Prepared for consideration by<br/><strong>Hon. Lt. Gen. (Rtd) Henry Tumukunde</strong><br/>Minister of Gender, Labour and Social Development</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="seal">U</span><div>UGANDA CREATIVE<br/>INNOVATION CENTRE</div></div>
+    <p>All visuals are conceptual. Budget and facility specifications are preliminary and subject to feasibility, design, procurement and approvals.</p>
+    <div class="footer-meta">© 2026 · Draft for discussion · Kampala, Uganda</div>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+<script type="module" src="js/campus.js"></script>
+<script type="module" src="js/hero3d.js"></script>
 </body>
 </html>
