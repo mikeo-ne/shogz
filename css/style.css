@@ -168,6 +168,14 @@ h2.light{color:#fff}
    reads as "loading a building" rather than a broken empty box. */
 .campus-scene::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 58%,rgba(216,179,106,.16),transparent 70%);animation:campusPulse 1.9s ease-in-out infinite;pointer-events:none;transition:opacity .6s}
 .campus-scene.ready::before{opacity:0}
+/* No WebGL: collapse the scene instead of leaving a tall empty box. */
+.campus-scene.failed{height:auto;min-height:0;padding:18px 16px}
+.campus-scene.failed::before{display:none}
+.campus-scene.failed canvas{display:none}
+.campus-scene.failed .campus-loading{position:static;display:block;max-width:52ch;line-height:1.5;padding:0;background:none;border:0}
+.campus-scene.failed .campus-hint,
+.campus-scene.failed .campus-mode-badge,
+.campus-scene.failed .campus-caption{display:none}
 @keyframes campusPulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.9;transform:scale(1.03)}}
 .campus-hint{position:absolute;right:16px;top:16px;background:rgba(7,20,38,.82);color:var(--gold2);border:1px solid rgba(216,179,106,.4);padding:9px 13px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;border-radius:99px;pointer-events:none}
 .campus-caption{position:absolute;left:20px;bottom:16px;font-size:10px;letter-spacing:.14em;color:#E8D5AA;text-transform:uppercase;background:rgba(7,20,38,.6);padding:6px 10px;border-radius:6px}
