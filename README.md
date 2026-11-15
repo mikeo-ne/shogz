@@ -1,58 +1,89 @@
-# SHOGZZ — Editorial Photography Portfolio
+# Uganda Creative Innovation Centre (UCIC) — Interactive 3D Ministerial Proposal
 
-A clean, responsive, high-end editorial photography portfolio website built with
-semantic HTML, modern CSS, and vanilla JavaScript. No framework, no build step —
-just open `index.html` or serve the folder.
+A modern, shareable, interactive 3D proposal website for the **Uganda Creative Innovation Centre** — a national creative development institution in Kampala, Uganda. It is **music-first**: recording, production and mixing studios open in Phase 1,
+with film, photography, creative technology and enterprise following.
 
-Built for **SHOGZZ** (ShoghiMbaya) — entrepreneur & creator. Visual diary spanning
-architecture, food & drinks, and travel & lifestyle.
+> *Record. Produce. Learn. Earn. Ugandan music.*
 
-## Design system
+Prepared for consideration by **Hon. Lt. Gen. (Rtd) Henry Tumukunde**, Minister of Gender, Labour and Social Development.
 
-| Role                  | Value     |
-| --------------------- | --------- |
-| Background / linen    | `#FDFBF7` |
-| Body / headings       | `#2A221E` |
-| Metadata / sand-taupe | `#8C7C6D` |
+## What this is
 
-- **Headings:** Playfair Display (primary serif) + Cormorant Garamond (italic serif)
-- **UI / labels:** Space Grotesk (fallback Inter)
+A single-page interactive proposal that replaces a static document with a living experience:
 
-## Features
+- **Music-led hero** — a spinning vinyl record with a live audio waveform (Three.js), a DAW-style
+  waveform strip and music-first headline
+- **Interactive 3D campus** — a single-storey U-plan building (north production block, two teaching
+  wings, south entrance block) wrapped around a courtyard and covered colonnade. Orbit, zoom,
+  click any wing, cutaway floor plan, guided 6-stop tour, walk into the control room,
+  day / golden hour / evening lighting, hover highlighting and auto-orbit
+- **Animated investment framework** — interactive SVG donut chart + clickable UGX 3.0bn budget lines with downloadable summary
+- **Five institutional pillars** — interactive explorer
+- **Delivery roadmap, governance, East Sound Technologies** showcase
+- **Ministerial request** section with share + print/PDF actions
+- Scroll animations (GSAP ScrollTrigger), counters, tilt cards, marquee, preloader, progress bar
 
-- **Sticky header** — "SHOGZZ" brand + navigation (Architecture, Food & Drinks,
-  Travel, Contact). Inverts from light (over the hero) to dark on scroll.
-  Full-screen slide-down menu on mobile.
-- **Hero** — large editorial "REDEFINE CREATIVITY" typography with an italic tagline
-  over a slow-zooming architectural backdrop.
-- **Three portfolio sections** — Architectural Photography, Food & Drinks,
-  Travel & Lifestyle — each a 3-column (→ 2 → 1 on smaller screens) responsive grid.
-- **Cards** — image + project title + metadata tag (e.g. `2026 • KAMPALA`), subtle
-  hover zoom, and an index numeral.
-- **Lightbox** — click a card to open a full-screen modal with a close button,
-  prev/next navigation, keyboard support (`Esc`, `←`, `→`), and backdrop-click to close.
-- **Footer** — centered "Let's Collaborate" call-to-action, a connect button linking to
-  [SHOGZZ's Linktree](https://linktr.ee/ShoghiMbaya), social links (YouTube, X/Twitter,
-  Snapchat), and copyright.
+## Content sections
 
-## Structure
+| # | Section | Highlights |
+|---|---------|------------|
+| 01 | The national case | Uganda's music travels; its studios don't |
+| 02 | **Music first** | Why music leads, the four gaps, Studio A / B, producer lab, UGX 650m |
+| 03 | The studios in 3D | U-plan campus building, ~1,000–1,200 m² usable space |
+| 03 | Pillars | Music, film, photography, creative tech, learning & enterprise |
+| 04 | Beyond music | Film, photography, creative tech, learning & enterprise |
+| 05 | Investment | UGX 3.0bn preliminary establishment plan (14 lines) |
+| 06 | East Sound | Homegrown music-intelligence initiative |
+| 07 | Roadmap | Validate → Establish → Launch → Expand (24 months) |
+| 08 | Governance | Safeguards & impact metrics |
+| 09 | Ministerial request | 90-day development phase ask |
 
-```
-index.html          # Page markup
-css/style.css       # Design system + layout + responsive rules
-js/main.js          # Grid render, lightbox, smooth scroll, header state, reveals
-images/             # Photographic assets + favicon
-```
+## Tech
+
+- **No build step** — plain HTML/CSS/JS, deploy anywhere static
+- Three.js (r161 via CDN import map) for both 3D scenes
+- GSAP 3 + ScrollTrigger via CDN for scroll animation
+- Google Fonts: Fraunces (serif display) + Inter + Space Grotesk
 
 ## Run locally
 
 ```bash
-# any static server works, e.g.
 python3 -m http.server 8080
-# then open http://localhost:8080
+# open http://localhost:8080
 ```
 
-## Deploy
+> Note: ES modules + import maps require serving over HTTP (not `file://`).
 
-The included GitHub Actions workflow (`static.yml`) publishes the repository
-contents to GitHub Pages on pushes to `main`.
+## Deploy / share
+
+- **Vercel** — the `shogz` project is already linked to `mikeo-ne/shogz`. Merge to `main`
+  and Vercel rebuilds automatically; no build command or framework preset is needed.
+  Live: <https://shogz.vercel.app>
+- **GitHub Pages** — `.github/workflows/static.yml` also publishes on push to `main`.
+- **Netlify** — import the repo, leave the build command empty, publish directory `/`.
+- **Share** — use the in-page *Share proposal* button (Web Share API → clipboard fallback),
+  or copy the live URL. `images/og-cover.png` (1200×630) provides rich link previews on
+  WhatsApp, X, LinkedIn and Slack.
+
+## Notes
+
+- `.nojekyll` is included so GitHub Pages serves the `js/` folder byte-for-byte.
+- The preloader has a 5-second failsafe and inline `<noscript>` styles, so content is never
+  trapped behind an animation if a CDN is blocked.
+- `prefers-reduced-motion` disables auto-orbit, marquee motion and reveal animations.
+
+## Structure
+
+```
+index.html          # Page markup (all proposal content)
+css/style.css       # Design system + layout + responsive + print
+js/main.js          # Preloader, nav, reveals, pillars, budget, share
+js/campus.js        # Three.js U-plan building: walls, colonnade, interiors,
+                    #   cutaway, guided tour, time-of-day, hover picking
+js/hero3d.js        # Three.js vinyl record + waveform hero, DAW waveform strip
+images/             # Favicon, OG cover (svg + png)
+```
+
+## Disclaimer
+
+All visuals are conceptual. Budget and facility specifications are preliminary and subject to feasibility, design, procurement and approvals. © 2026 · Draft for discussion.

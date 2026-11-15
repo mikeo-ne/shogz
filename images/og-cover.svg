@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050B14"/>
+      <stop offset="0.6" stop-color="#0B2238"/>
+      <stop offset="1" stop-color="#122E44"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.76" cy="0.24" r="0.55">
+      <stop offset="0" stop-color="#2A5C7C" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#0B2238" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F0D79E"/>
+      <stop offset="1" stop-color="#C79B52"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#D8B36A" stroke-opacity="0.10" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- vinyl record + waveform -->
+  <g transform="translate(880,300)" opacity="0.9">
+    <circle r="132" fill="#0A0C10" stroke="#2A2320" stroke-width="2"/>
+    <circle r="126" fill="none" stroke="#8A7448" stroke-opacity="0.30" stroke-width="1"/>
+    <circle r="112" fill="none" stroke="#8A7448" stroke-opacity="0.22" stroke-width="1"/>
+    <circle r="96" fill="none" stroke="#8A7448" stroke-opacity="0.20" stroke-width="1"/>
+    <circle r="80" fill="none" stroke="#8A7448" stroke-opacity="0.18" stroke-width="1"/>
+    <circle r="44" fill="url(#gold)"/>
+    <circle r="30" fill="#B08F4B"/>
+    <circle r="4" fill="#060D1A"/>
+    <g stroke="url(#gold)" stroke-width="3" stroke-linecap="round" opacity="0.85">
+      <path d="M0 -168 L0 -150"/><path d="M62 -156 L56 -140"/><path d="M118 -120 L106 -108"/>
+      <path d="M156 -62 L140 -56"/><path d="M168 0 L150 0"/><path d="M156 62 L140 56"/>
+      <path d="M118 120 L106 108"/><path d="M62 156 L56 140"/><path d="M0 168 L0 150"/>
+      <path d="M-62 156 L-56 140"/><path d="M-118 120 L-106 108"/><path d="M-156 62 L-140 56"/>
+      <path d="M-168 0 L-150 0"/><path d="M-156 -62 L-140 -56"/><path d="M-118 -120 L-106 -108"/>
+      <path d="M-62 -156 L-56 -140"/>
+    </g>
+    <!-- tonearm -->
+    <g stroke="#CFC9BA" stroke-linecap="round" fill="none">
+      <path d="M150 -104 L84 -22" stroke-width="5"/>
+      <circle cx="152" cy="-107" r="15" fill="#CFC9BA" stroke="none"/>
+      <path d="M84 -22 L70 -4" stroke-width="9"/>
+    </g>
+  </g>
+
+  <!-- orbit ring -->
+  <ellipse cx="840" cy="300" rx="330" ry="120" fill="none" stroke="#D8B36A" stroke-opacity="0.22" stroke-width="1"/>
+
+  <!-- particles -->
+  <g fill="#F0D79E" opacity="0.7">
+    <circle cx="640" cy="180" r="2.5"/><circle cx="742" cy="140" r="1.8"/><circle cx="1082" cy="220" r="2.2"/>
+    <circle cx="980" cy="480" r="1.6"/><circle cx="600" cy="500" r="2"/><circle cx="1140" cy="410" r="1.8"/>
+    <circle cx="700" cy="120" r="1.4"/><circle cx="900" cy="170" r="2.6"/>
+  </g>
+
+  <!-- seal -->
+  <g transform="translate(96,86)">
+    <circle cx="34" cy="34" r="33" fill="none" stroke="url(#gold)" stroke-width="1.6"/>
+    <text x="34" y="47" text-anchor="middle" font-family="Georgia,serif" font-size="34" fill="url(#gold)">U</text>
+  </g>
+
+  <text x="96" y="196" fill="#CFE0EC" font-family="Helvetica,Arial,sans-serif" font-size="15" letter-spacing="5">A NATIONAL HOME FOR UGANDAN MUSIC · KAMPALA</text>
+
+  <text x="96" y="292" fill="#FFFFFF" font-family="Georgia,serif" font-size="62">Record. Produce.</text>
+  <text x="96" y="366" fill="url(#gold)" font-family="Georgia,serif" font-size="62" font-style="italic">Learn. Earn.</text>
+  <text x="96" y="440" fill="#FFFFFF" font-family="Georgia,serif" font-size="62">Ugandan music.</text>
+
+  <line x1="96" y1="492" x2="470" y2="492" stroke="#D8B36A" stroke-opacity="0.6"/>
+
+  <g font-family="Helvetica,Arial,sans-serif">
+    <text x="96" y="540" fill="#FFFFFF" font-size="26" font-weight="bold">UGX 650m</text>
+    <text x="96" y="566" fill="#9FB2C3" font-size="13" letter-spacing="2">COMMITTED TO MUSIC</text>
+
+    <text x="340" y="540" fill="#FFFFFF" font-size="26" font-weight="bold">3 studios</text>
+    <text x="340" y="566" fill="#9FB2C3" font-size="13" letter-spacing="2">LIVE ROOM · BOOTH · LAB</text>
+
+    <text x="618" y="540" fill="#FFFFFF" font-size="26" font-weight="bold">1,200 m²</text>
+    <text x="618" y="566" fill="#9FB2C3" font-size="13" letter-spacing="2">UCIC CONCEPT CAMPUS</text>
+  </g>
+
+  <rect x="0" y="609" width="1200" height="21" fill="#D8B36A"/>
+  <text x="96" y="625" fill="#060D1A" font-family="Helvetica,Arial,sans-serif" font-size="11" font-weight="bold" letter-spacing="3">MUSIC-FIRST PROPOSAL · WALK THE STUDIOS IN 3D</text>
+</svg>
