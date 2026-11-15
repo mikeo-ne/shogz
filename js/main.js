@@ -58,36 +58,44 @@
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   /* ---------- Counters ---------- */
+  /* The figures are already correct in the markup, so print / PDF, slow JS
+     and no-JS visitors always see real numbers rather than UGX 0bn. The
+     animation only settles them, and never rewinds a correct value to zero.
+
+     t0 comes from the first animation frame, not performance.now(): the two
+     clocks do not share an origin in every browser, which rendered the stats
+     as "-16.8bn" on a real deployment. Progress is clamped as well. */
   let countersStarted = false;
+  function formatStat(el, value) {
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    return prefix + value.toLocaleString('en-US', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    }) + suffix;
+  }
   function startCounters() {
     if (countersStarted) return;
     countersStarted = true;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     document.querySelectorAll('[data-count]').forEach(el => {
       const target = parseFloat(el.dataset.count);
-      const decimals = parseInt(el.dataset.decimals || '0', 10);
-      const prefix = el.dataset.prefix || '';
-      const suffix = el.dataset.suffix || '';
-      const dur = 1600; const t0 = performance.now();
+      if (!isFinite(target)) return;
+      if (reduce) { el.textContent = formatStat(el, target); return; }
+      const from = target * 0.7;
+      const dur = 1100;
+      let t0 = null;
       function tick(now) {
-        const t = Math.min(1, (now - t0) / dur);
+        if (t0 === null) t0 = now;
+        const raw = (now - t0) / dur;
+        const t = raw < 0 ? 0 : raw > 1 ? 1 : raw;
         const eased = 1 - Math.pow(1 - t, 3);
-        const val = t >= 1 ? target : target * eased;
-        el.textContent = prefix + val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+        el.textContent = formatStat(el, from + (target - from) * eased);
         if (t < 1) requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
     });
-    // Budget total counter
-    const bt = document.getElementById('budgetTotal');
-    if (bt) {
-      const t0 = performance.now();
-      (function tick(now) {
-        const t = Math.min(1, (now - t0) / 1600);
-        const eased = 1 - Math.pow(1 - t, 3);
-        bt.textContent = 'UGX ' + (t >= 1 ? '3.0' : (3.0 * eased).toFixed(1)) + 'bn';
-        if (t < 1) requestAnimationFrame(tick);
-      })(t0);
-    }
   }
 
   /* ---------- Marquee duplicate for seamless loop ---------- */

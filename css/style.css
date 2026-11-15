@@ -164,6 +164,11 @@ h2.light{color:#fff}
 #campus3d{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
 #campus3d:active{cursor:grabbing}
 .campus-loading{position:absolute;left:16px;top:16px;color:var(--gold2);font-size:11px;background:rgba(7,20,38,.82);padding:9px 13px;border-radius:99px;border:1px solid rgba(216,179,106,.35)}
+/* Skeleton swell behind the canvas while the model builds, so the space
+   reads as "loading a building" rather than a broken empty box. */
+.campus-scene::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 58%,rgba(216,179,106,.16),transparent 70%);animation:campusPulse 1.9s ease-in-out infinite;pointer-events:none;transition:opacity .6s}
+.campus-scene.ready::before{opacity:0}
+@keyframes campusPulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.9;transform:scale(1.03)}}
 .campus-hint{position:absolute;right:16px;top:16px;background:rgba(7,20,38,.82);color:var(--gold2);border:1px solid rgba(216,179,106,.4);padding:9px 13px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;border-radius:99px;pointer-events:none}
 .campus-caption{position:absolute;left:20px;bottom:16px;font-size:10px;letter-spacing:.14em;color:#E8D5AA;text-transform:uppercase;background:rgba(7,20,38,.6);padding:6px 10px;border-radius:6px}
 .campus-mode-badge{position:absolute;right:16px;bottom:16px;background:var(--gold);color:var(--navy);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:99px}

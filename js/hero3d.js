@@ -1,16 +1,32 @@
 /* UCIC — Hero visual: a spinning vinyl record with a live audio waveform.
  * Deliberately music-first: no abstract particles, no wireframe geometry.
+ *
+ * Three.js is ~259 KB gzipped. Awaiting it before first paint made the hero
+ * look slow, so the module now waits for the page to finish loading and then
+ * imports Three. The 2D waveform strip below runs immediately and is what
+ * carries the first impression.
  */
-import * as THREE from 'three';
 
 const canvas = document.getElementById('hero3d');
 
-if (canvas) {
+/* Paint the waveform right away — it needs no dependency at all. */
+function whenIdle(fn) {
+  if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 1800 });
+  else setTimeout(fn, 320);
+}
+
+async function bootHero3D() {
+  if (!canvas) return;
+  const THREE = await import('three');
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const dpr = devicePixelRatio || 1;
+  const smallScreen = Math.min(innerWidth, innerHeight) < 820;
+  const renderer = new THREE.WebGLRenderer({
+    canvas, antialias: !smallScreen, alpha: true, powerPreference: 'high-performance'
+  });
+  renderer.setPixelRatio(Math.min(dpr, smallScreen ? 1.5 : 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
@@ -174,8 +190,19 @@ if (canvas) {
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clock = new THREE.Clock();
 
+  /* The hero used to keep a full render loop running for the entire page.
+   * Once it scrolls away there is nothing to look at, so skip the draw while
+   * it is off-screen and stop advancing the clock — otherwise the record
+   * silently spins and burns battery behind nine sections of text. */
+  let heroVisible = true;
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(es => { heroVisible = es[0].isIntersecting; }, { threshold: 0 })
+      .observe(canvas);
+  }
+
   function animate() {
     requestAnimationFrame(animate);
+    if (!heroVisible) { clock.getDelta(); return; }
     const t = clock.getElapsedTime();
 
     // record spins like it is playing at 33⅓ rpm
@@ -209,6 +236,13 @@ if (canvas) {
     renderer.render(scene, camera);
   }
   animate();
+}
+
+/* Defer until the page has loaded so Three.js never competes with first paint. */
+if (canvas) {
+  const start = () => whenIdle(() => { bootHero3D().catch(() => {}); });
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start, { once: true });
 }
 
 /* ------------------------------------------------------------------ *
