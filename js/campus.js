@@ -20,6 +20,11 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const canvas = document.getElementById('campus3d');
 
+/* The scene is ~43 meshes, 16 lights and a 2048² shadow map. Building it at
+ * import time made the whole page feel slow, because that work ran while the
+ * visitor was still reading the hero. The module is now imported on approach
+ * (see the loader at the bottom of index.html) and simply builds on import. */
+
 if (canvas) {
   /* ------------------------------------------------------------------ *
    * Renderer / scene
@@ -33,10 +38,21 @@ if (canvas) {
   const HOME = { pos: new THREE.Vector3(46, 44, 62), target: new THREE.Vector3(0, 2, -3) };
   camera.position.copy(HOME.pos);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  /* Adaptive quality. A 3x phone screen at a 2048² shadow map is a lot of
+   * pixels to shade for a marketing page, so cap the render scale and drop
+   * the shadow map on small / high-density screens. The massing still reads
+   * because the sun angle carries the modelling. */
+  const dpr = devicePixelRatio || 1;
+  const smallScreen = Math.min(innerWidth, innerHeight) < 820;
+  const maxRatio = smallScreen ? 1.5 : 2;
+  const shadowSize = smallScreen ? 1024 : 2048;
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas, antialias: !smallScreen, powerPreference: 'high-performance'
+  });
+  renderer.setPixelRatio(Math.min(dpr, maxRatio));
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = smallScreen ? THREE.PCFShadowMap : THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.0;
@@ -57,7 +73,7 @@ if (canvas) {
   const sun = new THREE.DirectionalLight(0xffe2b0, 2.5);
   sun.position.set(-38, 44, 26);
   sun.castShadow = true;
-  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.mapSize.set(shadowSize, shadowSize);
   Object.assign(sun.shadow.camera, { left: -52, right: 52, top: 52, bottom: -52, near: 1, far: 160 });
   sun.shadow.bias = -0.0004;
   sun.shadow.normalBias = 0.03;
@@ -199,14 +215,24 @@ if (canvas) {
     const m = box(parent, x, y, z, w, h, d, stripMat(), false);
     return m;
   }
+  /* Each pendant used to add a real PointLight. Five of them, layered on the
+   * sun, fill, hemisphere and ambient, is a lot of per-fragment work for a
+   * phone GPU — and they only existed to make the shade look lit. The bulb
+   * material is emissive, which reads the same at a fraction of the cost. */
   function pendant(parent, x, z, y, r = 0.16) {
     box(parent, x, y + 0.55, z, 0.012, 1.1, 0.012, mats.dark, false);
     const shade = new THREE.Mesh(new THREE.ConeGeometry(r, r * 1.1, 14, 1, true), mats.gold);
     shade.position.set(x, y + 0.5, z); shade.rotation.x = Math.PI; parent.add(shade);
     const b = new THREE.Mesh(new THREE.SphereGeometry(r * 0.45, 10, 8), mats.bulb);
     b.position.set(x, y + 0.36, z); parent.add(b);
-    const l = new THREE.PointLight(0xffd9a0, 0.5, 6, 2);
-    l.position.set(x, y + 0.4, z); parent.add(l);
+    /* A soft glow disc where the light would fall on the floor. */
+    const pool = new THREE.Mesh(
+      new THREE.CircleGeometry(r * 3.4, 16),
+      new THREE.MeshBasicMaterial({ color: 0xFFD9A0, transparent: true, opacity: 0.10, depthWrite: false })
+    );
+    pool.rotation.x = -Math.PI / 2;
+    pool.position.set(x, 0.02, z);
+    parent.add(pool);
   }
 
   /* ------------------------------------------------------------------ *
@@ -732,9 +758,14 @@ if (canvas) {
     const x = 14.5 + i * 3.6;
     const lamp = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.14, 0.32, 10), mats.dark);
     lamp.position.set(x, 6.5, -12.9); lamp.rotation.x = 0.4; fg.add(lamp);
-    const spot = new THREE.SpotLight(0xffe0a8, 7, 15, 0.42, 0.62, 1.5);
-    spot.position.set(x, 6.5, -12.9); spot.target.position.set(x, 0.6, -18.6);
-    fg.add(spot, spot.target);
+    /* Only the two outer lamps carry a real spot; the rest are geometry.
+       Six overlapping spots on a small stage were the single most expensive
+       thing in this scene and added almost nothing visually. */
+    if (i === 0 || i === 5) {
+      const spot = new THREE.SpotLight(0xffe0a8, 7, 15, 0.42, 0.62, 1.5);
+      spot.position.set(x, 6.5, -12.9); spot.target.position.set(x, 0.6, -18.6);
+      fg.add(spot, spot.target);
+    }
   }
   // dolly track + camera
   box(fg, 25.5, 0.46, -12.9, 16, 0.05, 0.14, mats.gold, false);
@@ -1214,10 +1245,31 @@ if (canvas) {
   window.addEventListener('resize', resize);
   resize();
 
+  /* Shadow-pass thinning.
+   *
+   * box() defaults to castShadow = true, so nearly a thousand meshes — down to
+   * 0.1 m chair legs and cable runs — were submitted to the 2048² shadow map.
+   * At campus scale those shadows are sub-pixel, so they cost a full extra
+   * pass for nothing. Anything smaller than ~0.6 m stops casting; silhouettes
+   * come from the walls, roofs, columns and furniture that actually read. */
+  if (renderer.shadowMap.enabled) {
+    const MIN_CASTER = 0.6;
+    const _box = new THREE.Box3();
+    const _size = new THREE.Vector3();
+    scene.traverse(o => {
+      if (!o.isMesh || !o.castShadow) return;
+      _box.setFromObject(o);
+      _box.getSize(_size);
+      if (Math.max(_size.x, _size.y, _size.z) < MIN_CASTER) o.castShadow = false;
+    });
+  }
+
   applyTime('day');
 
   const loading = $('campus-loading');
   if (loading) loading.textContent = '3D campus ready · click a wing or start the tour';
+  const sceneWrap = canvas.closest('.campus-scene');
+  if (sceneWrap) sceneWrap.classList.add('ready');
 
   function animate() {
     requestAnimationFrame(animate);

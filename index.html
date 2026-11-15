@@ -4,18 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Uganda Creative Innovation Centre — Ministerial Investment Proposal</title>
-<meta name="description" content="Interactive 3D ministerial proposal for the Uganda Creative Innovation Centre (UCIC) — a national creative development institution in Kampala. Explore the campus in 3D, the UGX 3.0bn investment framework, and the delivery roadmap." />
+<meta name="description" content="A ministerial proposal for the Uganda Creative Innovation Centre (UCIC) — a national home for Ugandan music in Kampala. Three professional studios, producer training and a UGX 3.0bn establishment plan." />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Uganda Creative Innovation Centre — Ministerial Proposal" />
-<meta property="og:description" content="Where Uganda's creative future takes shape. An interactive 3D proposal: campus, investment & roadmap." />
-<meta property="og:image" content="images/og-cover.png" />
+<meta property="og:url" content="https://ucic-music.vercel.app/" />
+<meta property="og:title" content="UCIC — Record. Produce. Learn. Earn. Ugandan music." />
+<meta property="og:description" content="A ministerial proposal for a national home for Ugandan music: three professional studios, producer training and a UGX 3.0bn establishment plan for Kampala." />
+<meta property="og:image" content="https://ucic-music.vercel.app/images/og-cover.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Uganda Creative Innovation Centre — interactive 3D ministerial proposal" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:alt" content="Vinyl record and tonearm — Record. Produce. Learn. Earn. Ugandan music." />
 <meta property="og:site_name" content="Uganda Creative Innovation Centre" />
-<meta name="twitter:image" content="images/og-cover.png" />
-<meta name="twitter:title" content="Uganda Creative Innovation Centre — Ministerial Proposal" />
-<meta name="twitter:description" content="An interactive 3D proposal: concept campus, UGX 3.0bn investment framework and 24-month roadmap." />
+<meta property="og:locale" content="en_UG" />
+<meta name="twitter:image" content="https://ucic-music.vercel.app/images/og-cover.png" />
+<meta name="twitter:title" content="UCIC — Record. Produce. Learn. Earn. Ugandan music." />
+<meta name="twitter:description" content="A ministerial proposal for a national home for Ugandan music: three studios, producer training and a UGX 3.0bn establishment plan." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#060D1A" />
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
@@ -110,10 +113,10 @@
     </div>
 
     <div class="hero-stats reveal-hero">
-      <div class="hstat"><strong data-count="3.0" data-decimals="1" data-prefix="UGX " data-suffix="bn">UGX 0bn</strong><span>Establishment plan</span></div>
-      <div class="hstat"><strong data-count="650" data-suffix="m">0m</strong><span>Committed to music fit-out</span></div>
-      <div class="hstat"><strong data-count="1200" data-suffix=" m²">0 m²</strong><span>Usable campus space</span></div>
-      <div class="hstat"><strong data-count="24" data-suffix=" mo">0 mo</strong><span>To full programme</span></div>
+      <div class="hstat"><strong data-count="3.0" data-decimals="1" data-prefix="UGX " data-suffix="bn">UGX 3.0bn</strong><span>Establishment plan</span></div>
+      <div class="hstat"><strong data-count="650" data-suffix="m">650m</strong><span>Committed to music fit-out</span></div>
+      <div class="hstat"><strong data-count="1200" data-suffix=" m²">1,200 m²</strong><span>Usable campus space</span></div>
+      <div class="hstat"><strong data-count="24" data-suffix=" mo">24 mo</strong><span>To full programme</span></div>
     </div>
   </div>
 
@@ -361,7 +364,7 @@
     <div class="budget-layout">
       <div>
         <div class="kicker">Total indicative establishment investment</div>
-        <div class="budget-total"><span id="budgetTotal">UGX 0</span><small> · preliminary planning estimate</small></div>
+        <div class="budget-total"><span id="budgetTotal">UGX 3.0bn</span><small> · preliminary planning estimate</small></div>
         <p>Explore the allocations by selecting a budget line. Values are indicative and require technical validation, a bill of quantities and supplier quotations.</p>
         <div class="note">The estimate assumes an existing suitable building. Land purchase, new construction and a fully funded multi-year operating budget are excluded.</div>
         <div class="budget-actions">
@@ -523,10 +526,45 @@
 <!-- Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="js/main.js"></script>
-<script type="module" src="js/campus.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="js/main.js"></script>
 <script type="module" src="js/hero3d.js"></script>
+<script type="module">
+  /* Load the 3D campus only when it is about to be seen.
+   *
+   * Building the scene costs tens of milliseconds of main-thread work and a
+   * 259 KB Three.js download. Doing it up front delayed the hero on phones,
+   * so the module is fetched when the campus section gets within 400px of the
+   * viewport. The placeholder text doubles as the loading state. */
+  const scene = document.getElementById('campus3d');
+  const section = document.getElementById('campus');
+  const status = document.getElementById('campus-loading');
+
+  let started = false;
+  function loadCampus() {
+    if (started || !scene) return;
+    started = true;
+    if (status) status.textContent = 'Building the campus model…';
+    import('js/campus.js').catch(() => {
+      if (status) status.textContent = 'The 3D model could not load. The plan is described below.';
+    });
+  }
+
+  if (!section || !('IntersectionObserver' in window)) {
+    loadCampus();
+  } else {
+    const io = new IntersectionObserver((entries, obs) => {
+      if (entries.some(e => e.isIntersecting)) {
+        obs.disconnect();
+        loadCampus();
+      }
+    }, { rootMargin: '400px 0px' });
+    io.observe(section);
+
+    /* If someone lands straight on #campus from a shared link, don't wait. */
+    if (location.hash === '#campus') loadCampus();
+  }
+</script>
 </body>
 </html>
