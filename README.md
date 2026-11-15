@@ -56,10 +56,17 @@ python3 -m http.server 8080
 
 ## Deploy / share
 
-- **Vercel** — the `shogz` project is already linked to `mikeo-ne/shogz`. Merge to `main`
-  and Vercel rebuilds automatically; no build command or framework preset is needed.
-  Live: <https://shogz.vercel.app>
-- **GitHub Pages** — `.github/workflows/static.yml` also publishes on push to `main`.
+- **Vercel — primary link to share**
+  - <https://ucic-music.vercel.app>
+  - <https://shogz.vercel.app> (same deployment, original project alias)
+
+  The `shogz` Vercel project is linked to `mikeo-ne/shogz`; every merge to `main`
+  rebuilds and promotes to production automatically. No build command or framework
+  preset is needed. Note: `ucic.vercel.app` is already owned by a different Vercel
+  account, which is why `ucic-music.vercel.app` is used — a custom domain such as
+  `ucic.ug` would be the upgrade path.
+- **GitHub Pages** — `.github/workflows/static.yml` also publishes on push to `main`,
+  to <https://mikeo-ne.github.io/shogz/>.
 - **Netlify** — import the repo, leave the build command empty, publish directory `/`.
 - **Share** — use the in-page *Share proposal* button (Web Share API → clipboard fallback),
   or copy the live URL. `images/og-cover.png` (1200×630) provides rich link previews on
