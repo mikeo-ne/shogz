@@ -11,7 +11,10 @@ Prepared for consideration by **Hon. Lt. Gen. (Rtd) Henry Tumukunde**, Minister 
 A single-page interactive proposal that replaces a static document with a living experience:
 
 - **Animated 3D hero** — particle field + wireframe campus massing (Three.js)
-- **Interactive 3D campus** — orbit, zoom, click buildings, cutaway interiors, "enter the music studio", auto-orbit
+- **Interactive 3D campus** — a single-storey U-plan building (north production block, two teaching
+  wings, south entrance block) wrapped around a courtyard and covered colonnade. Orbit, zoom,
+  click any wing, cutaway floor plan, guided 6-stop tour, walk into the control room,
+  day / golden hour / evening lighting, hover highlighting and auto-orbit
 - **Animated investment framework** — interactive SVG donut chart + clickable UGX 3.0bn budget lines with downloadable summary
 - **Five institutional pillars** — interactive explorer
 - **Delivery roadmap, governance, East Sound Technologies** showcase
@@ -23,7 +26,7 @@ A single-page interactive proposal that replaces a static document with a living
 | # | Section | Highlights |
 |---|---------|------------|
 | 01 | The national case | Talent · Access · Enterprise, vision & mission |
-| 02 | Campus 3D | 6-wing concept campus, ~1,000–1,200 m² |
+| 02 | Campus 3D | U-plan campus building, ~1,000–1,200 m² usable space |
 | 03 | Pillars | Music, film, photography, creative tech, learning & enterprise |
 | 04 | Investment | UGX 3.0bn preliminary establishment plan (14 lines) |
 | 05 | East Sound | Homegrown music-intelligence initiative |
@@ -71,7 +74,8 @@ python3 -m http.server 8080
 index.html          # Page markup (all proposal content)
 css/style.css       # Design system + layout + responsive + print
 js/main.js          # Preloader, nav, reveals, pillars, budget, share
-js/campus.js        # Three.js interactive campus model
+js/campus.js        # Three.js U-plan building: walls, colonnade, interiors,
+                    #   cutaway, guided tour, time-of-day, hover picking
 js/hero3d.js        # Three.js hero particle/massing background
 images/             # Favicon, OG cover (svg + png)
 ```

@@ -22,24 +22,24 @@
   <rect width="1200" height="630" fill="url(#glow)"/>
   <rect width="1200" height="630" fill="url(#grid)"/>
 
-  <!-- wireframe campus massing (flat-roof pavilions) -->
-  <g transform="translate(26,10)" opacity="0.6" fill="none" stroke="url(#gold)" stroke-width="1.5">
-    <!-- pavilion 1 -->
-    <path d="M700 400 L700 306 L806 306 L806 400 Z"/>
-    <path d="M700 330 L806 330 M700 356 L806 356 M700 382 L806 382"/>
-    <path d="M730 306 L730 400 M776 306 L776 400"/>
-    <path d="M700 306 L716 284 L822 284 L806 306"/>
-    <path d="M716 284 L716 378 M822 284 L822 378"/>
-    <!-- pavilion 2 -->
-    <path d="M846 400 L846 336 L936 336 L936 400 Z"/>
-    <path d="M846 360 L936 360 M846 382 L936 382"/>
-    <path d="M846 336 L860 318 L950 318 L936 336"/>
-    <path d="M860 318 L860 364 M950 318 L950 364"/>
-    <!-- pergola / link -->
-    <g opacity="0.55">
-    <path d="M560 420 L560 372 L640 372 L640 420 Z"/>
-    <path d="M560 388 L640 388 M580 372 L580 420 M600 372 L600 420 M620 372 L620 420"/>
-    </g>
+  <!-- wireframe U-plan building -->
+  <g transform="translate(884,332) scale(0.66) translate(-725,-333)" opacity="0.7" fill="none" stroke="url(#gold)" stroke-width="1.9">
+    <!-- north block -->
+    <path d="M640 350 L640 258 L810 258 L810 350"/>
+    <path d="M640 258 L664 236 L834 236 L810 258"/>
+    <path d="M664 236 L664 328 M834 236 L834 328"/>
+    <path d="M640 300 L810 300 M700 258 L700 328 M760 258 L760 328"/>
+    <!-- west + east wings -->
+    <path d="M640 350 L640 430 L700 430 L700 350"/>
+    <path d="M810 350 L810 430 L870 430 L870 350"/>
+    <!-- south block -->
+    <path d="M700 430 L700 384 L810 384 L810 430"/>
+    <path d="M640 326 L640 300"/>
+    <!-- courtyard -->
+    <path d="M660 366 L790 366" stroke-opacity="0.5"/>
+    <ellipse cx="725" cy="366" rx="34" ry="10" stroke-opacity="0.7"/>
+    <!-- colonnade ticks -->
+    <path d="M652 344 L652 352 M672 344 L672 352 M692 344 L692 352 M712 344 L712 352 M732 344 L732 352 M752 344 L752 352 M772 344 L772 352 M792 344 L792 352" stroke-opacity="0.55"/>
   </g>
 
   <!-- orbit ring -->

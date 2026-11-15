@@ -181,14 +181,14 @@
         <div class="kicker kicker-gold">02 · Concept campus visualisation</div>
         <h2 class="light">One connected<br/><em>creative campus.</em></h2>
       </div>
-      <p class="light-muted">Illustrative spatial concept for a large Kampala facility of approximately 1,000–1,200 m² usable space, subject to premises assessment, design and approvals.</p>
+      <p class="light-muted">A single-storey U-plan building of roughly 1,000–1,200 m²: a north production block, two teaching wings and a south entrance block, wrapped around a courtyard and covered colonnade. Illustrative concept, subject to premises assessment, design and approvals.</p>
     </div>
 
     <div class="campus-shell reveal">
       <div class="campus-scene" aria-label="Interactive 3D campus visualisation">
         <canvas id="campus3d" aria-label="Interactive three-dimensional conceptual campus model"></canvas>
         <div class="campus-loading" id="campus-loading">Loading interactive 3D campus…</div>
-        <div class="campus-hint">Drag to orbit · Scroll to zoom · Click a building</div>
+        <div class="campus-hint">Drag to orbit · scroll to zoom · click a wing</div>
         <div class="campus-caption">Conceptual 3D massing study · Not an actual site or approved design</div>
         <div class="campus-mode-badge" id="campus-mode">Exterior overview</div>
       </div>
@@ -204,10 +204,17 @@
         </div>
 
         <div class="campus-controls">
-          <button id="roof-toggle" type="button">Show interior layout</button>
+          <button id="roof-toggle" type="button">Show floor plan (cutaway)</button>
           <button id="inside-toggle" type="button">Enter music studio</button>
           <button id="auto-toggle" type="button" aria-pressed="false">Auto-orbit: Off</button>
           <button id="reset-campus" type="button">Reset view</button>
+        </div>
+
+        <div class="time-tabs" role="group" aria-label="Time of day">
+          <span class="time-label">Lighting</span>
+          <button data-time="day" class="active" type="button">☀ Daylight</button>
+          <button data-time="dusk" type="button">◐ Golden hour</button>
+          <button data-time="night" type="button">☾ Evening</button>
         </div>
 
         <div class="campus-info" aria-live="polite">
@@ -224,7 +231,7 @@
 
         <div class="campus-cta">
           <button class="tour-btn" id="tourBtn" type="button">▶ Start the guided 3D tour</button>
-          <span>Illustrative massing — click any wing or use the tabs above.</span>
+          <span>Illustrative architectural concept — click a wing, or use the tabs above.</span>
         </div>
       </div>
     </div>
