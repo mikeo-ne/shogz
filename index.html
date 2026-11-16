@@ -551,7 +551,10 @@
     if (started || !scene) return;
     started = true;
     if (status) status.querySelector('.cl-text').textContent = 'Building the campus model…';
-    import('js/campus.js').catch(err => {
+    /* Must be a relative URL with './'. A bare 'js/campus.js' is treated as
+       a package specifier and fails to resolve — which silently killed the
+       entire campus scene. */
+    import('./js/campus.js').catch(err => {
       /* Report the real reason instead of a friendly guess. Earlier this said
          "WebGL is turned off" for every failure, including bugs in the scene
          itself, and hid the canvas — which masked the problem rather than
