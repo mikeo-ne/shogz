@@ -94,12 +94,18 @@ def tracked(canv, x, y, text, font, size, tracking, color, align="left"):
         x = x - total
     elif align == "center":
         x = x - total / 2.0
-    canv.setFont(font, size)
+
     canv.setFillColor(color)
-    cx = x
-    for ch in text:
-        canv.drawString(cx, y, ch)
-        cx += pdfmetrics.stringWidth(ch, font, size) + tracking
+    # Draw as one string with character spacing set on the text object, not
+    # glyph by glyph. Drawing each character separately gives the same visual
+    # kerning but a text layer of "R E P U B L I C" — which breaks copy,
+    # search and accessibility in the PDF.
+    t = canv.beginText(x, y)
+    t.setFont(font, size)
+    t.setCharSpace(tracking)
+    t.textOut(text)
+    t.setCharSpace(0)
+    canv.drawText(t)
     return total
 
 
