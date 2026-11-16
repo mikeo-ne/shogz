@@ -233,7 +233,15 @@ async function bootHero3D() {
 }
 
 /* Start immediately — the turntable is the hero, not a deferred extra. */
-if (canvas) bootHero3D().catch(() => {});
+/* Never fail silently: a swallowed error here is indistinguishable from
+   "the animation was removed", which is exactly what it looked like. */
+if (canvas) {
+  bootHero3D().catch(err => {
+    console.error('[UCIC] hero 3D failed to start:', err);
+    if (canvas.parentElement) canvas.parentElement.classList.add('hero3d-failed');
+    canvas.setAttribute('data-error', String(err && (err.message || err)));
+  });
+}
 
 /* ------------------------------------------------------------------ *
  * Hero waveform strip — canvas, drawn to look like a DAW timeline
