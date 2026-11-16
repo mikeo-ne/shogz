@@ -20,6 +20,22 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 const canvas = document.getElementById('campus3d');
 
+/* Probe before building 1,300 meshes. If no context can be created at all
+ * there is no point doing the work and then throwing — let the caller fall
+ * back to the Canvas 2D renderer straight away. */
+function hasWebGL() {
+  try {
+    const c = document.createElement('canvas');
+    const gl = c.getContext('webgl2') || c.getContext('webgl') ||
+               c.getContext('experimental-webgl');
+    return !!gl;
+  } catch (e) { return false; }
+}
+
+if (canvas && !hasWebGL()) {
+  throw new Error('WebGL is not available in this browser');
+}
+
 /* The scene is ~43 meshes, 16 lights and a 2048² shadow map. Building it at
  * import time made the whole page feel slow, because that work ran while the
  * visitor was still reading the hero. The module is now imported on approach
