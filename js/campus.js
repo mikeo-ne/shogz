@@ -1267,7 +1267,11 @@ if (canvas) {
   applyTime('day');
 
   const loading = $('campus-loading');
-  if (loading) loading.textContent = '3D campus ready · click a wing or start the tour';
+  if (loading) {
+    const txt = loading.querySelector ? loading.querySelector('.cl-text') : null;
+    if (txt) txt.textContent = '3D campus ready · click a wing or start the tour';
+    else loading.textContent = '3D campus ready · click a wing or start the tour';
+  }
   const sceneWrap = canvas.closest('.campus-scene');
   if (sceneWrap) sceneWrap.classList.add('ready');
 
