@@ -186,6 +186,35 @@ def check_content(js_rows):
     notes.append("PDF pages: %d" % pdf_page_count())
     notes.append("budget lines cross-checked in both editions: %d" % len(js_rows or []))
 
+    check_no_overflow()
+
+
+def check_no_overflow():
+    """Nothing may sit outside the page margins.
+
+    This catches the class of bug where a nested table is built at the wrong
+    width and is silently drawn past the right edge — invisible on screen,
+    clipped on paper. It shipped once in the headline figures card."""
+    import pymupdf
+    doc = pymupdf.open(PDF)
+    # 16 mm margins, matching tools/build_pdf.py
+    left = 16 * 72 / 25.4
+    page_w = doc[0].rect.width
+    right = page_w - left
+
+    offenders = []
+    for i, page in enumerate(doc):
+        for w in page.get_text("words"):
+            if w[2] > right + 0.75 or w[0] < left - 0.75:
+                offenders.append((i + 1, round(w[0], 1), round(w[2], 1), w[4][:28]))
+
+    if offenders:
+        failures.append("text outside the page margins on %d word(s)" % len(offenders))
+        for page_no, x0, x1, word in offenders[:8]:
+            failures.append("  page %d: x %s..%s  %r" % (page_no, x0, x1, word))
+    else:
+        notes.append("no text outside the page margins")
+
 
 # ---------------------------------------------------------------- main
 def main():
