@@ -289,13 +289,10 @@ def fit_width(f, w):
                 f._colWidths = list(f._argW)
                 f._width = None
 
-    for row in (getattr(f, "_cellvalues", None) or []):
-        for cell in row:
-            if isinstance(cell, (list, tuple)):
-                for x in cell:
-                    fit_width(x, w)
-            elif isinstance(cell, Table):
-                fit_width(cell, w)
+    # Deliberately does NOT recurse into cell contents. A nested table must fit
+    # the cell's *inner* width (column width minus padding), not the outer
+    # width; passing the outer width down inflated nested tables by twice the
+    # padding and pushed their right-hand cells past the card's edge.
     return f
 
 
