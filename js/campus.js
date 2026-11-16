@@ -47,12 +47,32 @@ if (canvas) {
   const maxRatio = smallScreen ? 1.5 : 2;
   const shadowSize = smallScreen ? 1024 : 2048;
 
-  const renderer = new THREE.WebGLRenderer({
-    canvas, antialias: !smallScreen, powerPreference: 'high-performance'
-  });
+  /* Fall back progressively rather than failing outright. 'high-performance'
+     asks the browser to pick the discrete GPU, and on some drivers that
+     request is refused even though a perfectly good context is available.
+     Antialiasing is likewise not always supported on low-end GPUs. Each of
+     these threw before, which killed the whole scene. */
+  function makeRenderer(opts) {
+    return new THREE.WebGLRenderer(Object.assign({
+      canvas, alpha: false, depth: true, stencil: false,
+      powerPreference: 'default', preserveDrawingBuffer: false
+    }, opts));
+  }
+  let renderer;
+  try {
+    renderer = makeRenderer({ antialias: !smallScreen, powerPreference: 'high-performance' });
+  } catch (e1) {
+    try { renderer = makeRenderer({ antialias: false, powerPreference: 'high-performance' }); }
+    catch (e2) {
+      try { renderer = makeRenderer({ antialias: false, powerPreference: 'default' }); }
+      catch (e3) { renderer = makeRenderer({ antialias: false, failIfMajorPerformanceCaveat: false }); }
+    }
+  }
   renderer.setPixelRatio(Math.min(dpr, maxRatio));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = smallScreen ? THREE.PCFShadowMap : THREE.PCFSoftShadowMap;
+  /* Cheap, well-supported precision; avoids a shader-compile failure path. */
+  renderer.shadowMap.autoUpdate = true;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.0;

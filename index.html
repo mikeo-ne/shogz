@@ -551,15 +551,18 @@
     if (started || !scene) return;
     started = true;
     if (status) status.querySelector('.cl-text').textContent = 'Building the campus model…';
-    import('js/campus.js').catch(() => {
-      /* No WebGL, an old GPU or a blocked CDN. Collapse the canvas rather
-         than leaving a tall empty box mid-proposal, and say what happened in
-         plain language. The building is still described in the copy. */
+    import('js/campus.js').catch(err => {
+      /* Report the real reason instead of a friendly guess. Earlier this said
+         "WebGL is turned off" for every failure, including bugs in the scene
+         itself, and hid the canvas — which masked the problem rather than
+         showing it. Keep the canvas visible so a partial render still shows,
+         and leave the actual message on screen and in the console. */
+      const msg = (err && (err.message || err)) || 'unknown error';
+      console.error('[UCIC] 3D campus failed to start:', err);
       const wrap = scene.closest('.campus-scene');
       if (wrap) wrap.classList.add('failed');
       if (status) {
-        status.textContent = 'The interactive model needs WebGL, which this browser has turned off. ' +
-          'The campus is described in the text below.';
+        status.textContent = 'The 3D model could not start: ' + msg;
       }
     });
   }
