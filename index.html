@@ -22,6 +22,8 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#060D1A" />
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -40,7 +42,7 @@
   });
 </script>
 <script type="importmap">
-{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/" } }
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.min.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/" } }
 </script>
 <noscript><style>#preloader{display:none}.reveal,.reveal-hero{opacity:1!important;transform:none!important}.hero-title .line-inner{transform:none!important}</style></noscript>
 </head>
@@ -271,7 +273,10 @@
     <div class="campus-shell reveal">
       <div class="campus-scene" aria-label="Interactive 3D campus visualisation">
         <canvas id="campus3d" aria-label="Interactive three-dimensional conceptual campus model"></canvas>
-        <div class="campus-loading" id="campus-loading">Loading interactive 3D campus…</div>
+        <div class="campus-loading" id="campus-loading">
+          <span class="cl-spin" aria-hidden="true"></span>
+          <span class="cl-text">Loading interactive 3D campus…</span>
+        </div>
         <div class="campus-hint">Drag to orbit · click a studio · try evening light</div>
         <div class="campus-caption">Conceptual 3D massing study · Not an actual site or approved design</div>
         <div class="campus-mode-badge" id="campus-mode">Exterior overview</div>
@@ -545,7 +550,7 @@
   function loadCampus() {
     if (started || !scene) return;
     started = true;
-    if (status) status.textContent = 'Building the campus model…';
+    if (status) status.querySelector('.cl-text').textContent = 'Building the campus model…';
     import('js/campus.js').catch(() => {
       /* No WebGL, an old GPU or a blocked CDN. Collapse the canvas rather
          than leaving a tall empty box mid-proposal, and say what happened in
@@ -562,16 +567,21 @@
   if (!section || !('IntersectionObserver' in window)) {
     loadCampus();
   } else {
+    /* The model is wanted, not avoided: it starts as soon as the section is
+       anywhere near the viewport, and immediately once the page is otherwise
+       idle. The old margin was too tight to feel responsive. */
     const io = new IntersectionObserver((entries, obs) => {
       if (entries.some(e => e.isIntersecting)) {
         obs.disconnect();
         loadCampus();
       }
-    }, { rootMargin: '400px 0px' });
+    }, { rootMargin: '1200px 0px' });
     io.observe(section);
 
-    /* If someone lands straight on #campus from a shared link, don't wait. */
+    /* Deep links, or a visitor who scrolls fast, should never see a wait. */
     if (location.hash === '#campus') loadCampus();
+    if ('requestIdleCallback' in window) requestIdleCallback(loadCampus, { timeout: 2500 });
+    else setTimeout(loadCampus, 1800);
   }
 </script>
 </body>

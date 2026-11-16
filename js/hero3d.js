@@ -1,19 +1,13 @@
 /* UCIC — Hero visual: a spinning vinyl record with a live audio waveform.
  * Deliberately music-first: no abstract particles, no wireframe geometry.
  *
- * Three.js is ~259 KB gzipped. Awaiting it before first paint made the hero
- * look slow, so the module now waits for the page to finish loading and then
- * imports Three. The 2D waveform strip below runs immediately and is what
- * carries the first impression.
+ * The record is the first thing anyone sees, so it must not be deferred. It
+ * boots as soon as the document is parsed, against the minified Three build
+ * (168 KB gzipped rather than 259 KB). The 2D waveform strip is drawn in the
+ * same frame so the hero is never empty while the module resolves.
  */
 
 const canvas = document.getElementById('hero3d');
-
-/* Paint the waveform right away — it needs no dependency at all. */
-function whenIdle(fn) {
-  if ('requestIdleCallback' in window) requestIdleCallback(fn, { timeout: 1800 });
-  else setTimeout(fn, 320);
-}
 
 async function bootHero3D() {
   if (!canvas) return;
@@ -238,12 +232,8 @@ async function bootHero3D() {
   animate();
 }
 
-/* Defer until the page has loaded so Three.js never competes with first paint. */
-if (canvas) {
-  const start = () => whenIdle(() => { bootHero3D().catch(() => {}); });
-  if (document.readyState === 'complete') start();
-  else window.addEventListener('load', start, { once: true });
-}
+/* Start immediately — the turntable is the hero, not a deferred extra. */
+if (canvas) bootHero3D().catch(() => {});
 
 /* ------------------------------------------------------------------ *
  * Hero waveform strip — canvas, drawn to look like a DAW timeline
