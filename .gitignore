@@ -1,12 +1,3 @@
-# OS / editor
-.DS_Store
-Thumbs.db
-*.swp
-*.tmp
-
-# Logs
-*.log
-npm-debug.log*
-
-# Node (in case a build is added later)
 node_modules/
+.DS_Store
+*.log

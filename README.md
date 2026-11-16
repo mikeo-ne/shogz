@@ -1,49 +1,70 @@
-# Uganda Creative Innovation Centre (UCIC) — Interactive 3D Ministerial Proposal
+# Uganda Creative Innovation Centre (UCIC) — Ministerial Proposal
 
-A modern, shareable, interactive 3D proposal website for the **Uganda Creative Innovation Centre** — a national creative development institution in Kampala, Uganda. It is **music-first**: recording, production and mixing studios open in Phase 1,
-with film, photography, creative technology and enterprise following.
+A proposal to establish the **Uganda Creative Innovation Centre**, a public music and creative
+production facility in Kampala. It is **music-first**: recording, production and mixing rooms open
+in Phase 1, with film, photography, creative technology and enterprise following.
 
-> *Record. Produce. Learn. Earn. Ugandan music.*
+> *Record. Produce. Learn. Earn.*
 
-Prepared for consideration by **Hon. Lt. Gen. (Rtd) Henry Tumukunde**, Minister of Gender, Labour and Social Development.
+Submitted for the consideration of **Hon. Lt. Gen. (Rtd) Henry Tumukunde**, Minister of Gender,
+Labour and Social Development.
 
-## What this is
+## Two editions, one document
 
-A single-page interactive proposal that replaces a static document with a living experience:
+The proposal exists in two forms, and they carry the **same content and the same design**:
 
-- **Music-led hero** — a spinning vinyl record with a live audio waveform (Three.js), a DAW-style
-  waveform strip and music-first headline
-- **Interactive 3D campus** — a single-storey U-plan building (north production block, two teaching
-  wings, south entrance block) wrapped around a courtyard and covered colonnade. Orbit, zoom,
-  click any wing, cutaway floor plan, guided 6-stop tour, walk into the control room,
-  day / golden hour / evening lighting, hover highlighting and auto-orbit
-- **Animated investment framework** — interactive SVG donut chart + clickable UGX 3.0bn budget lines with downloadable summary
-- **Five institutional pillars** — interactive explorer
-- **Delivery roadmap, governance, East Sound Technologies** showcase
-- **Ministerial request** section with share + print/PDF actions
-- Scroll animations (GSAP ScrollTrigger), counters, tilt cards, marquee, preloader, progress bar
+| Edition | File | Purpose |
+|---|---|---|
+| Interactive | `index.html` | To be read on screen |
+| Print / PDF | `UCIC-proposal.pdf` | The copy to circulate, print or attach to a submission |
 
-## Content sections
+The PDF is not a summary. It is the whole document — letter of transmittal, all eight sections and
+the annexes — laid out for A4. `tools/check_parity.py` asserts that the two editions still agree, so
+they cannot drift apart.
 
-| # | Section | Highlights |
-|---|---------|------------|
-| 01 | The national case | Uganda's music travels; its studios don't |
-| 02 | **Music first** | Why music leads, the four gaps, Studio A / B, producer lab, UGX 650m |
-| 03 | The studios in 3D | U-plan campus building, ~1,000–1,200 m² usable space |
-| 03 | Pillars | Music, film, photography, creative tech, learning & enterprise |
-| 04 | Beyond music | Film, photography, creative tech, learning & enterprise |
-| 05 | Investment | UGX 3.0bn preliminary establishment plan (14 lines) |
-| 06 | East Sound | Homegrown music-intelligence initiative |
-| 07 | Roadmap | Validate → Establish → Launch → Expand (24 months) |
-| 08 | Governance | Safeguards & impact metrics |
-| 09 | Ministerial request | 90-day development phase ask |
+## Structure
 
-## Tech
+| # | Section | Contents |
+|---|---------|----------|
+| — | Cover | Title, addressee, subject, date, provenance |
+| — | Transmittal | Formal letter to the Minister |
+| — | Contents | Document map |
+| — | Executive summary | What is proposed, what it costs, headline figures |
+| 1 | Background and public case | Why production infrastructure is the constraint |
+| 2 | Fit with the Ministry's mandate | YLP, UWEP, GROW and SAGE, and the gap UCIC fills |
+| 3 | The proposed facility | U-plan building, four music spaces, premises strategy |
+| 4 | Programmes and access model | Five programme areas, three access tiers |
+| 5 | Indicative investment framework | UGX 3.0bn, 14 budget lines, funding sequence |
+| 6 | Governance, audit and public value | Safeguards and the measures that will be reported |
+| 7 | Delivery roadmap | Validate → Establish → Launch music-first → Expand |
+| 8 | Decisions requested | Six requests and the 90-day development phase |
+| — | Annexes | Assumptions, budget schedule, definitions |
 
-- **No build step** — plain HTML/CSS/JS, deploy anywhere static
-- Three.js (r161 via CDN import map) for both 3D scenes
-- GSAP 3 + ScrollTrigger via CDN for scroll animation
-- Google Fonts: Fraunces (serif display) + Inter + Space Grotesk
+## Images
+
+Four illustrative concepts live in `images/`: the courtyard elevation, a control room, a vocal booth
+and a producer lab. **They are renderings, not approved designs and not photographs of any site** —
+every placement is captioned as such, in both editions.
+
+## Build
+
+No build step for the website: plain HTML, CSS and JavaScript, deployable to any static host.
+
+Fonts are self-hosted in `fonts/` (Fraunces, Inter — both SIL OFL), so the site has no external
+font dependency. The browser uses the `.woff2` files; the PDF builder uses the `.ttf` files.
+
+To regenerate the PDF after editing content:
+
+```bash
+python3 -m pip install reportlab pymupdf
+python3 tools/build_pdf.py        # writes UCIC-proposal.pdf
+python3 tools/check_parity.py     # asserts web and PDF editions agree
+```
+
+`tools/build_pdf.py` lays the document out directly with reportlab. A headless-browser
+"print to PDF" was tried first and could not run in this environment (no browser binary and no
+system libraries available), so the PDF is composed rather than screenshotted — which also gives
+real page numbers, running footers and selectable text.
 
 ## Run locally
 
@@ -52,38 +73,24 @@ python3 -m http.server 8080
 # open http://localhost:8080
 ```
 
-> Note: ES modules + import maps require serving over HTTP (not `file://`).
+## Deploy
 
-## Deploy / share
+The `shogz` project on Vercel is linked to `mikeo-ne/shogz`. Merge to `main` and Vercel rebuilds
+automatically; no build command or framework preset is needed. The PDF is a committed file, so it
+serves as a normal download at `/UCIC-proposal.pdf`.
 
-- **Vercel** — the `shogz` project is already linked to `mikeo-ne/shogz`. Merge to `main`
-  and Vercel rebuilds automatically; no build command or framework preset is needed.
-  Live: <https://shogz.vercel.app>
-- **GitHub Pages** — `.github/workflows/static.yml` also publishes on push to `main`.
-- **Netlify** — import the repo, leave the build command empty, publish directory `/`.
-- **Share** — use the in-page *Share proposal* button (Web Share API → clipboard fallback),
-  or copy the live URL. `images/og-cover.png` (1200×630) provides rich link previews on
-  WhatsApp, X, LinkedIn and Slack.
+## Editorial rules for the two editions
 
-## Notes
+If you edit content, edit it in **both** places:
 
-- `.nojekyll` is included so GitHub Pages serves the `js/` folder byte-for-byte.
-- The preloader has a 5-second failsafe and inline `<noscript>` styles, so content is never
-  trapped behind an animation if a CDN is blocked.
-- `prefers-reduced-motion` disables auto-orbit, marquee motion and reveal animations.
+- **Budget lines** — `BUDGET` in `js/main.js` *and* `BUDGET` in `tools/build_pdf.py`.
+  `check_parity.py` fails if they differ.
+- **Figures** — UGX 3.0bn total, UGX 650m music allocation, 1,000–1,200 m², 24 months. These appear
+  in the cover, summary, Section 5 and the annexes.
+- **Tone** — this is a submission to a serving Cabinet Minister. No marketing superlatives, no
+  claims of approval, no unqualified cost certainty. Wherever a figure is an estimate, say so.
 
-## Structure
+## Status
 
-```
-index.html          # Page markup (all proposal content)
-css/style.css       # Design system + layout + responsive + print
-js/main.js          # Preloader, nav, reveals, pillars, budget, share
-js/campus.js        # Three.js U-plan building: walls, colonnade, interiors,
-                    #   cutaway, guided tour, time-of-day, hover picking
-js/hero3d.js        # Three.js vinyl record + waveform hero, DAW waveform strip
-images/             # Favicon, OG cover (svg + png)
-```
-
-## Disclaimer
-
-All visuals are conceptual. Budget and facility specifications are preliminary and subject to feasibility, design, procurement and approvals. © 2026 · Draft for discussion.
+Version 1.0, November 2026. A proposal for consideration: not an approved government project, not a
+procurement document, and not a commitment of public funds.

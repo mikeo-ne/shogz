@@ -1,593 +1,908 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Uganda Creative Innovation Centre — Ministerial Investment Proposal</title>
-<meta name="description" content="A ministerial proposal for the Uganda Creative Innovation Centre (UCIC) — a national home for Ugandan music in Kampala. Three professional studios, producer training and a UGX 3.0bn establishment plan." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://ucic-music.vercel.app/" />
-<meta property="og:title" content="UCIC — Record. Produce. Learn. Earn. Ugandan music." />
-<meta property="og:description" content="A ministerial proposal for a national home for Ugandan music: three professional studios, producer training and a UGX 3.0bn establishment plan for Kampala." />
-<meta property="og:image" content="https://ucic-music.vercel.app/images/og-cover.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:alt" content="Vinyl record and tonearm — Record. Produce. Learn. Earn. Ugandan music." />
-<meta property="og:site_name" content="Uganda Creative Innovation Centre" />
-<meta property="og:locale" content="en_UG" />
-<meta name="twitter:image" content="https://ucic-music.vercel.app/images/og-cover.png" />
-<meta name="twitter:title" content="UCIC — Record. Produce. Learn. Earn. Ugandan music." />
-<meta name="twitter:description" content="A ministerial proposal for a national home for Ugandan music: three studios, producer training and a UGX 3.0bn establishment plan." />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="theme-color" content="#060D1A" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UCIC — A National Facility for Music &amp; Creative Work | Proposal to the Minister of Gender, Labour and Social Development</title>
+<meta name="description" content="A proposal for the Uganda Creative Innovation Centre: a public music and creative production facility in Kampala, with a UGX 3.0bn establishment framework, delivered in partnership with the Ministry of Gender, Labour and Social Development." />
+<meta name="theme-color" content="#0A1A2F" />
+<meta property="og:title" content="Uganda Creative Innovation Centre — Ministerial Proposal" />
+<meta property="og:description" content="A national facility where Ugandan music and creative work is recorded, taught and turned into a livelihood. Submitted for the consideration of Hon. Lt. Gen. (Rtd) Henry Tumukunde, Minister of Gender, Labour and Social Development." />
+<meta property="og:type" content="article" />
+<meta property="og:image" content="images/campus-exterior.jpg" />
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
-<script>
-  /* Preloader failsafe: reveal the page even if a script fails to load. */
-  window.addEventListener('load', function () {
-    setTimeout(function () {
-      var pre = document.getElementById('preloader');
-      if (pre && !pre.classList.contains('done')) {
-        pre.classList.add('done');
-        document.querySelectorAll('.hero-title .line-inner').forEach(function (el) { el.style.transform = 'none'; });
-        document.querySelectorAll('.reveal-hero').forEach(function (el) { el.style.opacity = 1; el.style.transform = 'none'; });
-      }
-    }, 5000);
-  });
-</script>
-<script type="importmap">
-{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.min.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/" } }
-</script>
-<noscript><style>#preloader{display:none}.reveal,.reveal-hero{opacity:1!important;transform:none!important}.hero-title .line-inner{transform:none!important}</style></noscript>
 </head>
 <body>
 
-<!-- Preloader -->
-<div id="preloader" aria-hidden="true">
-  <div class="pre-inner">
-    <div class="pre-seal">U</div>
-    <div class="pre-word">UGANDA CREATIVE<br/>INNOVATION CENTRE</div>
-    <div class="pre-bar"><span id="preBarFill"></span></div>
-    <div class="pre-pct" id="prePct">0%</div>
-  </div>
-</div>
+<a class="skip" href="#cover">Skip to document</a>
 
-<!-- Progress -->
-<div class="scroll-progress" id="scrollProgress"></div>
-
-<!-- Nav -->
+<!-- ============ COVER ============ -->
 <header class="topbar" id="topbar">
-  <a class="brand" href="#top">
-    <span class="seal">U</span>
-    <span class="brand-text">UCIC · UGANDA CREATIVE<br/>INNOVATION CENTRE</span>
+  <a class="brand" href="#cover" aria-label="Uganda Creative Innovation Centre — top of document">
+    <span class="seal" aria-hidden="true">U</span>
+    <span class="brand-text">UGANDA CREATIVE<br/>INNOVATION CENTRE</span>
   </a>
-  <nav class="nav" id="mainNav" aria-label="Primary">
-    <a href="#case">The case</a>
-    <a href="#music">Music first</a>
-    <a href="#campus">The studios</a>
-    <a href="#pillars">Pillars</a>
+
+  <nav class="nav" aria-label="Document sections">
+    <a href="#background">Background</a>
+    <a href="#mandate">Mandate fit</a>
+    <a href="#facility">The facility</a>
     <a href="#investment">Investment</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#east">East Sound</a>
-    <a class="cta" href="#ask">Ministerial request</a>
+    <a href="#governance">Governance</a>
+    <a class="cta" href="UCIC-proposal.pdf" download>Download PDF</a>
   </nav>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+
+  <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open document contents">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
-<!-- Mobile menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#case">The case</a><a href="#music">Music first</a><a href="#campus">The studios</a><a href="#pillars">Pillars</a><a href="#investment">Investment</a><a href="#roadmap">Roadmap</a><a href="#east">East Sound</a><a href="#ask">Ministerial request</a>
-</div>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Document sections">
+  <a href="#cover">Cover</a>
+  <a href="#background">1 · Background</a>
+  <a href="#mandate">2 · Mandate fit</a>
+  <a href="#facility">3 · The facility</a>
+  <a href="#programmes">4 · Programmes</a>
+  <a href="#investment">5 · Investment</a>
+  <a href="#governance">6 · Governance</a>
+  <a href="#next-steps">7 · Next steps</a>
+  <a href="UCIC-proposal.pdf" download>⤓ Download PDF</a>
+</nav>
 
 <main id="top">
 
-<!-- ============ HERO ============ -->
-<section class="hero" id="hero">
-  <canvas id="hero3d" aria-hidden="true"></canvas>
-  <div class="hero-grain" aria-hidden="true"></div>
-  <div class="hero-vignette" aria-hidden="true"></div>
+<!-- ---------- COVER ---------- -->
+<section class="doc-cover" id="cover">
+  <div class="cover-media" aria-hidden="true">
+    <img src="images/campus-exterior.jpg" alt="" />
+  </div>
 
-  <div class="hero-inner">
-    <div class="hero-eyebrow reveal-hero"><span class="dot"></span> A NATIONAL HOME FOR UGANDAN MUSIC · KAMPALA</div>
-    <h1 class="hero-title">
-      <span class="line"><span class="line-inner">Record. Produce.</span></span>
-      <span class="line"><span class="line-inner"><em>Learn. Earn.</em></span></span>
-      <span class="line"><span class="line-inner">Ugandan music.</span></span>
+  <div class="cover-inner">
+    <p class="cover-org">Republic of Uganda</p>
+
+    <h1 class="cover-title">
+      The Uganda Creative<br/>Innovation Centre
     </h1>
-    <p class="hero-sub reveal-hero">The Uganda Creative Innovation Centre opens with <strong>music</strong>: professional recording rooms, production and mixing suites, an acoustically isolated vocal booth and a training programme — free at the point of access for selected artists, producers and engineers. Film, photography and enterprise follow.</p>
+    <p class="cover-sub">
+      A public facility where Ugandan music is recorded, taught and turned into a livelihood.
+    </p>
 
-    <div class="wave-wrap reveal-hero" aria-hidden="true">
-      <div class="wave-label"><span class="rec-dot"></span> UCIC · Live room / Studio A <em>concept</em></div>
-      <canvas id="heroWave" height="72"></canvas>
-      <div class="wave-meta"><span>24-track</span><span>Neumann-style booth</span><span>Mixing &amp; mastering</span><span>Producer development</span></div>
-    </div>
+    <p class="cover-purpose">
+      A proposal submitted for the consideration of the Minister of Gender, Labour and Social Development
+    </p>
 
-    <div class="hero-actions reveal-hero">
-      <a class="btn btn-gold" href="#campus">Walk through the studios <span>↗</span></a>
-      <a class="btn btn-ghost" href="#music">Why music first</a>
-      <button class="btn btn-ghost" id="printBtn" type="button">Print / PDF</button>
-    </div>
-
-    <div class="hero-stats reveal-hero">
-      <div class="hstat"><strong data-count="3.0" data-decimals="1" data-prefix="UGX " data-suffix="bn">UGX 3.0bn</strong><span>Establishment plan</span></div>
-      <div class="hstat"><strong data-count="650" data-suffix="m">650m</strong><span>Committed to music fit-out</span></div>
-      <div class="hstat"><strong data-count="1200" data-suffix=" m²">1,200 m²</strong><span>Usable campus space</span></div>
-      <div class="hstat"><strong data-count="24" data-suffix=" mo">24 mo</strong><span>To full programme</span></div>
-    </div>
-  </div>
-
-  <div class="hero-scroll" aria-hidden="true"><span>SCROLL</span><i></i></div>
-  <div class="hero-badge" aria-hidden="true">MUSIC-FIRST PROPOSAL<br/><b>STUDIO A · VOCAL BOOTH · LIVE ROOM</b></div>
-</section>
-
-<!-- Marquee -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track" id="marqueeTrack">
-    <span>RECORDING</span><i>✦</i><span>MUSIC PRODUCTION</span><i>✦</i><span>MIXING &amp; MASTERING</span><i>✦</i><span>VOCAL BOOTHS</span><i>✦</i><span>FILM &amp; DIGITAL MEDIA</span><i>✦</i><span>PHOTOGRAPHY &amp; VISUAL ARTS</span><i>✦</i><span>CREATIVE TECHNOLOGY</span><i>✦</i><span>LEARNING &amp; ENTERPRISE</span><i>✦</i><span>EAST SOUND TECHNOLOGIES</span><i>✦</i>
-  </div>
-</div>
-
-<!-- ============ 01 CASE ============ -->
-<section id="case" class="wrap section">
-  <div class="section-head reveal">
-    <div>
-      <div class="kicker">01 · The national case</div>
-      <h2>Uganda’s music travels.<br/><em>Its studios don’t.</em></h2>
-    </div>
-    <p>Ugandan music plays on every street, station and phone in the region. Yet a young producer still needs a quiet room, a working console and someone who knows how to use it. That gap — not talent — is what this proposal addresses, starting with music.</p>
-  </div>
-
-  <div class="grid">
-    <article class="panel span4 tilt reveal">
-      <div class="card-num">01</div>
-      <div class="kicker">The opportunity</div>
-      <div class="stat">Talent</div>
-      <p>Build a practical bridge between raw creative ability, professional standards, market access and income-generating enterprise.</p>
-      <div class="card-foot">Skills → Standards → Market</div>
-    </article>
-    <article class="panel span4 tilt reveal">
-      <div class="card-num">02</div>
-      <div class="kicker">The institutional response</div>
-      <div class="stat">Access</div>
-      <p>Shared, professionally managed facilities and programmes, available to beneficiaries through transparent booking and selection.</p>
-      <div class="card-foot">Shared · Managed · Fair</div>
-    </article>
-    <article class="panel span4 tilt reveal">
-      <div class="card-num">03</div>
-      <div class="kicker">The national outcome</div>
-      <div class="stat">Enterprise</div>
-      <p>Stronger skills, new creative businesses, jobs, local intellectual property and a more connected creative industry.</p>
-      <div class="card-foot">Jobs · IP · Industry</div>
-    </article>
-
-    <article class="panel span7 reveal">
-      <div class="kicker">Vision</div>
-      <h3>A national home for creative development</h3>
-      <p>To become a leading Ugandan institution for creative skills, innovation, production and enterprise — accessible to emerging and established talent from across the country.</p>
-      <div class="divider"></div>
-      <div class="kicker">Mission</div>
-      <p>To provide shared infrastructure, training, mentorship, technology and industry partnerships that enable Ugandans to turn creative ability into professional work and sustainable livelihoods.</p>
-    </article>
-    <article class="panel span5 dark reveal">
-      <div class="kicker kicker-gold">Guiding principle</div>
-      <h3>Public benefit first.</h3>
-      <p>UCIC is not a private studio or a closed membership club. It is a national platform with fair access, clear eligibility, transparent governance and measurable public outcomes.</p>
-      <ul class="check-list">
-        <li>Free-access public benefit</li><li>Transparent booking &amp; selection</li><li>Measurable outcomes</li>
-      </ul>
-    </article>
-  </div>
-</section>
-
-
-<!-- ============ 02 MUSIC FIRST ============ -->
-<section id="music" class="music-section">
-  <div class="wrap">
-    <div class="section-head reveal">
+    <dl class="cover-meta">
       <div>
-        <div class="kicker kicker-gold">02 · Why music leads</div>
-        <h2 class="light">Uganda already has<br/>the <em>talent. It needs rooms.</em></h2>
+        <dt>Submitted to</dt>
+        <dd>Hon. Lt. Gen. (Rtd) Henry Tumukunde<br/><span>Minister of Gender, Labour and Social Development</span></dd>
       </div>
-      <p class="light-muted">Music is the sector with the widest reach, the lowest entry barrier and the clearest path from talent to income. It is also the part of this proposal that can open first — which is why the first phase, and the largest equipment line, is music.</p>
+      <div>
+        <dt>Submitted by</dt>
+        <dd>Promoters of the Uganda Creative Innovation Centre<br/><span>Kampala, Uganda</span></dd>
+      </div>
+      <div>
+        <dt>Subject</dt>
+        <dd>Establishment of a national music and creative production facility<br/><span>UGX 3.0bn indicative framework</span></dd>
+      </div>
+      <div>
+        <dt>Date</dt>
+        <dd>November 2026<br/><span>Version 1.0 — for discussion</span></dd>
+      </div>
+    </dl>
+
+    <p class="cover-provenance">
+      Submitted through the Office of the Minister. This document is a proposal for consideration; it is not an
+      approved government project, a procurement document or a commitment of public funds.
+    </p>
+  </div>
+
+  <p class="cover-caption">Illustrative concept of the proposed facility — not an approved architectural design</p>
+</section>
+
+<!-- ---------- TRANSMITTAL ---------- -->
+<section class="doc-section" id="transmittal">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker">Transmittal</p>
+      <h2>Letter of transmittal</h2>
+    </div>
+    <div class="letter">
+      <p class="letter-head">Office of the Promoters<br/>Uganda Creative Innovation Centre<br/>Kampala, Uganda</p>
+      <p class="letter-date">15 November 2026</p>
+
+      <p class="letter-to">
+        Hon. Lt. Gen. (Rtd) Henry Tumukunde<br/>
+        Minister of Gender, Labour and Social Development<br/>
+        Ministry of Gender, Labour and Social Development<br/>
+        Kampala
+      </p>
+
+      <p class="letter-salutation">Honourable Minister,</p>
+
+      <h2 class="letter-subject">Subject: Proposal for the Establishment of the Uganda Creative Innovation Centre</h2>
+
+      <p>
+        We write to submit for your consideration a proposal to establish the Uganda Creative Innovation
+        Centre (UCIC) — a public facility in Kampala where Ugandan musicians, producers and engineers can
+        record, train and earn, and from which film, photography and creative enterprise programmes can later
+        grow.
+      </p>
+
+      <p>
+        The proposal proceeds from a straightforward observation. Uganda's music is heard across the region,
+        but the means of producing it are not widely available. A young producer with talent and a phone still
+        has no quiet room, no maintained console and no one to show them how to use it. The constraint is
+        infrastructure and instruction, not ability. That is the gap this proposal addresses.
+      </p>
+
+      <p>
+        It is submitted to your Ministry because the outcomes it seeks are the outcomes your Ministry is
+        mandated to deliver: decent work for young people, economic participation by women, and opportunity
+        for persons with disabilities. It is not proposed as a new bureaucracy. It is proposed as a shared
+        production facility that existing Ministry programmes — the Youth Livelihood Programme, the Uganda
+        Women Entrepreneurship Programme, the GROW project and the Social Assistance Grants for Empowerment —
+        can direct their beneficiaries into, so that training and revolving credit are matched with somewhere
+        to actually produce.
+      </p>
+
+      <p>
+        The document sets out the public case, the fit with the Ministry's mandate, the proposed facility, the
+        programme model, an indicative establishment framework of UGX 3.0 billion, the governance safeguards we
+        propose, and the specific decisions we respectfully request of you.
+      </p>
+
+      <p>
+        We would welcome the opportunity to present the proposal in person at your convenience, and to answer
+        any question the Ministry may have on its assumptions, costings or structure.
+      </p>
+
+      <p class="letter-close">Respectfully submitted,</p>
+
+      <div class="letter-sig">
+        <p class="sig-line">&nbsp;</p>
+        <p class="sig-name">For and on behalf of the Promoters</p>
+        <p class="sig-role">Uganda Creative Innovation Centre · Kampala</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- CONTENTS ---------- -->
+<section class="doc-section" id="contents">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker">Contents</p>
+      <h2>The document at a glance</h2>
     </div>
 
-    <div class="music-grid">
-      <article class="m-card reveal">
-        <div class="m-icon" aria-hidden="true">♪</div>
-        <h3>Rooms that are actually quiet</h3>
-        <p>Floating floors, isolated walls and treated ceilings. A vocal booth you can record a take in at 2am without the boda-bodas outside.</p>
-        <div class="m-foot">Acoustics · isolation · treatment</div>
+    <ol class="toc">
+      <li><a href="#summary"><span class="toc-n">Executive summary</span><span class="toc-p">What is proposed, and what it costs</span></a></li>
+      <li><a href="#background"><span class="toc-n">1 · Background and public case</span><span class="toc-p">Why production infrastructure is the constraint</span></a></li>
+      <li><a href="#mandate"><span class="toc-n">2 · Fit with the Ministry's mandate</span><span class="toc-p">How UCIC plugs into existing programmes</span></a></li>
+      <li><a href="#facility"><span class="toc-n">3 · The proposed facility</span><span class="toc-p">Rooms, layout and technical scope</span></a></li>
+      <li><a href="#programmes"><span class="toc-n">4 · Programmes and access model</span><span class="toc-p">Who uses it, how they are selected, what it costs them</span></a></li>
+      <li><a href="#investment"><span class="toc-n">5 · Indicative investment framework</span><span class="toc-p">UGX 3.0bn across fourteen budget lines</span></a></li>
+      <li><a href="#governance"><span class="toc-n">6 · Governance, audit and public value</span><span class="toc-p">Safeguards, oversight and the measures we will report</span></a></li>
+      <li><a href="#roadmap"><span class="toc-n">7 · Delivery roadmap</span><span class="toc-p">A 24-month sequence, music first</span></a></li>
+      <li><a href="#next-steps"><span class="toc-n">8 · Decisions requested</span><span class="toc-p">Six specific requests, and the immediate next step</span></a></li>
+      <li><a href="#annex"><span class="toc-n">Annexes</span><span class="toc-p">Budget schedule, assumptions, glossary</span></a></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ---------- EXECUTIVE SUMMARY ---------- -->
+<section class="doc-section" id="summary">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker">Executive summary</p>
+      <h2>Record. Produce. <em>Learn. Earn.</em></h2>
+      <p class="doc-standfirst">
+        A UGX 3.0 billion establishment framework to create a national music and creative production facility
+        in Kampala, opening with music and expanding into film, photography and creative enterprise over
+        twenty-four months.
+      </p>
+    </div>
+
+    <div class="summary-grid">
+      <div class="summary-body">
+        <p>
+          The Uganda Creative Innovation Centre is proposed as a single, professionally managed public
+          facility of approximately 1,000–1,200 m² in Kampala. Its first operational phase is music: a live
+          room, a control room, an acoustically isolated vocal booth and a producer lab, supported by a
+          structured training and mentorship programme and a fair booking system.
+        </p>
+        <p>
+          Access is free at the point of use for selected artists, producers and engineers, and subsidised for
+          others through a published schedule. The facility is not a private studio or a closed membership
+          club. It is a public platform with clear eligibility, transparent selection, published service
+          standards and audited accounts.
+        </p>
+        <p>
+          Of the UGX 3.0 billion indicative envelope, UGX 650 million is music-specific. The framework assumes
+          an existing suitable building secured through lease or institutional arrangement; it does not assume
+          land purchase or new construction. All figures are preliminary and require feasibility assessment,
+          a bill of quantities and supplier quotations before any commitment.
+        </p>
+      </div>
+
+      <aside class="summary-card">
+        <p class="kicker">Headline figures</p>
+        <dl class="figures">
+          <div><dt>Indicative establishment envelope</dt><dd>UGX 3.0bn</dd></div>
+          <div><dt>Music-specific allocation</dt><dd>UGX 650m</dd></div>
+          <div><dt>Usable facility area</dt><dd>1,000–1,200 m²</dd></div>
+          <div><dt>To full programme</dt><dd>24 months</dd></div>
+          <div><dt>Budget lines</dt><dd>14</dd></div>
+        </dl>
+        <p class="card-note">Preliminary planning estimate. Excludes land purchase, new construction and a multi-year operating budget.</p>
+      </aside>
+    </div>
+
+    <div class="callout">
+      <p class="callout-kicker">The proposition in one sentence</p>
+      <p class="callout-text">
+        Uganda already has the talent; what it lacks is a small number of properly built, properly run rooms
+        where that talent can be trained and paid — and the Ministry already has the beneficiaries, the
+        programmes and the mandate to fill them.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 1 BACKGROUND ---------- -->
+<section class="doc-section doc-dark" id="background">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker kicker-gold">Section 1</p>
+      <h2 class="light">Uganda's music travels.<br/><em>Its studios don't.</em></h2>
+      <p class="doc-standfirst light-muted">
+        Uganda's music is heard on every street, station and phone in the region. The capacity to produce it
+        remains concentrated, expensive and largely informal.
+      </p>
+    </div>
+
+    <div class="prose-cols">
+      <div>
+        <p>
+          A generation of Ugandan artists has demonstrated that the market for this country's music is
+          regional and, increasingly, global. That success has been achieved largely without corresponding
+          investment in the means of production. Recording capacity in Kampala is limited, uneven in quality
+          and priced for those who already have income.
+        </p>
+        <p>
+          The consequences are practical. Sessions stall on faulty equipment. Vocal takes are recorded in rooms
+          that let in traffic, generators and neighbours. Emerging producers learn by trial and error on
+          equipment materially worse than the standard their work will be judged against. Talented people
+          leave the sector not because they lack ability, but because the fixed cost of producing at a
+          professional standard exceeds what they can carry alone.
+        </p>
+      </div>
+      <div>
+        <p>
+          Shared infrastructure resolves this in the same way it resolves it in other sectors: by separating
+          the cost of the facility from the income of any one user. A single trained technician, one correctly
+          isolated live room and one maintained console can serve hundreds of sessions a year. That is a
+          different proposition from expecting each young producer to build a studio of their own.
+        </p>
+        <p>
+          The proposal is therefore deliberately modest in what it asks for and deliberately specific in what
+          it delivers. It does not propose a national recording industry from scratch. It proposes a working
+          facility, with the acoustic treatment, equipment and instruction that professional output actually
+          requires — and a route from that facility into paid work.
+        </p>
+      </div>
+    </div>
+
+    <h3 class="sub-head light">The problem, stated in three parts</h3>
+    <div class="three-up">
+      <article class="dark-card">
+        <p class="card-index">01</p>
+        <h4>Space that is usable</h4>
+        <p>Floating floors, isolated walls and treated ceilings. A room in which a vocal can be recorded at
+        any hour, in a city that is never quiet.</p>
       </article>
-      <article class="m-card reveal">
-        <div class="m-icon" aria-hidden="true">◉</div>
-        <h3>Gear that is actually working</h3>
-        <p>A large-format console, nearfield and main monitors, microphones, outboard and a maintained computer — so a session does not stall on a broken cable.</p>
-        <div class="m-foot">Console · monitors · microphones</div>
+      <article class="dark-card">
+        <p class="card-index">02</p>
+        <h4>Equipment that is working</h4>
+        <p>A console, monitoring, microphones, outboard and a maintained computer — with a technician and a
+        maintenance budget, so that a session does not end on a broken cable.</p>
       </article>
-      <article class="m-card reveal">
-        <div class="m-icon" aria-hidden="true">↑</div>
-        <h3>People who actually teach</h3>
-        <p>Producer development, engineering skills, artist coaching and mixing sessions — with the same rooms used for paid work so standards stay real.</p>
-        <div class="m-foot">Training · mentorship · sessions</div>
-      </article>
-      <article class="m-card reveal">
-        <div class="m-icon" aria-hidden="true">◎</div>
-        <h3>A route to being paid</h3>
-        <p>Rights awareness, distribution guidance, booking discipline and links to labels, radio and events — so a finished record becomes an income.</p>
-        <div class="m-foot">Rights · release · income</div>
+      <article class="dark-card">
+        <p class="card-index">03</p>
+        <h4>Instruction that is real</h4>
+        <p>Producer development, engineering practice, artist coaching and mixing sessions — taught in the same
+        rooms used for commercial work, so that standards stay honest.</p>
       </article>
     </div>
 
-    <div class="studio-strip reveal">
-      <div class="studio">
-        <div class="studio-tag">Studio A</div>
-        <h3>Live room</h3>
-        <p>Full band, drums, piano and strings. High ceilings, variable acoustics and sightlines to the control room.</p>
-        <div class="studio-spec"><span>≈ 42 m²</span><span>Drum kit · piano</span><span>Direct sightline</span></div>
+    <figure class="figure figure-wide figure-dark">
+      <img src="images/studio-control-room.jpg" alt="Illustrative concept of a control room with a large-format console, main monitors and a window into a live room." loading="lazy" />
+      <figcaption>
+        <span class="fig-label">Figure 1</span>
+        Control room, illustrative concept. Large-format console, main and nearfield monitoring, outboard rack
+        and direct sightline into the live room.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ---------- 2 MANDATE ---------- -->
+<section class="doc-section" id="mandate">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker">Section 2</p>
+      <h2>A shared facility for programmes <em>that already exist.</em></h2>
+      <p class="doc-standfirst">
+        The Ministry does not need a new programme to make this work. It needs a production facility into
+        which its existing beneficiaries can be directed.
+      </p>
+    </div>
+
+    <p class="lede">
+      The Ministry of Gender, Labour and Social Development already funds skills, capital and social
+      protection for the exact constituencies this facility would serve. What those programmes cannot supply
+      is a shared place to produce. UCIC is proposed as that missing layer — a common-user facility, not a
+      competing programme.
+    </p>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <caption>Existing Ministry instruments and the gap a shared facility closes</caption>
+        <thead>
+          <tr>
+            <th scope="col">Instrument</th>
+            <th scope="col">Who it reaches</th>
+            <th scope="col">What it provides</th>
+            <th scope="col">What UCIC adds</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Youth Livelihood Programme</th>
+            <td>Young people aged 18–30, organised in groups</td>
+            <td>Interest-free revolving funds, skills development and livelihood support</td>
+            <td>A production facility where funded youth groups can record, train and trade</td>
+          </tr>
+          <tr>
+            <th scope="row">Uganda Women Entrepreneurship Programme</th>
+            <td>Women aged 18–65, in groups of 10–15</td>
+            <td>Interest-free revolving credit and enterprise training</td>
+            <td>Shared equipment and technical instruction that a group could not finance alone</td>
+          </tr>
+          <tr>
+            <th scope="row">GROW project</th>
+            <td>Women-led micro and small enterprises</td>
+            <td>Support to grow enterprises, including common-user facilities</td>
+            <td>A creative-sector common-user facility consistent with the GROW model</td>
+          </tr>
+          <tr>
+            <th scope="row">Social Assistance Grants for Empowerment</th>
+            <td>Vulnerable households and older persons</td>
+            <td>Direct income support and referral into services</td>
+            <td>An accessible route into creative work for household members</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <p class="kicker">Employment, not equipment</p>
+        <h3>The outcome the Ministry is measured on.</h3>
+        <p>
+          A console is not an outcome. A young person with a recorded catalogue, a booking, an income and a
+          tax record is an outcome. Every element of this proposal is justified by its contribution to that
+          end, and the measures in Section 6 are built around it rather than around installation.
+        </p>
       </div>
-      <div class="studio">
-        <div class="studio-tag">Studio A</div>
-        <h3>Control room</h3>
+      <div class="panel">
+        <p class="kicker">Value created, not budget consumed</p>
+        <h3>A facility designed to earn.</h3>
+        <p>
+          The centre is structured to generate institutional income from commercial bookings, training
+          contracts and partnerships, which offsets the cost of free and subsidised access. It is intended to
+          be a producer of value for the sector, not a recurring charge on the Ministry's vote.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout callout-quiet">
+      <p class="callout-kicker">On inclusion</p>
+      <p class="callout-text">
+        The facility is proposed with physical accessibility, women's participation and youth employment as
+        design requirements rather than aspirations. Access quotas, disaggregated reporting and an accessible
+        building standard are set out in Sections 4 and 6.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 3 FACILITY ---------- -->
+<section class="doc-section doc-tint" id="facility">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker">Section 3</p>
+      <h2>One building. <em>Four working rooms.</em></h2>
+      <p class="doc-standfirst">
+        A single-storey U-plan building of approximately 1,000–1,200 m²: a production block, two teaching
+        wings and an entrance block, arranged around a courtyard and covered colonnade.
+      </p>
+    </div>
+
+    <figure class="figure figure-wide">
+      <img src="images/campus-exterior.jpg" alt="Illustrative concept of a single-storey U-plan building with a covered colonnade, courtyard planting and parking, with the Kampala skyline beyond." loading="lazy" />
+      <figcaption>
+        <span class="fig-label">Figure 2</span>
+        Illustrative architectural concept — courtyard elevation. Not an approved design, and not a depiction of
+        any specific site. Final form is subject to premises assessment, architectural design and approvals.
+      </figcaption>
+    </figure>
+
+    <h3 class="sub-head">Music spaces, by function</h3>
+    <div class="room-grid">
+      <article class="room">
+        <p class="room-tag">Studio A</p>
+        <h4>Live room</h4>
+        <p>Full band, drums, piano and strings. High ceilings, variable acoustics and clear sightlines to the
+        control room.</p>
+        <dl class="room-spec">
+          <div><dt>Area</dt><dd>≈ 42 m²</dd></div>
+          <div><dt>Provision</dt><dd>Drum kit · piano · direct sightline</dd></div>
+        </dl>
+      </article>
+      <article class="room">
+        <p class="room-tag">Studio A</p>
+        <h4>Control room</h4>
         <p>Large-format console, main and nearfield monitoring, outboard rack and a 24-track workflow.</p>
-        <div class="studio-spec"><span>≈ 24 m²</span><span>Console · outboard</span><span>Mixing · mastering</span></div>
-      </div>
-      <div class="studio">
-        <div class="studio-tag">Studio B</div>
-        <h3>Vocal booth</h3>
+        <dl class="room-spec">
+          <div><dt>Area</dt><dd>≈ 24 m²</dd></div>
+          <div><dt>Provision</dt><dd>Console · outboard · mixing and mastering</dd></div>
+        </dl>
+      </article>
+      <article class="room">
+        <p class="room-tag">Studio B</p>
+        <h4>Vocal booth</h4>
         <p>Isolated booth for vocals, voice-over and podcasts. Bookable by the hour, with an engineer on hand.</p>
-        <div class="studio-spec"><span>≈ 6 m²</span><span>Isolated</span><span>Podcast-ready</span></div>
-      </div>
-      <div class="studio">
-        <div class="studio-tag">Programme</div>
-        <h3>Producer lab</h3>
-        <p>Beat-making and production stations where emerging producers learn on rigs better than the ones at home.</p>
-        <div class="studio-spec"><span>6 stations</span><span>DAW · plugins</span><span>Mentored</span></div>
-      </div>
-    </div>
-
-    <div class="music-note reveal">
-      <div class="note-kicker">What the money buys</div>
-      <p><strong>UGX 650m of the UGX 3.0bn framework is music-specific</strong> — studio equipment, acoustic engineering and treatment — alongside the rooms that house them. It is the largest single programme commitment, and the first to open.</p>
-      <a class="btn btn-gold" href="#investment">See the allocation</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 03 STUDIOS 3D ============ -->
-<section id="campus" class="campus-section">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="kicker kicker-gold">03 · The studios, in 3D</div>
-        <h2 class="light">One connected<br/><em>creative campus.</em></h2>
-      </div>
-      <p class="light-muted">A single-storey U-plan building of roughly 1,000–1,200 m²: a north production block, two teaching wings and a south entrance block, wrapped around a courtyard and covered colonnade. Illustrative concept, subject to premises assessment, design and approvals.</p>
-    </div>
-
-    <div class="campus-shell reveal">
-      <div class="campus-scene" aria-label="Interactive 3D campus visualisation">
-        <canvas id="campus3d" aria-label="Interactive three-dimensional conceptual campus model"></canvas>
-        <div class="campus-loading" id="campus-loading">
-          <span class="cl-spin" aria-hidden="true"></span>
-          <span class="cl-text">Loading interactive 3D campus…</span>
-        </div>
-        <div class="campus-hint">Drag to orbit · click a studio · try evening light</div>
-        <div class="campus-caption">Conceptual 3D massing study · Not an actual site or approved design</div>
-        <div class="campus-mode-badge" id="campus-mode">Exterior overview</div>
-      </div>
-
-      <div class="campus-ui">
-        <div class="pill-tabs" role="tablist" aria-label="Campus wings">
-          <button class="active" data-room="hub" role="tab">Central hub</button>
-          <button data-room="music" role="tab">Music &amp; sound</button>
-          <button data-room="media" role="tab">Film &amp; media</button>
-          <button data-room="photo" role="tab">Photography</button>
-          <button data-room="learn" role="tab">Learning</button>
-          <button data-room="enterprise" role="tab">Enterprise</button>
-        </div>
-
-        <div class="campus-controls">
-          <button id="roof-toggle" type="button">Show floor plan (cutaway)</button>
-          <button id="inside-toggle" type="button">Enter music studio</button>
-          <button id="auto-toggle" type="button" aria-pressed="false">Auto-orbit: Off</button>
-          <button id="reset-campus" type="button">Reset view</button>
-        </div>
-
-        <div class="time-tabs" role="group" aria-label="Time of day">
-          <span class="time-label">Lighting</span>
-          <button data-time="day" class="active" type="button">☀ Daylight</button>
-          <button data-time="dusk" type="button">◐ Golden hour</button>
-          <button data-time="night" type="button">☾ Evening</button>
-        </div>
-
-        <div class="campus-info" aria-live="polite">
-          <div>
-            <strong id="room-title">Central innovation hub</strong>
-            <p id="room-desc">Shared reception, learning rooms, collaboration space, enterprise support and administration.</p>
-          </div>
-          <div class="campus-legend">
-            <span><i class="lg lg-gold"></i>Music</span>
-            <span><i class="lg lg-teal"></i>Media</span>
-            <span><i class="lg lg-cream"></i>Hub</span>
-          </div>
-        </div>
-
-        <div class="campus-cta">
-          <button class="tour-btn" id="tourBtn" type="button">▶ Start the guided 3D tour</button>
-          <span>Illustrative architectural concept — click a wing, or use the tabs above.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 03 PILLARS ============ -->
-<section id="pillars" class="wrap section">
-  <div class="section-head reveal">
-    <div>
-      <div class="kicker">04 · Beyond music</div>
-      <h2>Music opens first.<br/><em>Then the rest.</em></h2>
-    </div>
-    <p>Music is Phase 1 and takes the largest share of equipment investment. Film, photography, creative technology and enterprise expand in a planned sequence as partnerships, demand and operating capacity grow.</p>
-  </div>
-
-  <div class="pillars reveal" id="pillarsGrid">
-    <article class="pillar active" data-pillar="0" tabindex="0"><div class="num">01</div><h3>Music &amp; sound</h3><p>Recording, production, mixing, mastering and artist development.</p><span class="pillar-arrow">→</span></article>
-    <article class="pillar" data-pillar="1" tabindex="0"><div class="num">02</div><h3>Film &amp; digital media</h3><p>Video, editing, sound for picture and digital storytelling.</p><span class="pillar-arrow">→</span></article>
-    <article class="pillar" data-pillar="2" tabindex="0"><div class="num">03</div><h3>Photography &amp; visual arts</h3><p>Photography, visual communication and creative design.</p><span class="pillar-arrow">→</span></article>
-    <article class="pillar" data-pillar="3" tabindex="0"><div class="num">04</div><h3>Creative technology</h3><p>Music intelligence, digital tools, IP awareness and innovation.</p><span class="pillar-arrow">→</span></article>
-    <article class="pillar" data-pillar="4" tabindex="0"><div class="num">05</div><h3>Learning &amp; enterprise</h3><p>Training, mentorship, performance and business development.</p><span class="pillar-arrow">→</span></article>
-  </div>
-
-  <div class="pillar-detail reveal">
-    <div class="pillar-detail-num" id="pillar-num">01</div>
-    <div>
-      <h3 id="pillar-title">Music &amp; sound production</h3>
-      <p id="pillar-desc">The first operational priority: accessible professional recording and production rooms, equipment orientation, producer development, artist coaching, collaborative sessions and practical pathways into paid work.</p>
-      <div class="pillar-tags" id="pillar-tags"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 04 INVESTMENT ============ -->
-<section id="investment" class="wrap section">
-  <div class="section-head reveal">
-    <div>
-      <div class="kicker">05 · Investment framework</div>
-      <h2>A UGX 3 billion<br/><em>establishment plan.</em></h2>
-    </div>
-    <p>A preliminary planning envelope for fitting out and launching a large centre in an existing building secured through lease or institutional arrangement — not a land purchase or new-build estimate.</p>
-  </div>
-
-  <div class="panel investment-panel reveal">
-    <div class="budget-layout">
-      <div>
-        <div class="kicker">Total indicative establishment investment</div>
-        <div class="budget-total"><span id="budgetTotal">UGX 3.0bn</span><small> · preliminary planning estimate</small></div>
-        <p>Explore the allocations by selecting a budget line. Values are indicative and require technical validation, a bill of quantities and supplier quotations.</p>
-        <div class="note">The estimate assumes an existing suitable building. Land purchase, new construction and a fully funded multi-year operating budget are excluded.</div>
-        <div class="budget-actions">
-          <button class="btn btn-dark" id="downloadBudget" type="button">Download budget summary</button>
-          <button class="btn btn-outline" id="shareBtn" type="button">Share proposal</button>
-        </div>
-      </div>
-      <div class="donut-wrap">
-        <svg class="donut-svg" viewBox="0 0 200 200" role="img" aria-label="Budget allocation donut chart">
-          <g id="donutSegments"></g>
-          <circle cx="100" cy="100" r="62" fill="#fff"/>
-        </svg>
-        <div class="donut-label"><strong id="donutCenter">3.0bn</strong><span>UGX total</span><small id="donutSub">Tap a line below</small></div>
-      </div>
-    </div>
-    <div class="budget-list" id="budget-list"></div>
-    <div class="note" id="budget-detail">Select any budget line to see what it covers.</div>
-  </div>
-
-  <div class="grid" style="margin-top:18px">
-    <article class="panel span4 reveal"><div class="kicker">Premises strategy</div><h3>Assess before committing.</h3><p>Compare government or institutional premises, a long-term lease of an existing building, and a public-private property partnership. No property route is assumed at this stage.</p></article>
-    <article class="panel span4 reveal"><div class="kicker">Funding approach</div><h3>Mobilise in stages.</h3><p>Blend public support, private-sector contributions, development partners, equipment sponsorships and programme partnerships. The minister is asked to champion and facilitate, not personally finance the project.</p></article>
-    <article class="panel span4 reveal"><div class="kicker">Operating discipline</div><h3>Protect free access.</h3><p>Use transparent eligibility, scheduled access, trained staff, maintenance plans and a separate operating model combining grants, partnerships and earned institutional income.</p></article>
-  </div>
-</section>
-
-<!-- ============ 05 EAST SOUND ============ -->
-<section id="east" class="east-section">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="kicker">06 · Homegrown music technology</div>
-        <h2>Music technology built <em>in Uganda.</em></h2>
-      </div>
-      <p>UCIC can be a platform where local creative technology is demonstrated, tested, improved and connected to the wider industry.</p>
-    </div>
-    <div class="grid">
-      <article class="panel span5 reveal east-card">
-        <div class="east-mark">east<span>sound</span></div>
-        <div class="kicker">East Sound Technologies · existing initiative</div>
-        <h3>Music intelligence and rights awareness.</h3>
-        <p>East Sound Technologies, associated with 7H Music Group Ltd, is presented as a homegrown technology initiative and potential industry partner — not as a UCIC-owned or government-developed product.</p>
-        <a class="btn btn-dark" href="https://eastsound.vercel.app" target="_blank" rel="noopener">Visit East Sound Technologies ↗</a>
+        <dl class="room-spec">
+          <div><dt>Area</dt><dd>≈ 6 m²</dd></div>
+          <div><dt>Provision</dt><dd>Fully isolated · podcast-ready</dd></div>
+        </dl>
       </article>
-      <article class="panel span7 reveal">
-        <div class="kicker">Potential areas for collaboration</div>
-        <h3>Connecting creators to data, evidence and knowledge.</h3>
-        <ul class="feature-list">
-          <li>Radio airplay monitoring and music fingerprinting workflows.</li>
-          <li>Music charts, analytics and reporting tools.</li>
-          <li>Copyright, intellectual property and royalty education.</li>
-          <li>Technology incubation for Ugandan creative-sector innovators.</li>
-          <li>Industry dashboards and evidence-led decision support.</li>
-        </ul>
-        <div class="note">Any use of East Sound systems, data, services or intellectual property would be subject to due diligence, transparent procurement or partnership procedures, and a written agreement. Other Ugandan innovators should have fair opportunity to participate.</div>
+      <article class="room">
+        <p class="room-tag">Programme</p>
+        <h4>Producer lab</h4>
+        <p>Beat-making and production stations where emerging producers learn on equipment better than what
+        they have at home.</p>
+        <dl class="room-spec">
+          <div><dt>Stations</dt><dd>6 workstations</dd></div>
+          <div><dt>Provision</dt><dd>DAW · plugins · mentored sessions</dd></div>
+        </dl>
       </article>
     </div>
-  </div>
-</section>
 
-<!-- ============ 06 ROADMAP ============ -->
-<section id="roadmap" class="wrap section">
-  <div class="section-head reveal">
-    <div>
-      <div class="kicker">07 · Delivery roadmap</div>
-      <h2>Build carefully. <em>Prove value. Scale.</em></h2>
+    <div class="figure-pair">
+      <figure class="figure">
+        <img src="images/studio-vocal-booth.jpg" alt="Illustrative concept of an acoustically treated vocal booth with a condenser microphone, pop filter and a window into the control room." loading="lazy" />
+        <figcaption>
+          <span class="fig-label">Figure 3</span>
+          Vocal booth, illustrative concept. Full acoustic isolation, with sightline to the control room.
+        </figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="images/producer-lab.jpg" alt="Illustrative concept of a producer lab with six workstations, keyboards, headphones and treated wall panels." loading="lazy" />
+        <figcaption>
+          <span class="fig-label">Figure 4</span>
+          Producer lab, illustrative concept. Six mentored workstations on a shared booking system.
+        </figcaption>
+      </figure>
     </div>
-    <p>A phased implementation reduces risk, validates demand and allows the centre to open with a credible first set of services before expanding.</p>
-  </div>
-  <div class="timeline reveal" id="timeline">
-    <article class="phase"><b>PHASE 01 · 0–3 MONTHS</b><h3>Validate</h3><p>Stakeholder consultations, feasibility, premises assessment, governance design, technical brief and cost verification.</p><span class="phase-dot"></span></article>
-    <article class="phase"><b>PHASE 02 · 4–8 MONTHS</b><h3>Establish</h3><p>Secure premises, complete design and fit-out, procure priority music equipment, recruit and train core team.</p><span class="phase-dot"></span></article>
-    <article class="phase"><b>PHASE 03 · 9–12 MONTHS</b><h3>Launch music-first</h3><p>Open priority studios and learning programmes, introduce fair booking, publish service standards and baseline metrics.</p><span class="phase-dot"></span></article>
-    <article class="phase"><b>PHASE 04 · 12–24 MONTHS</b><h3>Expand</h3><p>Grow film, photography, creative technology and enterprise programmes as resources and performance justify.</p><span class="phase-dot"></span></article>
-  </div>
-</section>
 
-<!-- ============ 07 GOVERNANCE ============ -->
-<section class="wrap section">
-  <div class="section-head reveal">
-    <div>
-      <div class="kicker">08 · Governance &amp; public value</div>
-      <h2>Trust is part of <em>the infrastructure.</em></h2>
-    </div>
-    <p>UCIC should operate with professional management, independent oversight and a clear public-benefit mandate.</p>
-  </div>
-  <div class="grid">
-    <article class="panel span6 reveal">
-      <h3>Proposed governance safeguards</h3>
-      <ul class="feature-list">
-        <li>Public-private ownership and partnership structure, subject to legal and procurement assessment.</li>
-        <li>Independent board or oversight mechanism with clear conflict-of-interest rules.</li>
-        <li>Professional centre management and published service standards.</li>
-        <li>Annual financial reporting, procurement controls and performance reviews.</li>
-        <li>Transparent beneficiary selection, booking and complaints processes.</li>
-      </ul>
-    </article>
-    <article class="panel span6 dark reveal">
-      <h3>Impact to measure</h3>
-      <ul class="feature-list light-list">
-        <li>Creatives trained and supported, disaggregated by age, gender and region.</li>
-        <li>Hours of free or subsidised facility access delivered.</li>
-        <li>Creative works produced and projects completed.</li>
-        <li>Jobs, internships, enterprises and paid opportunities supported.</li>
-        <li>Partnerships, intellectual property awareness and technology adoption.</li>
-      </ul>
-    </article>
-  </div>
-</section>
-
-<!-- ============ 08 ASK ============ -->
-<section id="ask" class="ask-section">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <div class="kicker kicker-gold">09 · Request for ministerial consideration</div>
-        <h2 class="light">A champion to help<br/><em>convene the national effort.</em></h2>
+    <div class="two-col">
+      <div class="panel">
+        <p class="kicker">Premises strategy</p>
+        <h3>Assess before committing.</h3>
+        <p>
+          Three routes will be compared before any property decision: an under-used government or
+          institutional building, a long-term lease of an existing commercial building, and a public-private
+          property partnership. No property route is assumed in this document, and no site has been selected.
+        </p>
       </div>
-      <p class="light-muted">The proposal seeks strategic guidance and facilitation to move from concept to a properly assessed, partner-backed implementation plan.</p>
+      <div class="panel">
+        <p class="kicker">Technical scope</p>
+        <h3>Acoustics before equipment.</h3>
+        <p>
+          The largest technical risk in a music facility is not the console; it is the room. Acoustic
+          engineering, isolation and treatment are therefore budgeted as a distinct and protected line, and
+          commissioned before equipment procurement, so that installed equipment performs to specification.
+        </p>
+      </div>
     </div>
-    <div class="grid">
-      <div class="span7 reveal">
-        <h3 class="light ask-title">We respectfully request support to:</h3>
-        <ol class="ask-list">
-          <li>Consider and provide strategic guidance on the UCIC concept.</li>
-          <li>Facilitate introductions and coordination with relevant ministries, agencies, public institutions and training partners.</li>
-          <li>Support exploration of suitable government or institutional premises in Kampala.</li>
-          <li>Help mobilise resources for a feasibility and technical assessment.</li>
-          <li>Convene private-sector, development, technology and creative-industry partners.</li>
-          <li>Consider serving as a strategic champion or patron, subject to your acceptance.</li>
+  </div>
+</section>
+
+<!-- ---------- 4 PROGRAMMES ---------- -->
+<section class="doc-section" id="programmes">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker">Section 4</p>
+      <h2>Music opens first. <em>Then the rest.</em></h2>
+      <p class="doc-standfirst">
+        Music is the sector with the widest reach, the lowest entry barrier and the clearest path from
+        ability to income. It is therefore Phase 1 and takes the largest single equipment allocation.
+      </p>
+    </div>
+
+    <ol class="programme-list">
+      <li>
+        <p class="prog-num">01</p>
+        <div>
+          <h4>Music &amp; sound production <span class="prog-flag">Phase 1</span></h4>
+          <p>Recording, production, mixing, mastering and artist development. Accessible professional rooms,
+          equipment orientation, producer development, artist coaching, collaborative sessions and practical
+          pathways into paid work.</p>
+        </div>
+      </li>
+      <li>
+        <p class="prog-num">02</p>
+        <div>
+          <h4>Film &amp; digital media</h4>
+          <p>Video production, editing, sound for picture, digital storytelling and commercial content — added
+          once the facility's operating model is proven.</p>
+        </div>
+      </li>
+      <li>
+        <p class="prog-num">03</p>
+        <div>
+          <h4>Photography &amp; visual arts</h4>
+          <p>Shared photography facilities, lighting, visual communication, design practice, portfolio
+          development and exhibition opportunities.</p>
+        </div>
+      </li>
+      <li>
+        <p class="prog-num">04</p>
+        <div>
+          <h4>Creative technology &amp; innovation</h4>
+          <p>Creative software, music intelligence, intellectual property awareness, data tools, product
+          testing and space for Ugandan technology innovators.</p>
+        </div>
+      </li>
+      <li>
+        <p class="prog-num">05</p>
+        <div>
+          <h4>Learning, performance &amp; enterprise</h4>
+          <p>Practical training, mentorship, performance opportunities, business skills, market readiness,
+          partnerships and pathways to sustainable creative enterprise.</p>
+        </div>
+      </li>
+    </ol>
+
+    <h3 class="sub-head">Who the facility is for, and on what terms</h3>
+    <div class="access-grid">
+      <article class="access">
+        <p class="access-tier">Tier 1</p>
+        <h4>Free access</h4>
+        <p>Selected emerging artists, producers and engineers, and beneficiaries referred through Ministry
+        programmes. Allocated by published criteria and a transparent selection panel.</p>
+      </article>
+      <article class="access">
+        <p class="access-tier">Tier 2</p>
+        <h4>Subsidised access</h4>
+        <p>Registered creatives, students and non-profit projects, on a published rate card below commercial
+        market rates.</p>
+      </article>
+      <article class="access">
+        <p class="access-tier">Tier 3</p>
+        <h4>Commercial access</h4>
+        <p>Labels, agencies, corporate and broadcast clients at market rates. This income offsets Tier 1 and
+        Tier 2 access.</p>
+      </article>
+    </div>
+
+    <div class="callout">
+      <p class="callout-kicker">Why free access is a design requirement, not a subsidy</p>
+      <p class="callout-text">
+        The beneficiaries this facility exists to reach cannot pay commercial rates, and will not be reached if
+        the facility must recover all its costs from them. Free and subsidised tiers are therefore written into
+        the operating model, funded by a defined mix of grant support, partnership contribution and commercial
+        booking income — with the ratio reported annually.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 5 INVESTMENT ---------- -->
+<section class="doc-section doc-tint" id="investment">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker">Section 5</p>
+      <h2>A UGX 3.0 billion <em>establishment framework.</em></h2>
+      <p class="doc-standfirst">
+        An indicative planning envelope for fitting out and launching the centre in an existing building. It
+        is not a land purchase, a new-build estimate or a fully funded operating budget.
+      </p>
+    </div>
+
+    <div class="investment-layout">
+      <div class="investment-figure">
+        <p class="inv-label">Total indicative establishment investment</p>
+        <p class="inv-total">UGX 3.0<span>bn</span></p>
+        <p class="inv-note">Preliminary planning estimate, subject to feasibility, bill of quantities and
+        supplier quotations.</p>
+        <dl class="inv-breakdown">
+          <div><dt>Music-specific allocation</dt><dd>UGX 650m</dd></div>
+          <div><dt>Acoustics, isolation and treatment</dt><dd>UGX 300m</dd></div>
+          <div><dt>Building renovation and infrastructure</dt><dd>UGX 500m</dd></div>
+          <div><dt>Contingency provision</dt><dd>UGX 200m</dd></div>
+        </dl>
+      </div>
+
+      <div class="investment-chart">
+        <p class="chart-title">Allocation by budget line</p>
+        <div class="bar-chart" id="budgetChart" role="img" aria-label="Bar chart of the fourteen budget lines, totalling UGX 3.0 billion."></div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table data-table-num" id="budgetTable">
+        <caption>Indicative establishment budget — fourteen lines, UGX millions</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Budget line</th>
+            <th scope="col">Scope</th>
+            <th scope="col" class="num">Amount</th>
+            <th scope="col" class="num">Share</th>
+          </tr>
+        </thead>
+        <tbody id="budgetBody"></tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <th scope="row">Total indicative establishment investment</th>
+            <td></td>
+            <td class="num">UGX 3,000m</td>
+            <td class="num">100.0%</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="callout callout-quiet">
+      <p class="callout-kicker">What this estimate excludes</p>
+      <p class="callout-text">
+        Land purchase; new construction; financing costs; and a multi-year operating budget, which is
+        addressed separately in the operating model. The estimate assumes an existing suitable building at a
+        cost of occupancy to be confirmed during the premises assessment.
+      </p>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <p class="kicker">Funding approach</p>
+        <h3>Mobilise in stages.</h3>
+        <p>
+          Public support, private-sector contribution, development partners, equipment sponsorship and
+          programme partnership are combined in sequence, with each stage releasing the next. The Minister is
+          asked to champion and facilitate the project, not to finance it personally or from a single vote.
+        </p>
+      </div>
+      <div class="panel">
+        <p class="kicker">Procurement</p>
+        <h3>Nothing committed before it is costed.</h3>
+        <p>
+          No supplier, contractor or technology partner is selected by this document. All procurement would
+          follow applicable public procurement rules, on the basis of a technical specification, a bill of
+          quantities and competitive quotation or tender.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 6 GOVERNANCE ---------- -->
+<section class="doc-section doc-dark" id="governance">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker kicker-gold">Section 6</p>
+      <h2 class="light">Trust is part of <em>the infrastructure.</em></h2>
+      <p class="doc-standfirst light-muted">
+        A public facility holding public and partner resources must be auditable from the first cedi. These
+        safeguards are proposed as conditions of establishment, not as later additions.
+      </p>
+    </div>
+
+    <div class="two-col two-col-dark">
+      <div>
+        <h3 class="sub-head light">Proposed safeguards</h3>
+        <ol class="numbered-list">
+          <li>A defined public-private ownership and partnership structure, settled with legal advice before establishment.</li>
+          <li>An independent board or oversight mechanism, with published conflict-of-interest rules and a register of interests.</li>
+          <li>Professional centre management, appointed on merit, with published service standards and performance targets.</li>
+          <li>Annual audited financial reporting, procurement controls and independent performance review.</li>
+          <li>Transparent beneficiary selection, booking and complaints processes, with reasons given for decisions.</li>
+          <li>Public disclosure of access statistics, subsidy ratios and commercial income alongside audited accounts.</li>
         </ol>
-        <div class="ask-actions">
-          <button class="btn btn-gold" id="shareBtn2" type="button">Share this proposal ↗</button>
-          <button class="btn btn-ghost" id="printBtn2" type="button">Print / save as PDF</button>
-        </div>
       </div>
-      <div class="panel span5 reveal ask-card">
-        <div class="sig-badge">For ministerial consideration</div>
-        <div class="kicker">The immediate next step</div>
-        <h3>Authorise a 90-day development phase.</h3>
-        <p>Constitute a small multi-stakeholder working group to validate the concept, confirm premises options, commission technical costing, refine governance and prepare an investment-ready implementation case.</p>
-        <div class="divider"></div>
-        <div class="small">Prepared for consideration by<br/><strong>Hon. Lt. Gen. (Rtd) Henry Tumukunde</strong><br/>Minister of Gender, Labour and Social Development</div>
+      <div>
+        <h3 class="sub-head light">What we will report</h3>
+        <ul class="measure-list">
+          <li>Creatives trained and supported, disaggregated by age, sex, disability and region.</li>
+          <li>Hours of free and subsidised facility access delivered, against target.</li>
+          <li>Creative works produced, released and commercially exploited.</li>
+          <li>Jobs, internships, enterprises and paid opportunities supported, with evidence of income.</li>
+          <li>Partnerships formed, intellectual property awareness delivered and technology adoption achieved.</li>
+          <li>Cost per beneficiary and cost per access hour, published annually for comparison.</li>
+        </ul>
       </div>
     </div>
+
+    <div class="callout callout-dark-quiet">
+      <p class="callout-kicker">Traceability</p>
+      <p class="callout-text">
+        Every shilling spent is intended to be traceable to a budget line, a procurement record and a
+        delivered asset, and every asset to a maintained register. Where public money is spent, it should be
+        possible to show what was bought, what it cost, who is responsible for it and what it produced.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- 7 ROADMAP ---------- -->
+<section class="doc-section" id="roadmap">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker">Section 7</p>
+      <h2>Build carefully. <em>Prove value. Scale.</em></h2>
+      <p class="doc-standfirst">
+        A phased sequence reduces risk, tests demand and allows the centre to open with a credible first set
+        of services before later programmes are committed.
+      </p>
+    </div>
+
+    <ol class="roadmap">
+      <li>
+        <p class="phase-label">Phase 01 · 0–3 months</p>
+        <h4>Validate</h4>
+        <p>Stakeholder consultation, feasibility, premises assessment, governance design, technical brief and
+        independent cost verification.</p>
+      </li>
+      <li>
+        <p class="phase-label">Phase 02 · 4–8 months</p>
+        <h4>Establish</h4>
+        <p>Secure premises, complete design and fit-out, procure priority music equipment, recruit and train
+        the core technical team.</p>
+      </li>
+      <li>
+        <p class="phase-label">Phase 03 · 9–12 months</p>
+        <h4>Launch music-first</h4>
+        <p>Open the priority studios and learning programmes, introduce fair booking, publish service standards
+        and establish baseline metrics.</p>
+      </li>
+      <li>
+        <p class="phase-label">Phase 04 · 12–24 months</p>
+        <h4>Expand</h4>
+        <p>Extend into film, photography, creative technology and enterprise as resources, demand and operating
+        performance justify.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ---------- 8 NEXT STEPS ---------- -->
+<section class="doc-section doc-dark" id="next-steps">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker kicker-gold">Section 8</p>
+      <h2 class="light">Decisions <em>requested.</em></h2>
+      <p class="doc-standfirst light-muted">
+        The proposal seeks guidance and facilitation to move from concept to a properly assessed,
+        partner-backed implementation plan.
+      </p>
+    </div>
+
+    <div class="next-layout">
+      <div>
+        <h3 class="sub-head light">We respectfully request that the Honourable Minister:</h3>
+        <ol class="request-list">
+          <li>Consider the UCIC concept and provide strategic guidance on its alignment with Ministry priorities.</li>
+          <li>Facilitate coordination with relevant ministries, agencies, public institutions and training partners.</li>
+          <li>Support the identification and assessment of suitable government or institutional premises in Kampala.</li>
+          <li>Endorse the mobilisation of resources for an independent feasibility and technical assessment.</li>
+          <li>Convene private-sector, development, technology and creative-industry partners.</li>
+          <li>Consider serving as patron or strategic champion of the initiative, subject to your acceptance.</li>
+        </ol>
+      </div>
+
+      <aside class="decision-card">
+        <p class="sig-badge">For ministerial consideration</p>
+        <p class="kicker">The immediate next step</p>
+        <h3>Authorise a 90-day development phase.</h3>
+        <p>
+          Constitute a small multi-stakeholder working group to validate the concept, confirm premises
+          options, commission technical costing, refine governance and prepare an investment-ready
+          implementation case for the Ministry's decision.
+        </p>
+        <dl class="decision-meta">
+          <div><dt>Duration</dt><dd>90 days</dd></div>
+          <div><dt>Output</dt><dd>Investment-ready implementation case</dd></div>
+          <div><dt>Cost to Ministry</dt><dd>No financial commitment requested at this stage</dd></div>
+        </dl>
+        <p class="decision-sign">
+          Submitted for consideration by<br/>
+          <strong>Hon. Lt. Gen. (Rtd) Henry Tumukunde</strong><br/>
+          Minister of Gender, Labour and Social Development
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- ANNEX ---------- -->
+<section class="doc-section" id="annex">
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="kicker">Annexes</p>
+      <h2>Assumptions, schedule and <em>definitions.</em></h2>
+    </div>
+
+    <h3 class="sub-head">Annex A · Assumptions and limitations</h3>
+    <ul class="plain-list">
+      <li>All costs are indicative planning figures in Uganda Shillings, at November 2026 price levels, and are not quotations.</li>
+      <li>The framework assumes an existing suitable building. Land purchase and new construction are excluded.</li>
+      <li>No site, landlord, supplier, contractor or technology partner has been selected or engaged.</li>
+      <li>Facility areas and room counts are conceptual and subject to architectural design and measured survey.</li>
+      <li>Images in this document are illustrative renderings, not approved designs or photographs of existing premises.</li>
+      <li>Programme figures cited for Ministry instruments are summarised from published sources and should be verified against current Ministry records.</li>
+      <li>Establishment figures require validation through feasibility study, bill of quantities and competitive quotation.</li>
+    </ul>
+
+    <h3 class="sub-head">Annex B · Budget schedule</h3>
+    <div class="table-wrap">
+      <table class="data-table data-table-num" id="annexTable">
+        <caption>Annex B — full establishment schedule, fourteen budget lines, UGX millions</caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Budget line</th>
+            <th scope="col">Scope</th>
+            <th scope="col" class="num">Amount</th>
+            <th scope="col" class="num">Share</th>
+          </tr>
+        </thead>
+        <tbody id="annexBody"></tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-head">Annex C · Definitions</h3>
+    <dl class="glossary">
+      <div><dt>Common-user facility</dt><dd>A shared facility, typically publicly or partnership-owned, that provides equipment and services to many users who could not each afford to own it.</dd></div>
+      <div><dt>Establishment investment</dt><dd>One-off capital required to make the facility operational: premises works, acoustics, equipment, systems and launch costs.</dd></div>
+      <div><dt>Operating model</dt><dd>The recurring arrangement by which the facility is staffed, maintained and funded once open — treated separately from establishment.</dd></div>
+      <div><dt>Free access</dt><dd>Use of the facility at no charge to the beneficiary, allocated by published criteria and recorded against a defined annual allocation.</dd></div>
+      <div><dt>Subsidy ratio</dt><dd>The proportion of total facility access delivered at free or below-market rates, reported annually against the commercial income that offsets it.</dd></div>
+    </dl>
   </div>
 </section>
 
 </main>
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><span class="seal">U</span><div>UGANDA CREATIVE<br/>INNOVATION CENTRE</div></div>
-    <p>All visuals are conceptual. Budget and facility specifications are preliminary and subject to feasibility, design, procurement and approvals.</p>
-    <div class="footer-meta">© 2026 · Draft for discussion · Kampala, Uganda</div>
+<footer class="doc-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="seal" aria-hidden="true">U</span>
+      <div>UGANDA CREATIVE<br/>INNOVATION CENTRE</div>
+    </div>
+    <p>
+      A proposal submitted for the consideration of the Ministry of Gender, Labour and Social Development.
+      All figures are preliminary; all images are illustrative concepts and not approved designs.
+    </p>
+    <p class="footer-meta">Version 1.0 · November 2026 · Kampala, Uganda</p>
   </div>
 </footer>
 
-<!-- Toast -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script defer src="js/main.js"></script>
-<script type="module" src="js/hero3d.js"></script>
-<script type="module">
-  /* Load the 3D campus only when it is about to be seen.
-   *
-   * Building the scene costs tens of milliseconds of main-thread work and a
-   * 259 KB Three.js download. Doing it up front delayed the hero on phones,
-   * so the module is fetched when the campus section gets within 400px of the
-   * viewport. The placeholder text doubles as the loading state. */
-  const scene = document.getElementById('campus3d');
-  const section = document.getElementById('campus');
-  const status = document.getElementById('campus-loading');
-
-  let started = false;
-  function loadCampus() {
-    if (started || !scene) return;
-    started = true;
-    if (status) status.querySelector('.cl-text').textContent = 'Building the campus model…';
-    /* Must be a relative URL with './'. A bare 'js/campus.js' is treated as
-       a package specifier and fails to resolve — which silently killed the
-       entire campus scene. */
-    import('./js/campus.js').catch(err => {
-      console.warn('[UCIC] WebGL campus unavailable, using the canvas renderer:', err);
-      /* Blocking WebGL is a legitimate privacy choice (Brave's strict
-         fingerprinting protection, hardened Firefox, remote desktops, older
-         GPUs). Rather than telling the visitor to change their settings, load
-         a Canvas 2D renderer that draws the same building and still orbits,
-         zooms, focuses a wing and lights itself for day / evening. */
-      import('./js/campus2d.js').catch(err2 => {
-        console.error('[UCIC] canvas campus also failed:', err2);
-        const msg = (err2 && (err2.message || err2)) || 'unknown error';
-        if (status) status.textContent = 'The 3D model could not start: ' + msg;
-      });
-    });
-  }
-
-  if (!section || !('IntersectionObserver' in window)) {
-    loadCampus();
-  } else {
-    /* The model is wanted, not avoided: it starts as soon as the section is
-       anywhere near the viewport, and immediately once the page is otherwise
-       idle. The old margin was too tight to feel responsive. */
-    const io = new IntersectionObserver((entries, obs) => {
-      if (entries.some(e => e.isIntersecting)) {
-        obs.disconnect();
-        loadCampus();
-      }
-    }, { rootMargin: '1200px 0px' });
-    io.observe(section);
-
-    /* Deep links, or a visitor who scrolls fast, should never see a wait. */
-    if (location.hash === '#campus') loadCampus();
-    if ('requestIdleCallback' in window) requestIdleCallback(loadCampus, { timeout: 2500 });
-    else setTimeout(loadCampus, 1800);
-  }
-</script>
+<script src="js/main.js"></script>
 </body>
 </html>
