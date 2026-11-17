@@ -950,7 +950,9 @@ def build_story():
     st.append(Paragraph(
         "This document is also published as an interactive web edition at "
         "ucic-music.vercel.app. The two carry the same content; this edition is "
-        "the copy for print and circulation.", S["small"]))
+        "the copy for print and circulation. A companion architectural design and "
+        "plan note — design basis, plan, section and room schedules — is issued "
+        "alongside it as UCIC-design.pdf.", S["small"]))
 
     # ============ 4. Executive summary ============
     st.append(PageBreak())
