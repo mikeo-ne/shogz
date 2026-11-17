@@ -22,6 +22,29 @@ The PDF is not a summary. It is the whole document — letter of transmittal, al
 the annexes — laid out for A4. `tools/check_parity.py` asserts that the two editions still agree, so
 they cannot drift apart.
 
+## The design note
+
+`UCIC-design.pdf` is a **companion** to the proposal, not a third edition of it. The proposal answers
+*should we do this, and what does it cost*; the design note answers *what is it, how is it put
+together, and can it be built at that cost*.
+
+| Contents | Detail |
+|---|---|
+| Design basis | Envelope and courtyard dimensions derived from the 40ft high-cube module |
+| Five principles | Each written against a known container-build failure mode |
+| Drawing A-101 | Roof plan, 1:150, landscape A4 |
+| Drawing A-201 | Section A–A through the courtyard, 1:100, landscape A4 |
+| Room schedules | How each 12.032 m internal length divides, and the area it yields |
+| Build-up, levels, materials | The acoustic assembly as a number; the palette |
+| Build sequence | Five stages that explain the "opens in months" claim |
+
+The drawings are **vector**, drawn from the same dimensions the schedules use — not pictures of
+drawings. `tools/check_design.py` recomputes the geometry from the ISO container dimensions and fails
+if the document disagrees with itself.
+
+**It is illustrative, not for construction.** No site is selected, no engineering is carried out, and
+the drawings carry no structural, acoustic or services design.
+
 ## Structure
 
 | # | Section | Contents |
@@ -42,13 +65,15 @@ they cannot drift apart.
 
 ## Images
 
-Four illustrative concepts live in `images/`, all of the modular container scheme:
+Five illustrative concepts live in `images/`, all of the modular container scheme:
 
 | File | Shows |
 |---|---|
-| `compound-exterior.jpg` | The four-container cluster around the covered courtyard deck (cover + Section 3) |
+| `compound-exterior.jpg` | The four-container cluster around the covered courtyard deck (proposal cover + Section 3) |
 | `studio-container.jpg` | Studio container interior: vocal booth behind a glazed acoustic window, control room |
 | `beatlab-container.jpg` | Beat lab container interior, opening onto the courtyard deck |
+| `design-aerial.jpg` | Aerial of the cluster and its site, used on the design note cover |
+| `design-courtyard.jpg` | Eye-level courtyard view, used in the design note |
 
 **They are renderings, not approved designs and not photographs of any site** — every placement is
 captioned as such, in both editions.
@@ -72,7 +97,15 @@ To regenerate the PDF after editing content:
 python3 -m pip install reportlab pymupdf
 python3 tools/build_pdf.py        # writes UCIC-proposal.pdf
 python3 tools/check_parity.py     # asserts web and PDF editions agree
+
+python3 tools/build_design.py     # writes UCIC-design.pdf
+python3 tools/check_design.py     # recomputes the geometry and checks the drawings
 ```
+
+The design note shares the proposal's design system: `tools/build_design.py` imports
+`tools/build_pdf.py` for its palette, type, geometry and helpers rather than duplicating them, so the
+two documents cannot diverge visually. All dimensions live in `tools/design_data.py`, which is the
+single source for the drawings and the schedules.
 
 `tools/build_pdf.py` lays the document out directly with reportlab. A headless-browser
 "print to PDF" was tried first and could not run in this environment (no browser binary and no
@@ -89,8 +122,8 @@ python3 -m http.server 8080
 ## Deploy
 
 The `shogz` project on Vercel is linked to `mikeo-ne/shogz`. Merge to `main` and Vercel rebuilds
-automatically; no build command or framework preset is needed. The PDF is a committed file, so it
-serves as a normal download at `/UCIC-proposal.pdf`.
+automatically; no build command or framework preset is needed. Both PDFs are committed files, so
+they serve as normal downloads at `/UCIC-proposal.pdf` and `/UCIC-design.pdf`.
 
 ## Editorial rules for the two editions
 
@@ -102,6 +135,10 @@ If you edit content, edit it in **both** places:
   in the cover, summary, Section 5 and the annexes.
 - **Tone** — this is a submission to a serving Cabinet Minister. No marketing superlatives, no
   claims of approval, no unqualified cost certainty. Wherever a figure is an estimate, say so.
+- **Geometry** — dimensions live in `tools/design_data.py` only. Never type a dimension into a
+  drawing or a schedule; add it to the data module and let both read from it.
+- **Areas** — four containers at 28.3 m² give 113.2 m² enclosed and 202.4 m² covered with the deck.
+  The proposal's "roughly 120 m²" is the rounded figure for the same cluster.
 
 ## Status
 
