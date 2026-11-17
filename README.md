@@ -32,7 +32,7 @@ they cannot drift apart.
 | — | Executive summary | What is proposed, what it costs, headline figures |
 | 1 | Background and public case | Why production infrastructure is the constraint |
 | 2 | Fit with the Ministry's mandate | YLP, UWEP, GROW and SAGE, and the gap UCIC fills |
-| 3 | The proposed facility | U-plan building, four music spaces, premises strategy |
+| 3 | The proposed facility | Four 40ft containers around a courtyard, four music spaces, site strategy |
 | 4 | Programmes and access model | Five programme areas, three access tiers |
 | 5 | Indicative investment framework | UGX 3.0bn, 14 budget lines, funding sequence |
 | 6 | Governance, audit and public value | Safeguards and the measures that will be reported |
@@ -42,9 +42,22 @@ they cannot drift apart.
 
 ## Images
 
-Four illustrative concepts live in `images/`: the courtyard elevation, a control room, a vocal booth
-and a producer lab. **They are renderings, not approved designs and not photographs of any site** —
-every placement is captioned as such, in both editions.
+Four illustrative concepts live in `images/`, all of the modular container scheme:
+
+| File | Shows |
+|---|---|
+| `compound-exterior.jpg` | The four-container cluster around the covered courtyard deck (cover + Section 3) |
+| `studio-container.jpg` | Studio container interior: vocal booth behind a glazed acoustic window, control room |
+| `beatlab-container.jpg` | Beat lab container interior, opening onto the courtyard deck |
+
+**They are renderings, not approved designs and not photographs of any site** — every placement is
+captioned as such, in both editions.
+
+### On the area figures
+
+Four 40ft high-cube containers give roughly **120 m²** of enclosed floor plus the covered deck. The
+**1,000–1,200 m²** figure is the **full campus at completion**, not the first cluster. Both figures are
+deliberate and both editions explain the difference in Section 3 — do not quietly swap one for the other.
 
 ## Build
 

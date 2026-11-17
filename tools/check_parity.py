@@ -111,7 +111,7 @@ WEB_HEADINGS = [
     "Uganda's music travels. Its studios don't.",
     "The problem, stated in three parts",
     "A shared facility for programmes that already exist",
-    "One building. Four working rooms.",
+    "Four containers. One courtyard.",
     "Music spaces, by function",
     "Music opens first. Then the rest.",
     "Who the facility is for, and on what terms",
@@ -129,9 +129,12 @@ CROSS_EDITION_FACTS = [
     ("UGX 3.0", "total envelope"),
     ("UGX 650m", "music allocation"),
     ("UGX 300m", "acoustics allocation"),
-    ("UGX 500m", "renovation allocation"),
+    ("UGX 500m", "container and site allocation"),
     ("UGX 200m", "contingency"),
-    ("1,000-1,200", "facility area"),
+    ("1,000-1,200", "full-campus area"),
+    ("40ft high-cube", "container module"),
+    ("Container 01", "first module"),
+    ("Container 04", "fourth module"),
     ("24 months", "programme horizon"),
     ("Youth Livelihood Programme", "YLP"),
     ("Uganda Women Entrepreneurship Programme", "UWEP"),
@@ -139,6 +142,11 @@ CROSS_EDITION_FACTS = [
     ("Social Assistance Grants for Empowerment", "SAGE"),
     ("90-day development phase", "immediate ask"),
     ("Illustrative concept", "image disclaimer"),
+    ("first cluster of four", "summary describes the container cluster"),
+    ("beat lab", "summary names the beat lab"),
+    ("covered courtyard", "courtyard scheme"),
+    ("secure, serviced plot", "site requirement"),
+    ("Full campus at completion", "area label"),
     ("free access", "access policy"),
     ("Common-user facility", "definition"),
 ]
@@ -186,7 +194,39 @@ def check_content(js_rows):
     notes.append("PDF pages: %d" % pdf_page_count())
     notes.append("budget lines cross-checked in both editions: %d" % len(js_rows or []))
 
+    check_retired_phrases(web, pdf)
     check_no_overflow()
+
+
+RETIRED_PHRASES = [
+    # Left over from the single-storey U-plan draft. The scheme is now four
+    # 40ft containers around a courtyard, so these must not reappear in either
+    # edition. They were all present in the container draft's prose long after
+    # the facility section had been rewritten, which is why this check exists.
+    "u-plan",
+    "usable facility area",
+    "existing suitable building",
+    "expecting each young producer to build a studio of their own",
+    "building renovation",
+    "new construction",
+    "producer lab",
+    "studio a",
+    "studio b",
+]
+
+
+def check_retired_phrases(web, pdf):
+    """No stale wording from a superseded draft may survive in either edition."""
+    hits = 0
+    for phrase in RETIRED_PHRASES:
+        # word boundaries, so "studio a" does not match "studio and"
+        pat = re.compile(r"\b" + re.escape(norm(phrase)) + r"\b")
+        for label, text in (("web edition", web), ("PDF", pdf)):
+            if pat.search(text):
+                failures.append("%s still uses retired phrasing %r" % (label, phrase))
+                hits += 1
+    if not hits:
+        notes.append("no retired phrasing in either edition")
 
 
 def check_no_overflow():

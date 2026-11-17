@@ -646,9 +646,9 @@ BUDGET = [
     ("Feasibility, legal, architectural & engineering", 150,
      "Studies, legal structuring, concept design and technical assessments."),
     ("Property deposit, lease preparation & initial occupancy", 120,
-     "Initial occupancy costs for an existing premises; final amount depends on the property route."),
-    ("Building renovation & infrastructure", 500,
-     "Building adaptation, internal works, circulation, finishes and essential infrastructure."),
+     "Initial occupancy costs for a serviced plot; final amount depends on the property route."),
+    ("Container supply, siting & site infrastructure", 500,
+     "Container modules, delivery and craning, foundations, decking and essential site infrastructure."),
     ("Acoustic engineering & treatment", 300,
      "Sound isolation, room acoustics and treatment for professional music spaces."),
     ("Music production equipment", 350,
@@ -721,7 +721,7 @@ def draw_cover(canv, doc):
     canv.rect(0, 0, pw, ph, stroke=0, fill=1)
 
     # ---- photograph, top 78% of the page, cover-fitted
-    img_path = os.path.join(ROOT, "images/campus-exterior.jpg")
+    img_path = os.path.join(ROOT, "images/compound-exterior.jpg")
     ir = ImageReader(img_path)
     iw, ih = ir.getSize()
     img_top_mm, img_bot_mm = 0.0, 200.0
@@ -963,10 +963,12 @@ def build_story():
 
     left = [
         Paragraph(
-            "The Uganda Creative Innovation Centre is proposed as a single, professionally managed public "
-            "facility of approximately 1,000–1,200 m² in Kampala. Its first operational phase is music: a live "
-            "room, a control room, an acoustically isolated vocal booth and a producer lab, supported by a "
-            "structured training and mentorship programme and a fair booking system.", S["body"]),
+            "The Uganda Creative Innovation Centre is proposed as a professionally managed public facility "
+            "in Kampala, built from modular container units around a covered courtyard. A first cluster of "
+            "four containers opens the music programme: a studio and control room, a live band module, an "
+            "isolated vocal booth and a beat lab. The full campus grows to approximately 1,000–1,200 m² as "
+            "demand is proven. Access is supported by a structured training and mentorship programme and a "
+            "fair booking system.", S["body"]),
         Paragraph(
             "Access is free at the point of use for selected artists, producers and engineers, and subsidised "
             "for others through a published schedule. The facility is not a private studio or a closed "
@@ -974,16 +976,17 @@ def build_story():
             "published service standards and audited accounts.", S["body"]),
         Paragraph(
             "Of the UGX 3.0 billion indicative envelope, UGX 650 million is music-specific. The framework "
-            "assumes an existing suitable building secured through lease or institutional arrangement; it "
-            "does not assume land purchase or new construction. All figures are preliminary and require "
-            "feasibility assessment, a bill of quantities and supplier quotations before any commitment.",
+            "assumes a secure, serviced plot held on a long-term lease or institutional arrangement, with "
+            "the four containers craned into place; it does not assume land purchase or a conventional "
+            "new-build. All figures are preliminary and require feasibility assessment, a bill of "
+            "quantities and supplier quotations before any commitment.",
             S["body"]),
     ]
 
     figure_rows = [
         ("Indicative establishment envelope", "UGX 3.0bn"),
         ("Music-specific allocation", "UGX 650m"),
-        ("Usable facility area", "1,000–1,200 m²"),
+        ("Full campus at completion", "1,000–1,200 m²"),
         ("To full programme", "24 months"),
         ("Budget lines", "14"),
     ]
@@ -1011,8 +1014,8 @@ def build_story():
     right = card(
         [Kicker("Headline figures", color=GOLDLT, rule_color=None),
          Spacer(1, 7), fig_tbl, Spacer(1, 8),
-         Paragraph("Preliminary planning estimate. Excludes land purchase, new construction and a "
-                   "multi-year operating budget.", S["small"])],
+         Paragraph("Preliminary planning estimate. Excludes land purchase, a conventional new-build and "
+                   "a multi-year operating budget.", S["small"])],
         bg=NAVY, border=NAVY, pad=13, accent=GOLD, accent_w=3.2, width=right_w)
 
     st.append(two_col(left, right, gap=gap, widths=(left_w, right_w)))
@@ -1031,9 +1034,9 @@ def build_story():
         "Uganda's music is heard on every street, station and phone in the region. The capacity to produce "
         "it remains concentrated, expensive and largely informal.", dark=True))
 
-    st.append(figure("images/studio-control-room.jpg",
-                     "Control room, illustrative concept. Large-format console, main and nearfield "
-                     "monitoring, outboard rack and direct sightline into the live room.",
+    st.append(figure("images/studio-container.jpg",
+                     "Studio container, illustrative concept. A vocal booth behind a glazed acoustic "
+                     "window, with the control position and reference monitoring beyond.",
                      label="Figure 1", aspect=16 / 6.0))
     st.append(Spacer(1, 14))
     st.append(two_col(
@@ -1052,8 +1055,8 @@ def build_story():
             "Shared infrastructure resolves this in the same way it resolves it in other sectors: by "
             "separating the cost of the facility from the income of any one user. A single trained "
             "technician, one correctly isolated live room and one maintained console can serve hundreds of "
-            "sessions a year. That is a different proposition from expecting each young producer to build a "
-            "studio of their own.", S["body"]),
+            "sessions a year. A cluster of four such rooms, sharing one courtyard and one team, does that "
+            "at a fraction of what it would cost each producer to build alone.", S["body"]),
          Paragraph(
             "The proposal is therefore deliberately modest in what it asks for and deliberately specific in "
             "what it delivers. It does not propose a national recording industry from scratch. It proposes a "
@@ -1172,31 +1175,89 @@ def build_story():
     st.append(Spacer(1, 24))
     st.extend(section_head(
         "Section 3",
-        "One building. <i>Four working rooms.</i>",
-        "A single-storey U-plan building of approximately 1,000–1,200 m²: a production block, two teaching "
-        "wings and an entrance block, arranged around a courtyard and covered colonnade."))
+        "Four containers. <i>One courtyard.</i>",
+        "The centre is proposed in the modular form shown here: standard 40ft high-cube containers arranged "
+        "around a covered timber courtyard. A first cluster of four containers opens the music programme; "
+        "further containers are added as demand and resources are confirmed, up to a full campus of "
+        "approximately 1,000\u20131,200 m\u00b2."))
 
-    st.append(figure("images/campus-exterior.jpg",
-                     "Illustrative architectural concept — courtyard elevation. Not an approved design, and "
-                     "not a depiction of any specific site. Final form is subject to premises assessment, "
-                     "architectural design and approvals.",
+    st.append(figure("images/compound-exterior.jpg",
+                     "Illustrative architectural concept \u2014 first container cluster around the courtyard "
+                     "deck. Not an approved design, and not a depiction of any specific site. Final form is "
+                     "subject to premises assessment, architectural design and approvals.",
                      label="Figure 2", aspect=16 / 7.4))
+
+    # --- why containers
+    why = [
+        ("01", "It opens in months, not years",
+         "Container modules are fabricated off site and craned into place, so fit-out and acoustic works run "
+         "in parallel rather than in sequence. The first cluster can be recording before a conventional "
+         "building would be out of the ground."),
+        ("02", "It grows with proven demand",
+         "Each module is a discrete, repeatable unit with a known cost. Capacity is added a container at a "
+         "time as bookings and programme demand justify it — instead of committing the full envelope before "
+         "a single session is recorded."),
+        ("03", "It does not strand public money",
+         "If a site has to change, the modules are craned onto trucks and moved. That is a materially "
+         "different risk profile from a fixed building, and it is why no site has to be locked in before the "
+         "premises assessment is complete."),
+    ]
+    wcells = []
+    for n, h, p_ in why:
+        wcells.append(card([
+            Paragraph(n, ParagraphStyle("wi", fontName=F_DISPLAY, fontSize=7.6, leading=10,
+                                         textColor=GOLD)),
+            Spacer(1, 2),
+            Paragraph(h, S["h4"]),
+            Paragraph(p_, ParagraphStyle("wp", fontName=F_SANS, fontSize=7.6, leading=11.4,
+                                          textColor=BODY)),
+        ], pad=10, accent=GOLD, accent_w=0))
+    wgap = 1.6
+    wcol = (CONTENT_W - wgap * 2) / 3
+    for c in wcells:
+        fit_width(c, wcol)
+    wt = Table([[wcells[0], "", wcells[1], "", wcells[2]]],
+               colWidths=[wcol, wgap, wcol, wgap, wcol])
+    wt.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("LEFTPADDING", (0, 0), (-1, -1), 0),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 0),
+        ("TOPPADDING", (0, 0), (-1, -1), 0),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
+    ]))
+    # the heading travels with its cards; if the trio does not fit under the
+    # figure, all four move to the next page rather than stranding a heading
+    st.append(KeepTogether([Paragraph("Why build from containers", S["h3"]),
+                            Spacer(1, 6), wt]))
+
+    st.append(Spacer(1, 13))
+    st.append(callout(
+        "On the area figures in this document",
+        "Four 40ft high-cube containers yield roughly 120 m\u00b2 of enclosed floor, plus the covered courtyard "
+        "deck. The 1,000\u20131,200 m\u00b2 figure used elsewhere in this document is the <b>full campus at "
+        "completion</b>, not the first cluster. Both figures are deliberate: the first is what the initial "
+        "budget lines actually buy, the second is the space the site must be able to accommodate."))
+    st.append(Spacer(1, 14))
 
     st.append(Paragraph("Music spaces, by function", S["h3"]))
 
     rooms = [
-        ("Studio A", "Live room",
-         "Full band, drums, piano and strings. High ceilings, variable acoustics and clear sightlines to the "
-         "control room.", "Area", "≈ 42 m²", "Provision", "Drum kit · piano · direct sightline"),
-        ("Studio A", "Control room",
-         "Large-format console, main and nearfield monitoring, outboard rack and a 24-track workflow.",
-         "Area", "≈ 24 m²", "Provision", "Console · outboard · mixing and mastering"),
-        ("Studio B", "Vocal booth",
-         "Isolated booth for vocals, voice-over and podcasts. Bookable by the hour, with an engineer on hand.",
-         "Area", "≈ 6 m²", "Provision", "Fully isolated · podcast-ready"),
-        ("Programme", "Producer lab",
-         "Beat-making and production stations where emerging producers learn on equipment better than what "
-         "they have at home.", "Stations", "6 workstations", "Provision", "DAW · plugins · mentored sessions"),
+        ("Container 01", "Studio and control room",
+         "One container split by a double-glazed acoustic window: vocal booth and live area on one side, "
+         "console and monitoring on the other. Full band tracking at a larger module added later.",
+         "Enclosed", "≈ 28 m²", "Provision", "Console · outboard · mixing and mastering"),
+        ("Container 02", "Live band module",
+         "A dedicated tracking container with variable acoustics and direct sightline to the control "
+         "position — the first capacity increase once the studio container is running.",
+         "Enclosed", "≈ 28 m²", "Provision", "Drums · piano · direct sightline"),
+        ("Container 03", "Vocal and voice booth",
+         "A second isolated booth for vocals, voice-over and podcast work. Bookable by the hour, with an "
+         "engineer on hand — the highest-throughput room in the cluster.",
+         "Enclosed", "≈ 12 m²", "Provision", "Fully isolated · podcast-ready"),
+        ("Container 04", "Beat lab",
+         "Three mentored production stations opening onto the courtyard deck, where emerging producers learn "
+         "on equipment better than what they have at home.",
+         "Stations", "3 (6 at full campus)", "Provision", "DAW · plugins · mentored sessions"),
     ]
 
     def room_card(r):
@@ -1251,12 +1312,14 @@ def build_story():
 
     st.append(Spacer(1, 10))
     st.append(two_col(
-        figure("images/studio-vocal-booth.jpg",
-               "Vocal booth, illustrative concept. Full acoustic isolation, with sightline to the control room.",
+        figure("images/studio-container.jpg",
+               "Studio container interior, illustrative concept. Vocal booth behind a double-glazed acoustic "
+               "window; control room with console and reference monitoring.",
                label="Figure 3",
                width=(CONTENT_W - 6 * mm) / 2, aspect=16 / 10),
-        figure("images/producer-lab.jpg",
-               "Producer lab, illustrative concept. Six mentored workstations on a shared booking system.",
+        figure("images/beatlab-container.jpg",
+               "Beat lab container interior, illustrative concept. Three mentored workstations, with the "
+               "courtyard deck beyond.",
                label="Figure 4",
                width=(CONTENT_W - 6 * mm) / 2, aspect=16 / 10)))
 
@@ -1265,9 +1328,10 @@ def build_story():
         card([Kicker("Premises strategy", color=GOLD, rule_color=None), Spacer(1, 4),
               Paragraph("Assess before committing.", S["h3"]),
               Paragraph("Three routes will be compared before any property decision: an under-used "
-                        "government or institutional building, a long-term lease of an existing commercial "
-                        "building, and a public-private property partnership. No property route is assumed "
-                        "in this document, and no site has been selected.", S["body"])],
+                        "government or institutional plot, a long-term lease of serviced land, and a "
+                        "public-private property partnership. Because the buildings are modular, the site "
+                        "requirement reduces to a secure, serviced plot of adequate size with vehicle access "
+                        "for a crane \u2014 not a specific building. No site has been selected.", S["body"])],
              pad=12, accent=NAVY, accent_w=2),
         card([Kicker("Technical scope", color=GOLD, rule_color=None), Spacer(1, 4),
               Paragraph("Acoustics before equipment.", S["h3"]),
@@ -1375,8 +1439,9 @@ def build_story():
     st.extend(section_head(
         "Section 5",
         "A UGX 3.0 billion <i>establishment framework.</i>",
-        "An indicative planning envelope for fitting out and launching the centre in an existing building. "
-        "It is not a land purchase, a new-build estimate or a fully funded operating budget."))
+        "An indicative planning envelope for siting, fitting out and launching the four-container first "
+        "cluster. It is not a land purchase, a conventional new-build estimate or a fully funded operating "
+        "budget."))
 
     left_inv = [
         Paragraph("TOTAL INDICATIVE ESTABLISHMENT INVESTMENT",
@@ -1393,7 +1458,7 @@ def build_story():
     brk = [
         ("Music-specific allocation", "UGX 650m"),
         ("Acoustics, isolation and treatment", "UGX 300m"),
-        ("Building renovation and infrastructure", "UGX 500m"),
+        ("Container supply, siting and site infrastructure", "UGX 500m"),
         ("Contingency provision", "UGX 200m"),
     ]
     bt = Table([[Paragraph(a, S["cell"]), Paragraph(b, S["cell_num"])] for a, b in brk],
@@ -1413,7 +1478,7 @@ def build_story():
     short = {
         "Feasibility, legal, architectural & engineering": "Feasibility &amp; legal",
         "Property deposit, lease preparation & initial occupancy": "Property &amp; occupancy",
-        "Building renovation & infrastructure": "Renovation &amp; infrastructure",
+        "Container supply, siting & site infrastructure": "Containers &amp; infrastructure",
         "Acoustic engineering & treatment": "Acoustics &amp; treatment",
         "Music production equipment": "Music equipment",
         "Film, photography & digital media equipment": "Film &amp; photo equipment",
@@ -1430,7 +1495,7 @@ def build_story():
     short = {
         "Feasibility, legal, architectural & engineering": "Feasibility and legal",
         "Property deposit, lease preparation & initial occupancy": "Property and occupancy",
-        "Building renovation & infrastructure": "Renovation and infrastructure",
+        "Container supply, siting & site infrastructure": "Containers and infrastructure",
         "Acoustic engineering & treatment": "Acoustics and treatment",
         "Music production equipment": "Music equipment",
         "Film, photography & digital media equipment": "Film and photo equipment",
@@ -1455,9 +1520,9 @@ def build_story():
     st.append(Spacer(1, 13))
     st.append(callout(
         "What this estimate excludes",
-        "Land purchase; new construction; financing costs; and a multi-year operating budget, which is "
-        "addressed separately in the operating model. The estimate assumes an existing suitable building at "
-        "a cost of occupancy to be confirmed during the premises assessment."))
+        "Land purchase; a conventional new-build; financing costs; and a multi-year operating budget, "
+        "which is addressed separately in the operating model. The estimate assumes a secure, serviced plot "
+        "at a cost of occupancy to be confirmed during the site assessment."))
 
     st.append(Spacer(1, 12))
     st.append(two_col(
@@ -1486,7 +1551,7 @@ def build_story():
              "Feasibility, legal structuring, concept design, cost verification",
              "UGX 150m", "5.0%"),
             ("Stage 2 · Establishment", "4–12 months",
-             "Premises, renovation, acoustics, equipment, systems, furniture, safety, core team",
+             "Site, containers, acoustics, equipment, systems, furniture, safety, core team",
              "UGX 2,270m", "75.7%"),
             ("Stage 3 · Launch and stabilise", "9–24 months",
              "Launch and outreach, initial operating reserve, contingency",
@@ -1686,11 +1751,12 @@ def build_story():
     st.append(bullet_list([
         "All costs are indicative planning figures in Uganda Shillings, at November 2026 price levels, and "
         "are not quotations.",
-        "The framework assumes an existing suitable building. Land purchase and new construction are excluded.",
+        "The framework assumes a secure, serviced plot with vehicle access for delivery and craning. Land "
+        "purchase and a conventional new-build are excluded.",
         "No site, landlord, supplier, contractor or technology partner has been selected or engaged.",
         "Facility areas and room counts are conceptual and subject to architectural design and measured survey.",
         "Images in this document are illustrative renderings, not approved designs or photographs of "
-        "existing premises.",
+        "existing premises; the container scheme is indicative and subject to architectural design.",
         "Programme figures cited for Ministry instruments are summarised from published sources and should "
         "be verified against current Ministry records.",
         "Establishment figures require validation through feasibility study, bill of quantities and "
