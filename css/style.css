@@ -248,6 +248,13 @@ img{max-width:100%;display:block}
 .dark-card h4{font-size:17.5px;color:#fff;margin:0 0 9px;line-height:1.3}
 .dark-card p{font-size:13.5px;line-height:1.7;color:#B4C2CE;margin:0}
 
+/* Light three-up, used on tinted sections */
+.three-up-light{background:var(--rule);border-color:var(--rule)}
+.plain-card{background:#fff;padding:clamp(20px,2.6vw,28px)}
+.plain-card .card-index{color:var(--gold);margin-bottom:12px}
+.plain-card h4{font-size:17px;color:var(--navy);margin:0 0 9px;line-height:1.3}
+.plain-card p{font-size:13.5px;line-height:1.7;color:var(--body);margin:0}
+
 /* ---------- Figures ---------- */
 .figure{margin:clamp(30px,4vw,44px) 0 0;border:1px solid var(--rule);background:#fff;overflow:hidden}
 .figure img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}

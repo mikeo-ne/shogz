@@ -19,9 +19,9 @@
     ['Feasibility, legal, architectural & engineering', 150,
       'Studies, legal structuring, concept design and technical assessments.'],
     ['Property deposit, lease preparation & initial occupancy', 120,
-      'Initial occupancy costs for an existing premises; final amount depends on the property route.'],
-    ['Building renovation & infrastructure', 500,
-      'Building adaptation, internal works, circulation, finishes and essential infrastructure.'],
+      'Initial occupancy costs for a serviced plot; final amount depends on the property route.'],
+    ['Container supply, siting & site infrastructure', 500,
+      'Container modules, delivery and craning, foundations, decking and essential site infrastructure.'],
     ['Acoustic engineering & treatment', 300,
       'Sound isolation, room acoustics and treatment for professional music spaces.'],
     ['Music production equipment', 350,
@@ -82,7 +82,7 @@
       var short = b[0]
         .replace('Feasibility, legal, architectural & engineering', 'Feasibility & legal')
         .replace('Property deposit, lease preparation & initial occupancy', 'Property & occupancy')
-        .replace('Building renovation & infrastructure', 'Renovation & infrastructure')
+        .replace('Container supply, siting & site infrastructure', 'Containers & infrastructure')
         .replace('Acoustic engineering & treatment', 'Acoustics & treatment')
         .replace('Music production equipment', 'Music equipment')
         .replace('Film, photography & digital media equipment', 'Film & photo equipment')
