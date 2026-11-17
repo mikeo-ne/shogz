@@ -194,9 +194,28 @@ def check_content(js_rows):
     notes.append("PDF pages: %d" % pdf_page_count())
     notes.append("budget lines cross-checked in both editions: %d" % len(js_rows or []))
 
+    check_shared_prose(web, pdf)
     check_retired_phrases(web, pdf)
     check_no_overflow()
 
+
+# Paragraphs that must read the same in both editions. The retired-phrase check
+# below only catches wording we knew to remove; this catches the opposite failure,
+# where a paragraph is reworked in one edition and left stale in the other. That
+# happened to the premises strategy, which was rewritten for the container scheme
+# in the PDF but not on the web page.
+SHARED_PROSE = [
+    ("separating the cost of the facility from the income of any one user",
+     "Section 1 - shared infrastructure"),
+    ("a cluster of four such rooms, sharing one courtyard and one team",
+     "Section 1 - the cluster argument"),
+    ("built from modular container units around a covered courtyard",
+     "executive summary - build method"),
+    ("the site requirement reduces to a secure, serviced plot",
+     "premises strategy - site requirement"),
+    ("with vehicle access for a crane", "premises strategy - crane access"),
+    ("roughly 120 m", "area reconciliation - first cluster"),
+]
 
 RETIRED_PHRASES = [
     # Left over from the single-storey U-plan draft. The scheme is now four
@@ -213,6 +232,19 @@ RETIRED_PHRASES = [
     "studio a",
     "studio b",
 ]
+
+
+def check_shared_prose(web, pdf):
+    """Key paragraphs must survive, recognisably, in both editions."""
+    hits = 0
+    for phrase, label in SHARED_PROSE:
+        p = norm(phrase)
+        for edition, text in (("web edition", web), ("PDF", pdf)):
+            if p not in text:
+                failures.append("%s does not carry %s" % (edition, label))
+                hits += 1
+    if not hits:
+        notes.append("shared prose present in both editions (%d passages)" % len(SHARED_PROSE))
 
 
 def check_retired_phrases(web, pdf):
