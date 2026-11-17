@@ -155,6 +155,39 @@ def check_area_schedule():
            % total_printed)
 
 
+# Phrases from superseded drafts of this note. Each was true of an earlier
+# design and became false when that design changed. A build cannot tell that a
+# paragraph is stale: the text compiles, the page renders, and only a reader
+# notices. They are listed here and searched for in the rendered PDF.
+RETIRED = [
+    ("service pod that the",
+     "the service pod was removed; plant sits inside the modules"),
+    ("the courtyard is larger",
+     "consequence of the removed pod, no longer true"),
+    ("Usable facility area", "the proposal renamed this to 'Full campus at completion'"),
+    ("1:100 at A2", "the plan is drawn at 1:150 on A4 landscape"),
+]
+
+
+def check_retired_prose():
+    """No stale paragraph from a superseded draft may survive into the PDF."""
+    try:
+        import pymupdf
+    except ImportError:
+        return
+    if not os.path.exists(PDF):
+        return
+    text = " ".join(p.get_text() for p in pymupdf.open(PDF))
+    flat = re.sub(r"\s+", " ", text)
+    hits = 0
+    for phrase, why in RETIRED:
+        if phrase in flat:
+            fail("stale prose in the design note: %r — %s" % (phrase, why))
+            hits += 1
+    if not hits:
+        ok("no stale prose from a superseded draft")
+
+
 # ---------------------------------------------------------------- 5. cross-doc
 def check_cross_document():
     """The design note must not drift from the proposal's published figures."""
@@ -277,6 +310,7 @@ def main():
     check_room_sums()
     check_area_schedule()
     check_cross_document()
+    check_retired_prose()
     check_no_overflow()
     check_drawing_pages()
 
