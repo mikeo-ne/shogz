@@ -777,12 +777,12 @@ def build_story():
     st.append(Paragraph("A note on the numbers", S["h3"]))
     st.append(Paragraph(
         "The proposal states roughly 120 m² of enclosed floor for the first cluster, plus the covered "
-        "courtyard deck, against 1,000–1,200 m² for the full campus at completion. This note reconciles "
-        "the first of those at design level: %.1f m² of enclosed floor across four containers, and "
-        "%.1f m² of covered area once the courtyard deck is counted. The difference between the "
-        "\"roughly 120 m²\" in the proposal and the %.1f m² drawn here is the service pod that the "
-        "proposal's figure allows for; at design level the plant bay and WC sit inside the modules "
-        "instead, which is why the enclosed figure is lower and the courtyard is larger. The larger "
+        "courtyard deck, against 1,000–1,200 m² for the full campus at completion. Setting out the plan "
+        "turns the first of those into an exact figure: four containers at 28.3 m² each give "
+        "%.1f m² of enclosed floor, and %.1f m² of covered area once the courtyard deck is counted. "
+        "The gap between the proposal's rounded \"roughly 120 m²\" and the %.1f m² drawn here is a "
+        "service allowance — plant, WC and store — which this design places inside the modules rather "
+        "than in a separate structure. The estimate does not change; only its distribution does. The "
         "campus figure remains a site capacity, not a first-phase build."
         % (D.ENCLOSED_M2, D.ENCLOSED_M2 + D.COURT_W * D.COURT_D / 1e6, D.ENCLOSED_M2), S["body"]))
 
